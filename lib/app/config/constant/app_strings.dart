@@ -1,0 +1,43 @@
+class AppStrings {
+  static const dialog_turnOn_network_description =
+      'Vui lòng bật Internet khi sử dụng app';
+  static const button_cancel = 'Hủy';
+  static const button_ok = 'Đồng ý';
+  static const token = 'token';
+  static const button_confirm = 'Xác nhận';
+  static const button_select = 'Chọn';
+  static const dialog_auth_error_title = 'Lỗi xác thực người dùng';
+  static const dialog_error_title = 'Thông báo';
+  static const login_success_message = 'Đăng nhập thành công';
+  static const dialog_error_generic = 'Có lỗi xảy ra, vui lòng thử lại';
+  static const login_title = 'Đăng nhập';
+  static const login_subtitle = 'Chào bạn quay lại';
+  static const forgot_password_text = 'Bạn quên mật khẩu?';
+  static const login_another_login = 'hoặc sử dụng';
+  static const show_title = 'Hiện';
+  static const hide_title = 'Ẩn';
+  static const input_email_hint_text = 'Email của bạn';
+  static const input_email_invalid_error_text = 'Email không hợp lệ';
+  static const input_phone_invalid_error_text = 'Số điện thoại không hợp lệ';
+  static const input_password_lenght_error_text = 'Mật khẩu phải lớn hơn 6 kí tự';
+  static const input_password_hint_text = 'Mật khẩu của bạn';
+  static const input_family_name_hint_text = 'Họ và tên đệm';
+  static const input_gender_hint_text = 'Giới tính';
+  static const input_province_hint_text = 'Tỉnh/Thành phố';
+  static const input_district_hint_text = 'Quận/Huyện';
+  static const input_ward_hint_text = 'Xã/Phường';
+  static const login_not_have_account_text = 'Chưa có tài khoản? ';
+  static const sign_up_now_text = 'Đăng kí ngay';
+  static const sign_up_have_account_text = 'Bạn đã có tài khoản? ';
+  static const sign_up_title = 'Đăng ký';
+  static const sign_up_subtitle = 'Tạo tài khoản Chợ Mới ngay';
+  static const input_name_hint_text = 'Tên';
+  static const input_birthday_hint_text = 'Chon ngày/tháng/năm sinh';
+  static const input_phone_hint_text = 'Số điện thoại';
+  static const error_title = 'Lỗi';
+  static const menu_home = 'Trang chủ';
+  static const menu_post = 'Quản lý tin';
+  static const menu_create_post = 'Đăng tin';
+  static const menu_go_market = 'Dạo chợ';
+  static const menu_add = 'Thêm';
+}
