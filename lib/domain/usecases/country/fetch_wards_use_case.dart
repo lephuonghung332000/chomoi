@@ -13,7 +13,7 @@ class FetchWardsUseCase
   }
 
   @override
-  Future<Either<Exception, List<WardModel>>> call(int params) {
+  Future<Either<Exception, List<WardModel>>> call(params) {
     return _repo.fetchWards(districtId: params);
   }
 }

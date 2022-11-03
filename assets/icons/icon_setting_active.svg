@@ -1,0 +1,21 @@
+<svg class="appWrapper-Header-icon" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+    viewBox="0 0 30 30" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path id="a7" d="M0 .223h1.56v2.006H0z" />
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(2.077 16.948)">
+            <mask id="b7" fill="#fff">
+                <use xlink:href="#a7" />
+            </mask>
+            <path fill="#FFF"
+                d="M1.56.223C1.29.57 1.01.913.728 1.25c-.237.33-.48.657-.728.98L1.56.222"
+                mask="url(#b7)" />
+        </g>
+        <g class="svg-fill-mobile" fill="#a1ce46">
+            <path
+                d="M6.341 11.77a3.295 3.295 0 1 0 0 6.59 3.295 3.295 0 0 0 0-6.59M14.957 11.77a3.295 3.295 0 1 0 0 6.59 3.295 3.295 0 0 0 0-6.59M23.572 11.77a3.295 3.295 0 1 0 0 6.59 3.295 3.295 0 0 0 0-6.59" />
+        </g>
+        <path stroke="#FFF" stroke-width=".5" d="M1 1h28v28H1z" opacity=".01" />
+    </g>
+</svg>

@@ -3,7 +3,7 @@ import 'package:chomoi/app/services/auth_service..dart';
 import 'package:chomoi/app/util/get_cupertino_dialog.dart';
 import 'package:chomoi/domain/models/request/auth/login_request_model.dart';
 import 'package:chomoi/domain/models/response/auth/login_information_model.dart';
-import 'package:chomoi/domain/models/states.dart';
+import 'package:chomoi/domain/models/state/states.dart';
 import 'package:chomoi/domain/usecases/auth/login_use_case.dart';
 import 'package:chomoi/presentation/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
@@ -58,7 +58,7 @@ class LoginController extends GetxController {
         onConfirm: () => Get.back(),
         barrierDismissible: false,
       );
-    }, (value) {
+    }, (value) async {
       _loginState.value = States.success(entity: value);
       AuthService.get.storeToken(value.idToken);
       _routeToMain();

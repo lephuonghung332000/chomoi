@@ -14,6 +14,9 @@ class AppAssets {
   static const String imageFacebook = './assets/images/facebook.png';
   static const String imageApple = './assets/images/apple.png';
   static const String imageZalo = './assets/images/zalo.png';
+  static const String imageDefault =
+      './assets/images/default_image.png';
+
 // static const String imageDiscoverPatients =
 //     './assets/images/discover_patients.svg';
 // static const String imageDiscoverColleagues =
@@ -32,8 +35,23 @@ class AppAssets {
 // static const String imageRocket = './assets/images/rocket_minimal.png';
 // static const String imageRocketNew = './assets/images/rocket_minimal_new.png';
 //
-// // Icons
-// static const String iconSuccess = './assets/icons/icon_success.png';
+  /// Icons
+  static const String iconHome = './assets/icons/icon_home.svg';
+  static const String iconHomeActive = './assets/icons/icon_home_active.svg';
+  static const String iconPost = './assets/icons/icon_post.svg';
+  static const String iconPostActive = './assets/icons/icon_post_active.svg';
+  static const String iconSetting = './assets/icons/icon_setting.svg';
+  static const String iconSettingActive =
+      './assets/icons/icon_setting_active.svg';
+  static const String iconNotification = './assets/icons/icon_notification.svg';
+  static const String iconNotificationActive =
+      './assets/icons/icon_notification_active.svg';
+  static const String iconCreatePost = './assets/icons/icon_create_post.svg';
+  static const String iconCreatePostActive =
+      './assets/icons/icon_create_post_active.svg';
+  static const String iconEmpty = './assets/icons/icon_empty.svg';
+  static const String iconChat = './assets/icons/icon_chat.svg';
+
 // static const String iconArrowRight = './assets/icons/icon_arrow_right.svg';
 // static const String iconHome = './assets/icons/icon_home.svg';
 // static const String iconHomeActive = './assets/icons/icon_home_active.svg';
@@ -86,15 +104,15 @@ class AppAssets {
 // static const String iconLocation = './assets/icons/icon_location.svg';
 // static const String iconPhoneContact =
 //     './assets/icons/icon_phone_contact.svg';
-// static const String iconAdd = './assets/icons/icon_add.svg';
+// static const String iconAdd = './assets/icons/icon_setting.svg';
 // static const String iconEyeShut = './assets/icons/icon_eye_shut.svg';
 //
 // // Flags
 // static String flag(String code) => './assets/flags/$code.png';
 //
-// //Icon back
-// static const String iconBack = './assets/icons/icon_arrow_back.svg';
-//
+  /// Icon back
+  static const String iconBack = './assets/icons/icon_arrow_back.svg';
+
 // static const String iconMarkerMap = './assets/icons/icon_marker_map.svg';
 //
 // static const String iconAlert = './assets/icons/icon_alert.svg';

@@ -126,7 +126,7 @@ class _$_DistrictModel implements _DistrictModel {
 
   @override
   String toString() {
-    return districtName;
+    return 'DistrictModel(districtId: $districtId, districtName: $districtName)';
   }
 
   @override

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:chomoi/app/config/constant/app_constants.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -14,7 +15,7 @@ class SvgIcon extends StatelessWidget {
 
   const SvgIcon({
     required this.icon,
-    this.size,
+    this.size = AppConstant.iconSize,
     this.width,
     this.height,
     this.color,

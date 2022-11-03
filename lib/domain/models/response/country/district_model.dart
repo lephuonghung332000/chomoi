@@ -10,11 +10,6 @@ class DistrictModel with _$DistrictModel {
     required String districtName,
   }) = _DistrictModel;
 
-  factory DistrictModel.empty() => DistrictModel(
-        districtId: '',
-        districtName: '',
-      );
-
   static List<DistrictModel> fromDto(DistrictDto dto) {
     return List<DistrictModel>.from(
       dto.results.map<DistrictModel>(

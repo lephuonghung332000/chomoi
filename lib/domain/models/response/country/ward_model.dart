@@ -10,11 +10,6 @@ class WardModel with _$WardModel {
     required String wardName,
   }) = _WardModel;
 
-  factory WardModel.empty() => WardModel(
-        wardId: '',
-        wardName: '',
-      );
-
   static List<WardModel> fromDto(WardDto dto) {
     return List<WardModel>.from(
       dto.results.map<WardModel>(

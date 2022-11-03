@@ -120,7 +120,7 @@ class _$_WardModel implements _WardModel {
 
   @override
   String toString() {
-    return wardName;
+    return 'WardModel(wardId: $wardId, wardName: $wardName)';
   }
 
   @override

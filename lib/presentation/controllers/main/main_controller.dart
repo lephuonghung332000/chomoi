@@ -4,72 +4,80 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:get/get.dart';
 
-extension TabItemExt on TabItem {
+extension TabItemExt on TabType {
   int get index {
     switch (this) {
-      case TabItem.home:
+      case TabType.home:
         return 0;
-      case TabItem.post:
+      case TabType.post:
         return 1;
-      case TabItem.create_post:
+      case TabType.create_post:
         return 2;
-      case TabItem.go_market:
+      case TabType.notification:
         return 3;
-      case TabItem.add:
+      case TabType.setting:
         return 4;
     }
   }
 }
 
 class MainController extends GetxController {
-  static Map<TabItem, GlobalKey<NavigatorState>?> navigatorKeys = {
-    TabItem.home: Get.nestedKey(TabItem.home),
-    TabItem.post: Get.nestedKey(TabItem.post),
-    TabItem.create_post: Get.nestedKey(TabItem.create_post),
-    TabItem.go_market: Get.nestedKey(TabItem.go_market),
-    TabItem.add: Get.nestedKey(TabItem.add),
+  static Map<TabType, GlobalKey<NavigatorState>?> navigatorKeys = {
+    TabType.home: Get.nestedKey(TabType.home),
+    TabType.post: Get.nestedKey(TabType.post),
+    TabType.create_post: Get.nestedKey(TabType.create_post),
+    TabType.notification: Get.nestedKey(TabType.notification),
+    TabType.setting: Get.nestedKey(TabType.setting),
   };
 
   static NavigatorState? get homeNavigator =>
-      navigatorKeys[TabItem.home]?.currentState;
+      navigatorKeys[TabType.home]?.currentState;
 
   final keyBottomNavLayout = GlobalKey();
   final pageStack = NoPageStack(initialPage: 0);
   final allTabs = [
-    TabItem.home,
-    TabItem.post,
-    TabItem.create_post,
-    TabItem.go_market,
-    TabItem.add,
+    TabType.home,
+    TabType.post,
+    TabType.create_post,
+    TabType.notification,
+    TabType.setting,
   ];
 
-  TabItem get currentTab => _currentTab;
-  final TabItem _currentTab = TabItem.home;
+  TabType get currentTab => _currentTab;
+  TabType _currentTab = TabType.home;
 
-  void _onTabChange(TabItem tab) async {
+  void _onTabChange(TabType tab) async {
     switch (tab) {
-      case TabItem.home:
-        // TODO: Handle this case.
+      case TabType.home:
         break;
-      case TabItem.post:
-        // TODO: Handle this case.
+      case TabType.post:
         break;
-      case TabItem.create_post:
-        // TODO: Handle this case.
+      case TabType.create_post:
         break;
-      case TabItem.go_market:
-        // TODO: Handle this case.
+      case TabType.notification:
         break;
-      case TabItem.add:
-        // TODO: Handle this case.
+      case TabType.setting:
         break;
     }
   }
 
   void currentTabChanged(int index) async {
+    // If user select same tab
+    final TabType tab = allTabs[index];
+    if (_currentTab == tab) {
+      try {
+        // try to pop current route
+        await navigatorKeys[tab]?.currentState?.maybePop();
+        return;
+      } catch (_) {}
+    }
+
+    _currentTab = tab;
+
+    _onTabChange(tab);
   }
 
-  void navigateToPage(TabItem page) {
+  void navigateToPage(TabType page) {
     if (_currentTab == page) {
       return;
     }

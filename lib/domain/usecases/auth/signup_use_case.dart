@@ -14,9 +14,7 @@ class SignUpUseCase extends ParamUseCase<
   }
 
   @override
-  Future<Either<Exception, SignUpInformationModel>> call(
-    SignUpRequestModel params,
-  ) {
+  Future<Either<Exception, SignUpInformationModel>> call(params) {
     return _repo.signUp(params);
   }
 }

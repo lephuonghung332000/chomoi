@@ -38,6 +38,18 @@ class AppStrings {
   static const menu_home = 'Trang chủ';
   static const menu_post = 'Quản lý tin';
   static const menu_create_post = 'Đăng tin';
-  static const menu_go_market = 'Dạo chợ';
-  static const menu_add = 'Thêm';
+  static const menu_notification = 'Thông báo';
+  static const menu_setting = 'Thêm';
+  static const search_hint_text = 'Tìm kiếm trên Chợ Mới';
+  static const no_data_text = 'Không có dữ liệu';
+  static const free_ship_text = 'Miễn phí vận chuyển';
+  static const rating_text = 'Đánh giá từ tôi';
+  static const introduce_text = 'Giới thiệu bạn bè';
+  static const discount_text = 'Chợ Mới Ưu Đãi';
+  static const saved_post_text = 'Tin đăng đã lưu';
+  static const saved_search_text = 'Tìm kiếm đã lưu';
+  static const category_title = 'Khám phá danh mục';
+  static const recommend_post_title = 'Tin đăng dành cho bạn';
+  static const latest_post_title = 'Tin đăng mới nhất';
+
 }

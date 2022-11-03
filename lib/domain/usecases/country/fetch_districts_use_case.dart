@@ -13,7 +13,7 @@ class FetchDistrictsUseCase
   }
 
   @override
-  Future<Either<Exception, List<DistrictModel>>> call(int params) {
+  Future<Either<Exception, List<DistrictModel>>> call(params) {
     return _repo.fetchDistricts(provinceId: params);
   }
 }

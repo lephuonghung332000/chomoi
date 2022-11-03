@@ -7,7 +7,7 @@ import 'package:chomoi/domain/models/response/auth/sign_up_information_model.dar
 import 'package:chomoi/domain/models/response/country/district_model.dart';
 import 'package:chomoi/domain/models/response/country/province_model.dart';
 import 'package:chomoi/domain/models/response/country/ward_model.dart';
-import 'package:chomoi/domain/models/states.dart';
+import 'package:chomoi/domain/models/state/states.dart';
 import 'package:chomoi/domain/usecases/auth/signup_use_case.dart';
 import 'package:chomoi/domain/usecases/country/fetch_districts_use_case.dart';
 import 'package:chomoi/domain/usecases/country/fetch_provinces_use_case.dart';

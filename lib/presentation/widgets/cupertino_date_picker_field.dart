@@ -1,7 +1,5 @@
-import 'package:chomoi/app/config/constant/app_strings.dart';
 import 'package:chomoi/app/util/date_formats.dart';
 import 'package:chomoi/presentation/widgets/custom_cupertino_date_picker.dart';
-import 'package:chomoi/presentation/widgets/custom_cupertino_picker.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'input_field.dart';

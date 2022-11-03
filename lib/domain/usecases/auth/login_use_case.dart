@@ -14,9 +14,7 @@ class LoginUseCase extends ParamUseCase<
   }
 
   @override
-  Future<Either<Exception, LoginInformationModel>> call(
-    LoginRequestModel params,
-  ) {
+  Future<Either<Exception, LoginInformationModel>> call(params) {
     return _repo.login(params);
   }
 }

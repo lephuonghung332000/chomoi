@@ -47,6 +47,7 @@ class AuthServiceImpl extends GetxService implements AuthService {
 
   @override
   Future<void> storeToken(String? token) async {
+    _accessToken = token;
     return _storage.write(
       key: AppStrings.token,
       value: token,

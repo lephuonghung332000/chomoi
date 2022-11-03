@@ -11,12 +11,6 @@ class ProvinceModel with _$ProvinceModel {
     required String provinceType,
   }) = _ProvinceModel;
 
-  factory ProvinceModel.empty() => ProvinceModel(
-        provinceId: '',
-        provinceType: '',
-        provinceName: '',
-      );
-
   static List<ProvinceModel> fromDto(ProvinceDto dto) {
     return List<ProvinceModel>.from(
       dto.results.map<ProvinceModel>(

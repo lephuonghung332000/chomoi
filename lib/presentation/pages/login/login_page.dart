@@ -3,7 +3,6 @@ import 'package:chomoi/app/config/resources/app_assets.dart';
 import 'package:chomoi/app/config/resources/app_colors.dart';
 import 'package:chomoi/app/config/resources/app_textstyles.dart';
 import 'package:chomoi/app/util/validators.dart';
-import 'package:chomoi/domain/models/states.dart';
 import 'package:chomoi/presentation/controllers/login/login_controller.dart';
 import 'package:chomoi/presentation/widgets/custom_button.dart';
 import 'package:chomoi/presentation/widgets/input_field.dart';

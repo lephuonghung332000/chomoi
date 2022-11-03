@@ -145,7 +145,7 @@ class _$_ProvinceModel implements _ProvinceModel {
 
   @override
   String toString() {
-    return provinceName;
+    return 'ProvinceModel(provinceId: $provinceId, provinceName: $provinceName, provinceType: $provinceType)';
   }
 
   @override
