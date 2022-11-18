@@ -1,5 +1,7 @@
 import 'package:bottom_nav_layout/bottom_nav_layout.dart';
+import 'package:chomoi/domain/models/response/category/category_model.dart';
 import 'package:chomoi/presentation/pages/main/main_page.dart';
+import 'package:chomoi/presentation/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:get/get.dart';
@@ -9,7 +11,7 @@ extension TabItemExt on TabType {
     switch (this) {
       case TabType.home:
         return 0;
-      case TabType.post:
+      case TabType.my_post:
         return 1;
       case TabType.create_post:
         return 2;
@@ -24,7 +26,7 @@ extension TabItemExt on TabType {
 class MainController extends GetxController {
   static Map<TabType, GlobalKey<NavigatorState>?> navigatorKeys = {
     TabType.home: Get.nestedKey(TabType.home),
-    TabType.post: Get.nestedKey(TabType.post),
+    TabType.my_post: Get.nestedKey(TabType.my_post),
     TabType.create_post: Get.nestedKey(TabType.create_post),
     TabType.notification: Get.nestedKey(TabType.notification),
     TabType.setting: Get.nestedKey(TabType.setting),
@@ -37,7 +39,7 @@ class MainController extends GetxController {
   final pageStack = NoPageStack(initialPage: 0);
   final allTabs = [
     TabType.home,
-    TabType.post,
+    TabType.my_post,
     TabType.create_post,
     TabType.notification,
     TabType.setting,
@@ -50,7 +52,7 @@ class MainController extends GetxController {
     switch (tab) {
       case TabType.home:
         break;
-      case TabType.post:
+      case TabType.my_post:
         break;
       case TabType.create_post:
         break;
@@ -94,4 +96,10 @@ class MainController extends GetxController {
     //pageStack.pop();
   }
 
+  void routeToCreatePostPage({required CategoryModel category}) {
+    Get.back();
+    Get.toNamed(AppPages.createPostPage.name, arguments: {
+      'categoryName': category.name,
+    });
+  }
 }

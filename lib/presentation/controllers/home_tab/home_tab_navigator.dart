@@ -7,6 +7,8 @@ class HomeTabNavigatorRoutes {
   HomeTabNavigatorRoutes._();
 
   static final home = AppPages.homePage.name;
+  static final search = AppPages.searchPage.name;
+  static final post = AppPages.postPage.name;
 }
 
 class HomeTabNavigator extends StatelessWidget {

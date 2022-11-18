@@ -1,14 +1,18 @@
 import 'package:chomoi/app/config/constant/app_strings.dart';
 import 'package:chomoi/app/config/constant/app_url_constant.dart';
+import 'package:chomoi/app/util/get_extensions.dart';
 import 'package:chomoi/domain/models/response/ads/ads_model.dart';
 import 'package:chomoi/domain/models/response/category/category_model.dart';
 import 'package:chomoi/domain/models/response/post/post_model.dart';
-import 'package:chomoi/domain/models/response/user/user_model.dart';
 import 'package:chomoi/domain/models/state/states.dart';
 import 'package:chomoi/domain/usecases/ads/fetch_ads_use_case.dart';
 import 'package:chomoi/domain/usecases/category/fetch_category_use_case.dart';
 import 'package:chomoi/domain/usecases/post/fetch_post_use_case.dart';
+import 'package:chomoi/presentation/controllers/home_tab/home_tab_navigator.dart';
+import 'package:chomoi/presentation/controllers/main/main_controller.dart';
+import 'package:chomoi/presentation/routes/app_pages.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -40,20 +44,32 @@ class HomeController extends GetxController {
 
   States<List<PostModel>> get postState => _postState.value;
 
-  final _userState = const States<List<UserModel>>.init(
-    entity: [],
-  ).obs;
-
-  States<List<UserModel>> get userState => _userState.value;
-
   final selectedBoxes = SelectedBox.values;
+
+  final _isLoadingPost = false.obs;
+
+  bool get isLoadingPost => _isLoadingPost.value;
+
+  int _page = 1;
+
+  int _total = 0;
+
+  final List<PostModel> _posts = [];
 
   @override
   void onReady() {
-    super.onReady();
     _fetchAds();
     _fetchCategory();
     _fetchPost();
+    super.onReady();
+  }
+
+  bool onNotification(ScrollNotification notification) {
+    if (notification.metrics.pixels == notification.metrics.maxScrollExtent) {
+      _fetchPost(page: _page + 1);
+    }
+
+    return false;
   }
 
   Future<void> _fetchAds() async {
@@ -76,14 +92,36 @@ class HomeController extends GetxController {
     });
   }
 
-  Future<void> _fetchPost({String? status, int? page}) async {
-    _postState.value = const States.loading();
-    final result = await fetchPostUseCase.call(Tuple2(status, page));
+  Future<void> _fetchPost({int page = 1}) async {
+    if (_total > 0 && _posts.length >= _total) {
+      return;
+    }
+
+    if (_isLoadingPost.value) {
+      return;
+    }
+
+    _isLoadingPost.value = true;
+    if (page == 1) {
+      _postState.value = const States.loading();
+    }
+    final result = await fetchPostUseCase.call(
+      Tuple6(null, null, null, null, null, page),
+    );
     result.fold((failure) {
-      _postState.value = States.failure(failure);
+      if (page == 1) {
+        _postState.value = States.failure(failure);
+      }
     }, (value) async {
-      _postState.value = States.success(entity: value);
+      _page = page;
+      if (value.posts.isNotEmpty) {
+        _total = value.total;
+        _posts.addAll(value.posts);
+        _postState.value = States.success(entity: _posts);
+        _postState.refresh();
+      }
     });
+    _isLoadingPost.value = false;
   }
 
   void onTapSelectedBox(int index) {
@@ -103,6 +141,25 @@ class HomeController extends GetxController {
       default:
         break;
     }
+  }
+
+  void routeToSearchPage({CategoryModel? category}) {
+    MainController.homeNavigator?.pushNamed(HomeTabNavigatorRoutes.search);
+  }
+
+  void routeToPostPage({required CategoryModel category}) {
+    MainController.homeNavigator
+        ?.pushNamed(HomeTabNavigatorRoutes.post, arguments: {
+      'categoryId': category,
+    });
+  }
+
+  void routePostDetail({required PostModel postModel}) {
+    final tag = Get.globalNavigator.toString() + (postModel.id.toString());
+    Get.toNamed(AppPages.postDetailPage.name, arguments: {
+      'post': postModel,
+      'tag': tag,
+    });
   }
 }
 

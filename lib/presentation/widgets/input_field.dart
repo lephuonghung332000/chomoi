@@ -11,10 +11,12 @@ class InputField extends StatefulWidget {
   final Color color;
   final bool password;
   final bool readOnly;
+  final String? label;
   final TextStyle style;
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
   final VoidCallback? onTap;
+  final EdgeInsets contentPadding;
 
   const InputField({
     required this.controller,
@@ -24,8 +26,11 @@ class InputField extends StatefulWidget {
     this.password = false,
     this.style = AppTextStyles.contentRegular15w400,
     this.validator,
+    this.label,
     this.suffixIcon,
     this.readOnly = false,
+    this.contentPadding =
+        const EdgeInsets.symmetric(vertical: 10, horizontal: 7),
     this.onTap,
   });
 
@@ -64,7 +69,7 @@ class _InputFieldState extends State<InputField> {
     return TextFormField(
       onTap: widget.onTap,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 7),
+        contentPadding: widget.contentPadding,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: widget.color,
@@ -74,6 +79,10 @@ class _InputFieldState extends State<InputField> {
           borderSide: BorderSide(
             color: widget.color,
           ),
+        ),
+        labelText: widget.label,
+        labelStyle: AppTextStyles.contentRegular15w400.copyWith(
+          color: AppColors.grayPhilippine,
         ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         hintText: widget.placeholder,

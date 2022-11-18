@@ -28,7 +28,7 @@ class UserData {
   UserData({
     required this.id,
     required this.address,
-    required this.avatar,
+    this.avatar,
     required this.birthday,
     required this.email,
     required this.fcmTokens,
@@ -36,17 +36,20 @@ class UserData {
     required this.gender,
     required this.name,
     required this.phone,
+    required this.createAt,
     required this.role,
   });
 
   final String id;
   final String address;
-  final String avatar;
+  final String? avatar;
   final int birthday;
   final String email;
   final List<String> fcmTokens;
   @JsonKey(name: 'fullname')
   final String fullName;
+  @JsonKey(name: 'create_at')
+  final double createAt;
   final bool gender;
   final String name;
   final String phone;

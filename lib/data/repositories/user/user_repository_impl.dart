@@ -1,10 +1,6 @@
-import 'package:chomoi/data/dto/response/post/post_dto.dart';
 import 'package:chomoi/data/dto/response/user/user_dto.dart';
-import 'package:chomoi/data/providers/network/apis/post_api.dart';
 import 'package:chomoi/data/providers/network/apis/user_api.dart';
-import 'package:chomoi/domain/models/response/post/post_model.dart';
 import 'package:chomoi/domain/models/response/user/user_model.dart';
-import 'package:chomoi/domain/repositories/post/post_repository.dart';
 import 'package:chomoi/domain/repositories/user/user_repository.dart';
 import 'package:dartz/dartz.dart';
 

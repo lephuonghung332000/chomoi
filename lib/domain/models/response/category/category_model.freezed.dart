@@ -19,11 +19,15 @@ class _$CategoryModelTearOff {
   const _$CategoryModelTearOff();
 
   _CategoryModel call(
-      {required String id, required String name, required String thumbnail}) {
+      {required String id,
+      required String name,
+      required String thumbnail,
+      required String subThumbnail}) {
     return _CategoryModel(
       id: id,
       name: name,
       thumbnail: thumbnail,
+      subThumbnail: subThumbnail,
     );
   }
 }
@@ -36,6 +40,7 @@ mixin _$CategoryModel {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
+  String get subThumbnail => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CategoryModelCopyWith<CategoryModel> get copyWith =>
@@ -47,7 +52,7 @@ abstract class $CategoryModelCopyWith<$Res> {
   factory $CategoryModelCopyWith(
           CategoryModel value, $Res Function(CategoryModel) then) =
       _$CategoryModelCopyWithImpl<$Res>;
-  $Res call({String id, String name, String thumbnail});
+  $Res call({String id, String name, String thumbnail, String subThumbnail});
 }
 
 /// @nodoc
@@ -64,6 +69,7 @@ class _$CategoryModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? thumbnail = freezed,
+    Object? subThumbnail = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -78,6 +84,10 @@ class _$CategoryModelCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
+      subThumbnail: subThumbnail == freezed
+          ? _value.subThumbnail
+          : subThumbnail // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -89,7 +99,7 @@ abstract class _$CategoryModelCopyWith<$Res>
           _CategoryModel value, $Res Function(_CategoryModel) then) =
       __$CategoryModelCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String name, String thumbnail});
+  $Res call({String id, String name, String thumbnail, String subThumbnail});
 }
 
 /// @nodoc
@@ -108,6 +118,7 @@ class __$CategoryModelCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? thumbnail = freezed,
+    Object? subThumbnail = freezed,
   }) {
     return _then(_CategoryModel(
       id: id == freezed
@@ -122,6 +133,10 @@ class __$CategoryModelCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
+      subThumbnail: subThumbnail == freezed
+          ? _value.subThumbnail
+          : subThumbnail // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -130,7 +145,10 @@ class __$CategoryModelCopyWithImpl<$Res>
 
 class _$_CategoryModel implements _CategoryModel {
   _$_CategoryModel(
-      {required this.id, required this.name, required this.thumbnail});
+      {required this.id,
+      required this.name,
+      required this.thumbnail,
+      required this.subThumbnail});
 
   @override
   final String id;
@@ -138,10 +156,12 @@ class _$_CategoryModel implements _CategoryModel {
   final String name;
   @override
   final String thumbnail;
+  @override
+  final String subThumbnail;
 
   @override
   String toString() {
-    return 'CategoryModel(id: $id, name: $name, thumbnail: $thumbnail)';
+    return 'CategoryModel(id: $id, name: $name, thumbnail: $thumbnail, subThumbnail: $subThumbnail)';
   }
 
   @override
@@ -151,7 +171,9 @@ class _$_CategoryModel implements _CategoryModel {
             other is _CategoryModel &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.thumbnail, thumbnail));
+            const DeepCollectionEquality().equals(other.thumbnail, thumbnail) &&
+            const DeepCollectionEquality()
+                .equals(other.subThumbnail, subThumbnail));
   }
 
   @override
@@ -159,7 +181,8 @@ class _$_CategoryModel implements _CategoryModel {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(thumbnail));
+      const DeepCollectionEquality().hash(thumbnail),
+      const DeepCollectionEquality().hash(subThumbnail));
 
   @JsonKey(ignore: true)
   @override
@@ -171,7 +194,8 @@ abstract class _CategoryModel implements CategoryModel {
   factory _CategoryModel(
       {required String id,
       required String name,
-      required String thumbnail}) = _$_CategoryModel;
+      required String thumbnail,
+      required String subThumbnail}) = _$_CategoryModel;
 
   @override
   String get id;
@@ -179,6 +203,8 @@ abstract class _CategoryModel implements CategoryModel {
   String get name;
   @override
   String get thumbnail;
+  @override
+  String get subThumbnail;
   @override
   @JsonKey(ignore: true)
   _$CategoryModelCopyWith<_CategoryModel> get copyWith =>

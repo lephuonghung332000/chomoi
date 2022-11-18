@@ -10,7 +10,7 @@ class CustomAppBar extends CupertinoNavigationBar {
     String? subTitle,
     Widget? leading,
     List<Widget> actions = const [],
-    Color? background = AppColors.white,
+    Color? background = AppColors.primaryColor,
   }) : super(
           padding: const EdgeInsetsDirectional.only(start: 0, end: 8),
           key: key,
@@ -22,12 +22,12 @@ class CustomAppBar extends CupertinoNavigationBar {
             children: actions,
           ),
           middle: Column(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (title != null)
                 Text(
                   title,
-                  style: const TextStyle(color: AppColors.primaryTextColor),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

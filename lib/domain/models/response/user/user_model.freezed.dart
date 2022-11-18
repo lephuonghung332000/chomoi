@@ -29,7 +29,8 @@ class _$UserModelTearOff {
       required bool gender,
       required String name,
       required String phone,
-      required String role}) {
+      required String role,
+      required double createAt}) {
     return _UserModel(
       id: id,
       address: address,
@@ -42,6 +43,7 @@ class _$UserModelTearOff {
       name: name,
       phone: phone,
       role: role,
+      createAt: createAt,
     );
   }
 }
@@ -62,6 +64,7 @@ mixin _$UserModel {
   String get name => throw _privateConstructorUsedError;
   String get phone => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
+  double get createAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserModelCopyWith<UserModel> get copyWith =>
@@ -83,7 +86,8 @@ abstract class $UserModelCopyWith<$Res> {
       bool gender,
       String name,
       String phone,
-      String role});
+      String role,
+      double createAt});
 }
 
 /// @nodoc
@@ -107,6 +111,7 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
     Object? name = freezed,
     Object? phone = freezed,
     Object? role = freezed,
+    Object? createAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -153,6 +158,10 @@ class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String,
+      createAt: createAt == freezed
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -174,7 +183,8 @@ abstract class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       bool gender,
       String name,
       String phone,
-      String role});
+      String role,
+      double createAt});
 }
 
 /// @nodoc
@@ -199,6 +209,7 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
     Object? name = freezed,
     Object? phone = freezed,
     Object? role = freezed,
+    Object? createAt = freezed,
   }) {
     return _then(_UserModel(
       id: id == freezed
@@ -245,6 +256,10 @@ class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String,
+      createAt: createAt == freezed
+          ? _value.createAt
+          : createAt // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -263,7 +278,8 @@ class _$_UserModel implements _UserModel {
       required this.gender,
       required this.name,
       required this.phone,
-      required this.role});
+      required this.role,
+      required this.createAt});
 
   @override
   final String id;
@@ -287,10 +303,12 @@ class _$_UserModel implements _UserModel {
   final String phone;
   @override
   final String role;
+  @override
+  final double createAt;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, address: $address, avatar: $avatar, birthday: $birthday, email: $email, fcmTokens: $fcmTokens, fullName: $fullName, gender: $gender, name: $name, phone: $phone, role: $role)';
+    return 'UserModel(id: $id, address: $address, avatar: $avatar, birthday: $birthday, email: $email, fcmTokens: $fcmTokens, fullName: $fullName, gender: $gender, name: $name, phone: $phone, role: $role, createAt: $createAt)';
   }
 
   @override
@@ -308,7 +326,8 @@ class _$_UserModel implements _UserModel {
             const DeepCollectionEquality().equals(other.gender, gender) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.phone, phone) &&
-            const DeepCollectionEquality().equals(other.role, role));
+            const DeepCollectionEquality().equals(other.role, role) &&
+            const DeepCollectionEquality().equals(other.createAt, createAt));
   }
 
   @override
@@ -324,7 +343,8 @@ class _$_UserModel implements _UserModel {
       const DeepCollectionEquality().hash(gender),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(phone),
-      const DeepCollectionEquality().hash(role));
+      const DeepCollectionEquality().hash(role),
+      const DeepCollectionEquality().hash(createAt));
 
   @JsonKey(ignore: true)
   @override
@@ -344,7 +364,8 @@ abstract class _UserModel implements UserModel {
       required bool gender,
       required String name,
       required String phone,
-      required String role}) = _$_UserModel;
+      required String role,
+      required double createAt}) = _$_UserModel;
 
   @override
   String get id;
@@ -368,6 +389,8 @@ abstract class _UserModel implements UserModel {
   String get phone;
   @override
   String get role;
+  @override
+  double get createAt;
   @override
   @JsonKey(ignore: true)
   _$UserModelCopyWith<_UserModel> get copyWith =>

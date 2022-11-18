@@ -12,10 +12,10 @@ class AppBackButton extends StatelessWidget {
       {Key? key,
       this.title,
       this.icon = const SvgIcon(
-        size: 24,
+        size: 20,
         icon: AppAssets.iconBack,
       ),
-      this.padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+      this.padding = const EdgeInsets.symmetric(horizontal: 16),
       this.onBack})
       : super(key: key);
 

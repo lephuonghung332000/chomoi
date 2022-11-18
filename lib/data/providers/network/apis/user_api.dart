@@ -21,7 +21,7 @@ class UserAPI implements APIRequestRepresentable {
   String get path {
     switch (type) {
       case UserType.fetchUser:
-        return '/';
+        return userId != null ? '/$userId' : '/';
     }
   }
 

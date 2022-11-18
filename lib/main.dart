@@ -14,9 +14,11 @@ void main() async {
 
 void _configAppStyle() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(statusBarColor: AppColors.primaryColor),
-  );
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: AppColors.primaryColor,
+    statusBarIconBrightness: Brightness.light
+  ));
   EasyLoading.instance
     ..loadingStyle = EasyLoadingStyle.custom
     ..indicatorType = EasyLoadingIndicatorType.circle

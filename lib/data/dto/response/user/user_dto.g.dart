@@ -21,7 +21,7 @@ Map<String, dynamic> _$UserDtoToJson(UserDto instance) => <String, dynamic>{
 UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       id: json['id'] as String,
       address: json['address'] as String,
-      avatar: json['avatar'] as String,
+      avatar: json['avatar'] as String?,
       birthday: json['birthday'] as int,
       email: json['email'] as String,
       fcmTokens:
@@ -30,6 +30,7 @@ UserData _$UserDataFromJson(Map<String, dynamic> json) => UserData(
       gender: json['gender'] as bool,
       name: json['name'] as String,
       phone: json['phone'] as String,
+      createAt: (json['create_at'] as num).toDouble(),
       role: json['role'] as String,
     );
 
@@ -41,6 +42,7 @@ Map<String, dynamic> _$UserDataToJson(UserData instance) => <String, dynamic>{
       'email': instance.email,
       'fcmTokens': instance.fcmTokens,
       'fullname': instance.fullName,
+      'create_at': instance.createAt,
       'gender': instance.gender,
       'name': instance.name,
       'phone': instance.phone,

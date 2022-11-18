@@ -9,13 +9,11 @@ class CategoryModel with _$CategoryModel {
     required String id,
     required String name,
     required String thumbnail,
+    required String subThumbnail,
   }) = _CategoryModel;
 
-  factory CategoryModel.empty() => CategoryModel(
-        id: '',
-        name: '',
-        thumbnail: '',
-      );
+  factory CategoryModel.empty() =>
+      CategoryModel(id: '', name: '', thumbnail: '', subThumbnail: '');
 
   static List<CategoryModel> fromDto(CategoryDto dto) {
     return List<CategoryModel>.from(
@@ -24,6 +22,7 @@ class CategoryModel with _$CategoryModel {
           id: e.id,
           name: e.name,
           thumbnail: e.thumbnail,
+          subThumbnail: e.subThumbnail,
         ),
       ),
     );

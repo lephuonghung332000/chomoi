@@ -3,14 +3,11 @@ import 'package:chomoi/app/config/constant/app_strings.dart';
 import 'package:chomoi/app/config/resources/app_colors.dart';
 import 'package:chomoi/app/config/resources/app_textstyles.dart';
 import 'package:chomoi/presentation/controllers/home_tab/home/home_controller.dart';
-import 'package:chomoi/presentation/pages/home_tab/home/viewmodels/post_view_model.dart';
-import 'package:chomoi/presentation/routes/app_pages.dart';
 import 'package:chomoi/presentation/widgets/hbox.dart';
-import 'package:chomoi/presentation/widgets/home/category_grid_view.dart';
-import 'package:chomoi/presentation/widgets/home/home_carousel.dart';
-import 'package:chomoi/presentation/widgets/home/post_grid_view.dart';
-import 'package:chomoi/presentation/widgets/home/post_vertical_box.dart';
-import 'package:chomoi/presentation/widgets/home/utility_box.dart';
+import 'package:chomoi/presentation/widgets/home_tab/category_grid_view.dart';
+import 'package:chomoi/presentation/widgets/home_tab/home_carousel.dart';
+import 'package:chomoi/presentation/widgets/home_tab/post/post_grid_view.dart';
+import 'package:chomoi/presentation/widgets/home_tab/utility_box.dart';
 import 'package:chomoi/presentation/widgets/ios_search_bar.dart';
 import 'package:chomoi/presentation/widgets/loading_screen.dart';
 import 'package:chomoi/presentation/widgets/vbox.dart';
@@ -30,25 +27,35 @@ class HomePage extends GetView<HomeController> {
           child: Column(
         children: [
           Expanded(
-            child: CustomScrollView(
-              physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics(),
+            child: NotificationListener(
+              onNotification: controller.onNotification,
+              child: CustomScrollView(
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
+                slivers: [
+                  _buildHeader,
+                  _buildCarousel,
+                  _buildUtility,
+                  _buildSpace,
+                  _buildCategory,
+                  _buildSpace,
+                  _buildLatestPost,
+                  _buildSpace,
+                  _buildLoadMorePost,
+                  _buildSpaceBottom,
+                ],
               ),
-              slivers: [
-                _buildHeader,
-                _buildCarousel,
-                _buildUtility,
-                _buildSpace,
-                _buildCategory,
-                _buildSpace,
-                _buildLatestProduct
-              ],
             ),
           )
         ],
       )),
     );
   }
+
+  Widget get _buildSpaceBottom => const SliverToBoxAdapter(
+        child: VBox(30),
+      );
 
   Widget get _buildSpace => const SliverToBoxAdapter(
         child: VBox(15),
@@ -61,12 +68,9 @@ class HomePage extends GetView<HomeController> {
           height: AppConstant.heightAppBarSearch,
           padding: const EdgeInsets.only(left: 6, right: 12, bottom: 2),
           child: InkWell(
-            onTap: () => Get.toNamed(
-              AppPages.searchPage.name,
-            ),
+            onTap: () => controller.routeToSearchPage(),
             child: const IOSSearchBar(
               height: AppConstant.heightAppBarSearch,
-              cancelButtonTitle: AppStrings.button_cancel,
               placeholder: AppStrings.search_hint_text,
               enable: false,
               isShowChat: true,
@@ -140,7 +144,7 @@ class HomePage extends GetView<HomeController> {
                     ),
                   ),
                   const VBox(10),
-                  Container(
+                  SizedBox(
                     height: AppConstant.heightCategoryView,
                     child: CategoryGridView(
                       categories: entity,
@@ -155,33 +159,44 @@ class HomePage extends GetView<HomeController> {
         );
       });
 
-  Widget get _buildLatestProduct => GetX<HomeController>(builder: (controller) {
+  Widget get _buildLatestPost => GetX<HomeController>(builder: (controller) {
         return SliverToBoxAdapter(
           child: controller.postState.when(
-            loading: () => const LoadingScreen(),
+            loading: () => const SizedBox.shrink(),
             success: (entity) => Container(
               color: AppColors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+              padding: const EdgeInsets.only(top: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const Padding(
-                    padding: EdgeInsets.only(left: 5),
+                    padding: EdgeInsets.only(left: 10),
                     child: Text(
                       AppStrings.latest_post_title,
                       style: AppTextStyles.contentBold15w700,
                     ),
                   ),
-                  const VBox(10),
+                  const VBox(12),
                   PostGridView(
                     posts: entity,
+                    onTap: (post) {
+                      controller.routePostDetail(postModel: post);
+                    },
                   )
                 ],
               ),
             ),
             failure: (exception) => const SizedBox.shrink(),
-            init: (entity) => const LoadingScreen(),
+            init: (entity) => const SizedBox.shrink(),
           ),
+        );
+      });
+
+  Widget get _buildLoadMorePost => GetX<HomeController>(builder: (controller) {
+        return SliverToBoxAdapter(
+          child: controller.isLoadingPost
+              ? const LoadingScreen()
+              : const SizedBox(),
         );
       });
 }

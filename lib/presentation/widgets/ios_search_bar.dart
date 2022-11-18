@@ -14,7 +14,6 @@ class IOSSearchBar extends StatefulWidget {
     this.controller,
     this.focusNode,
     this.placeholder,
-    required this.cancelButtonTitle,
     this.padding = const EdgeInsets.symmetric(vertical: 6),
     this.alwaysShowCancelButton = false,
     this.autofocus = false,
@@ -28,8 +27,6 @@ class IOSSearchBar extends StatefulWidget {
   }) : super(key: key);
 
   final String? placeholder;
-
-  final String cancelButtonTitle;
 
   final EdgeInsetsGeometry? padding;
 

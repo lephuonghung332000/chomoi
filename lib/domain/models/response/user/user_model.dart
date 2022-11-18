@@ -17,6 +17,7 @@ class UserModel with _$UserModel {
     required String name,
     required String phone,
     required String role,
+    required double createAt,
   }) = _UserModel;
 
   factory UserModel.empty() => UserModel(
@@ -24,6 +25,7 @@ class UserModel with _$UserModel {
         address: '',
         avatar: '',
         birthday: -1,
+        createAt: -1,
         email: '',
         fcmTokens: [],
         fullName: '',
@@ -37,7 +39,7 @@ class UserModel with _$UserModel {
     return UserModel(
       id: dto.data.id,
       address: dto.data.address,
-      avatar: dto.data.avatar,
+      avatar: dto.data.avatar ?? '',
       birthday: dto.data.birthday,
       email: dto.data.email,
       fcmTokens: dto.data.fcmTokens,
@@ -46,6 +48,7 @@ class UserModel with _$UserModel {
       name: dto.data.name,
       phone: dto.data.phone,
       role: dto.data.role,
+      createAt: dto.data.createAt,
     );
   }
 }

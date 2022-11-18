@@ -1,17 +1,28 @@
-import 'package:chomoi/data/dto/response/post/post_dto.dart';
+import 'package:chomoi/data/dto/response/post/post_paging_dto.dart';
 import 'package:chomoi/data/providers/network/apis/post_api.dart';
-import 'package:chomoi/domain/models/response/post/post_model.dart';
+import 'package:chomoi/domain/models/response/post/post_paging_model.dart';
 import 'package:chomoi/domain/repositories/post/post_repository.dart';
 import 'package:dartz/dartz.dart';
 
 class PostRepositoryImpl extends PostRepository {
   @override
-  Future<Either<Exception, List<PostModel>>> fetchPost({
+  Future<Either<Exception, PostPagingModel>> fetchPost({
     String? status,
+    String? timePost,
+    String? categoryId,
+    String? province,
+    String? search,
     int? page,
   }) =>
       Task(
-        () => PostAPI.fetchPost(status: status, page: page).request(),
+        () => PostAPI.fetchPost(
+                status: status,
+                page: page,
+                timePost: timePost,
+                province: province,
+                search: search,
+                categoryId: categoryId)
+            .request(),
       )
           .attempt()
           .map(
@@ -20,8 +31,29 @@ class PostRepositoryImpl extends PostRepository {
                 return l as Exception;
               },
             ).map(
-              (response) => PostModel.fromDto(
-                PostDto.fromJson(response),
+              (response) => PostPagingModel.fromDto(
+                PostPagingDto.fromJson(response),
+              ),
+            ),
+          )
+          .run();
+
+  @override
+  Future<Either<Exception, PostPagingModel>> fetchMyPost({String? status}) =>
+      Task(
+        () => PostAPI.fetchMyPost(
+          status: status,
+        ).request(),
+      )
+          .attempt()
+          .map(
+            (either) => either.leftMap<Exception>(
+              (l) {
+                return l as Exception;
+              },
+            ).map(
+              (response) => PostPagingModel.fromDto(
+                PostPagingDto.fromJson(response),
               ),
             ),
           )

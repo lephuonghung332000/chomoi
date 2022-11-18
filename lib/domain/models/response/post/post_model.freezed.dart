@@ -23,15 +23,19 @@ class _$PostModelTearOff {
       required String userId,
       required String categoryId,
       required String title,
-      required int createAt,
-      required int updateAt,
+      required double createAt,
+      required double updateAt,
       required String status,
       required String brandId,
       required List<String> images,
       required String address,
       required int price,
       required String description,
-      required String avatar}) {
+      required String avatar,
+      required String name,
+      required String phone,
+      required double dateJoin,
+      required String email}) {
     return _PostModel(
       id: id,
       userId: userId,
@@ -46,6 +50,10 @@ class _$PostModelTearOff {
       price: price,
       description: description,
       avatar: avatar,
+      name: name,
+      phone: phone,
+      dateJoin: dateJoin,
+      email: email,
     );
   }
 }
@@ -59,8 +67,8 @@ mixin _$PostModel {
   String get userId => throw _privateConstructorUsedError;
   String get categoryId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  int get createAt => throw _privateConstructorUsedError;
-  int get updateAt => throw _privateConstructorUsedError;
+  double get createAt => throw _privateConstructorUsedError;
+  double get updateAt => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get brandId => throw _privateConstructorUsedError;
   List<String> get images => throw _privateConstructorUsedError;
@@ -68,6 +76,10 @@ mixin _$PostModel {
   int get price => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get avatar => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get phone => throw _privateConstructorUsedError;
+  double get dateJoin => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostModelCopyWith<PostModel> get copyWith =>
@@ -83,15 +95,19 @@ abstract class $PostModelCopyWith<$Res> {
       String userId,
       String categoryId,
       String title,
-      int createAt,
-      int updateAt,
+      double createAt,
+      double updateAt,
       String status,
       String brandId,
       List<String> images,
       String address,
       int price,
       String description,
-      String avatar});
+      String avatar,
+      String name,
+      String phone,
+      double dateJoin,
+      String email});
 }
 
 /// @nodoc
@@ -117,6 +133,10 @@ class _$PostModelCopyWithImpl<$Res> implements $PostModelCopyWith<$Res> {
     Object? price = freezed,
     Object? description = freezed,
     Object? avatar = freezed,
+    Object? name = freezed,
+    Object? phone = freezed,
+    Object? dateJoin = freezed,
+    Object? email = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -138,11 +158,11 @@ class _$PostModelCopyWithImpl<$Res> implements $PostModelCopyWith<$Res> {
       createAt: createAt == freezed
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       updateAt: updateAt == freezed
           ? _value.updateAt
           : updateAt // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -171,6 +191,22 @@ class _$PostModelCopyWithImpl<$Res> implements $PostModelCopyWith<$Res> {
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      phone: phone == freezed
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String,
+      dateJoin: dateJoin == freezed
+          ? _value.dateJoin
+          : dateJoin // ignore: cast_nullable_to_non_nullable
+              as double,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -186,15 +222,19 @@ abstract class _$PostModelCopyWith<$Res> implements $PostModelCopyWith<$Res> {
       String userId,
       String categoryId,
       String title,
-      int createAt,
-      int updateAt,
+      double createAt,
+      double updateAt,
       String status,
       String brandId,
       List<String> images,
       String address,
       int price,
       String description,
-      String avatar});
+      String avatar,
+      String name,
+      String phone,
+      double dateJoin,
+      String email});
 }
 
 /// @nodoc
@@ -221,6 +261,10 @@ class __$PostModelCopyWithImpl<$Res> extends _$PostModelCopyWithImpl<$Res>
     Object? price = freezed,
     Object? description = freezed,
     Object? avatar = freezed,
+    Object? name = freezed,
+    Object? phone = freezed,
+    Object? dateJoin = freezed,
+    Object? email = freezed,
   }) {
     return _then(_PostModel(
       id: id == freezed
@@ -242,11 +286,11 @@ class __$PostModelCopyWithImpl<$Res> extends _$PostModelCopyWithImpl<$Res>
       createAt: createAt == freezed
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       updateAt: updateAt == freezed
           ? _value.updateAt
           : updateAt // ignore: cast_nullable_to_non_nullable
-              as int,
+              as double,
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -275,6 +319,22 @@ class __$PostModelCopyWithImpl<$Res> extends _$PostModelCopyWithImpl<$Res>
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      phone: phone == freezed
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String,
+      dateJoin: dateJoin == freezed
+          ? _value.dateJoin
+          : dateJoin // ignore: cast_nullable_to_non_nullable
+              as double,
+      email: email == freezed
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -295,7 +355,11 @@ class _$_PostModel implements _PostModel {
       required this.address,
       required this.price,
       required this.description,
-      required this.avatar});
+      required this.avatar,
+      required this.name,
+      required this.phone,
+      required this.dateJoin,
+      required this.email});
 
   @override
   final String id;
@@ -306,9 +370,9 @@ class _$_PostModel implements _PostModel {
   @override
   final String title;
   @override
-  final int createAt;
+  final double createAt;
   @override
-  final int updateAt;
+  final double updateAt;
   @override
   final String status;
   @override
@@ -323,10 +387,18 @@ class _$_PostModel implements _PostModel {
   final String description;
   @override
   final String avatar;
+  @override
+  final String name;
+  @override
+  final String phone;
+  @override
+  final double dateJoin;
+  @override
+  final String email;
 
   @override
   String toString() {
-    return 'PostModel(id: $id, userId: $userId, categoryId: $categoryId, title: $title, createAt: $createAt, updateAt: $updateAt, status: $status, brandId: $brandId, images: $images, address: $address, price: $price, description: $description, avatar: $avatar)';
+    return 'PostModel(id: $id, userId: $userId, categoryId: $categoryId, title: $title, createAt: $createAt, updateAt: $updateAt, status: $status, brandId: $brandId, images: $images, address: $address, price: $price, description: $description, avatar: $avatar, name: $name, phone: $phone, dateJoin: $dateJoin, email: $email)';
   }
 
   @override
@@ -348,7 +420,11 @@ class _$_PostModel implements _PostModel {
             const DeepCollectionEquality().equals(other.price, price) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.avatar, avatar));
+            const DeepCollectionEquality().equals(other.avatar, avatar) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.phone, phone) &&
+            const DeepCollectionEquality().equals(other.dateJoin, dateJoin) &&
+            const DeepCollectionEquality().equals(other.email, email));
   }
 
   @override
@@ -366,7 +442,11 @@ class _$_PostModel implements _PostModel {
       const DeepCollectionEquality().hash(address),
       const DeepCollectionEquality().hash(price),
       const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(avatar));
+      const DeepCollectionEquality().hash(avatar),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(phone),
+      const DeepCollectionEquality().hash(dateJoin),
+      const DeepCollectionEquality().hash(email));
 
   @JsonKey(ignore: true)
   @override
@@ -380,15 +460,19 @@ abstract class _PostModel implements PostModel {
       required String userId,
       required String categoryId,
       required String title,
-      required int createAt,
-      required int updateAt,
+      required double createAt,
+      required double updateAt,
       required String status,
       required String brandId,
       required List<String> images,
       required String address,
       required int price,
       required String description,
-      required String avatar}) = _$_PostModel;
+      required String avatar,
+      required String name,
+      required String phone,
+      required double dateJoin,
+      required String email}) = _$_PostModel;
 
   @override
   String get id;
@@ -399,9 +483,9 @@ abstract class _PostModel implements PostModel {
   @override
   String get title;
   @override
-  int get createAt;
+  double get createAt;
   @override
-  int get updateAt;
+  double get updateAt;
   @override
   String get status;
   @override
@@ -416,6 +500,14 @@ abstract class _PostModel implements PostModel {
   String get description;
   @override
   String get avatar;
+  @override
+  String get name;
+  @override
+  String get phone;
+  @override
+  double get dateJoin;
+  @override
+  String get email;
   @override
   @JsonKey(ignore: true)
   _$PostModelCopyWith<_PostModel> get copyWith =>

@@ -13,4 +13,6 @@ class AppUrlConstant {
       'https://lighthouse.chotot.com/_next/image?url=https%3A%2F%2Fcdn.chotot.com%2Fadmincentre%2FPeH_Zz-8hDT7yZ8F2Mm-BI4p7HWGasDhgq8I_7xdXyk%2Fpreset%3Araw%2Fplain%2Fe16cec7ca2ff9d7649268427ea9c1e4e-2741458979427623023.jpg&w=256&q=95';
   static const String iconSavedSearch =
       'https://lighthouse.chotot.com/_next/image?url=https%3A%2F%2Fcdn.chotot.com%2Fadmincentre%2FSDwFNRG5QRbMeZWWAa4zI7AL6eJdnzO8P6H_1DxTi4I%2Fpreset%3Araw%2Fplain%2Fc7ae341fb3dad555452cb23a8b903275-2741458990797599981.jpg&w=256&q=95';
+  static const String termPage =
+      'https://trogiup.chotot.com/nguoi-ban/tai-sao-chotot-vn-duyet-tin-truoc-khi-dang/?utm_source=chotot&utm_medium=user_protection&utm_campaign=user_protection_ad_view&_gl=1%2A1xv7ef0%2A_ga%2AMTUzODY0ODQyNC4xNjYxNDM1MjU1%2A_ga_XQVN5K27XX%2AMTY2ODA3NDU4OC43MC4xLjE2NjgwNzQ1ODkuNTkuMC4w&_ga=2.138826811.921293253.1666767427-1538648424.1661435255';
 }

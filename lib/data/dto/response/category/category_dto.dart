@@ -27,11 +27,14 @@ class CategoryData {
     required this.id,
     required this.name,
     required this.thumbnail,
+    required this.subThumbnail,
   });
 
   final String id;
   final String name;
   final String thumbnail;
+  @JsonKey(name: 'sub_thumbnail')
+  final String subThumbnail;
 
   Map<String, dynamic> toJson() => _$CategoryDataToJson(this);
 }

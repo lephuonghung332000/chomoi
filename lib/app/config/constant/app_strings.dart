@@ -19,7 +19,10 @@ class AppStrings {
   static const input_email_hint_text = 'Email của bạn';
   static const input_email_invalid_error_text = 'Email không hợp lệ';
   static const input_phone_invalid_error_text = 'Số điện thoại không hợp lệ';
-  static const input_password_lenght_error_text = 'Mật khẩu phải lớn hơn 6 kí tự';
+  static const input_password_lenght_error_text =
+      'Mật khẩu phải lớn hơn 6 kí tự';
+  static const input_comment_error_text =
+      'Bình luận không được để trống';
   static const input_password_hint_text = 'Mật khẩu của bạn';
   static const input_family_name_hint_text = 'Họ và tên đệm';
   static const input_gender_hint_text = 'Giới tính';
@@ -51,5 +54,53 @@ class AppStrings {
   static const category_title = 'Khám phá danh mục';
   static const recommend_post_title = 'Tin đăng dành cho bạn';
   static const latest_post_title = 'Tin đăng mới nhất';
-
+  static const related_post_title = 'Tin đăng liên quan';
+  static const seconds_ago_text = 'giây trước';
+  static const minutes_ago_text = 'phút trước';
+  static const hours_ago_text = 'giờ trước';
+  static const days_ago_text = 'ngày trước';
+  static const weeks_ago_text = 'tuần trước';
+  static const months_ago_text = 'tháng trước';
+  static const search_recent_title = 'TÌM KIẾM GẦN ĐÂY';
+  static const area_text = 'Khu vực:';
+  static const all_area_text = 'Toàn quốc';
+  static const filter_text = 'Lọc';
+  static const latest_post_text = 'Mới nhất';
+  static const old_post_text = 'Cũ nhất';
+  static const all_category_text = 'Tất cả danh mục';
+  static const category_selection_title = 'Chọn danh mục';
+  static const all_comment_title = 'Tất cả bình luận';
+  static const province_selection_title = 'Vị trí';
+  static const filter_province_selection_title = 'Lọc theo khu vực';
+  static const apply_text = 'ÁP DỤNG';
+  static const button_save_post_text = 'Lưu tin';
+  static const button_saved_post_text = 'Đã lưu';
+  static const see_page_text = 'Xem trang';
+  static const date_join_text = 'Ngày tham gia';
+  static const call_action_text = 'Gọi điện';
+  static const sms_action_text = 'Gửi SMS';
+  static const chat_action_text = 'Chat';
+  static const see_more_text = 'Xem thêm';
+  static const see_more_about_text = 'Xem thêm về';
+  static const create_post_rule_text = 'Quy định đăng tin của Chợ Mới';
+  static const create_post_info_text = 'Thông tin chi tiết';
+  static const find_more_text = 'Tìm hiểu thêm';
+  static const go_with_another_text = 'Nên kiểm tra nguồn gốc sản phẩm trước khi mua bán. .';
+  static const guaranted_text =
+      'Tin đăng này đã được kiểm duyệt. Nếu gặp vấn đề, vui lòng báo cáo tin đăng hoặc liên hệ CSKH để được trợ giúp ';
+  static const comment_title = 'Đánh giá sản phẩm';
+  static const see_more_comment_title = 'Xem thêm bình luận';
+  static const post_text = 'Đăng';
+  static const add_comment_hint_text = 'Thêm bình luận...';
+  static const see_all_text = 'Xem tất cả';
+  static const manage_post_title = 'Quản lý tin đăng';
+  static const associate_e_wallet_title = 'Liên kết ví bán hàng';
+  static const see_statistic_title = 'Xem thống kê';
+  static const see_hide_show_post_title = 'Đã bán/Ẩn tin';
+  static const create_post_title = 'Đăng tin';
+  static const category_label_create_post_title = 'Danh mục';
+  static const see_reason_reject_post_title = 'Xem lý do bị từ chối';
+  static String accept_post_title(int total) => 'ĐANG HIỂN THỊ ($total)';
+  static String pending_post_title(int total) => 'CHỜ DUYỆT ($total)';
+  static String reject_post_title(int total) => 'BỊ TỪ CHỐI ($total)';
 }
