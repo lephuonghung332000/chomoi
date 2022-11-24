@@ -123,7 +123,6 @@ class SignUpController extends GetxController {
 
   void _clearInputDistrict() {
     //clear district field
-    districtController.clear();
     if (districtController.text.isNotEmpty) {
       districtController.clear();
     }
@@ -163,13 +162,13 @@ class SignUpController extends GetxController {
     });
   }
 
-  Future<void> getWards({String? wardId}) async {
+  Future<void> getWards({String? districtId}) async {
     _clearInputWard();
 
-    if (wardId == null) {
+    if (districtId == null) {
       return;
     }
-    final int id = int.parse(wardId);
+    final int id = int.parse(districtId);
 
     _wardState.value = const States.loading();
     final result = await fetchWardsUseCase.call(id);
@@ -224,6 +223,14 @@ class SignUpController extends GetxController {
   void onClose() {
     emailController.dispose();
     passwordController.dispose();
+    nameController.dispose();
+    phoneController.dispose();
+    familyNameController.dispose();
+    genderController.dispose();
+    districtController.dispose();
+    provinceController.dispose();
+    birthdayController.dispose();
+    wardController.dispose();
     super.onClose();
   }
 }

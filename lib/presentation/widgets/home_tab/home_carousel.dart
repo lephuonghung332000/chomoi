@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chomoi/app/config/constant/app_constants.dart';
 import 'package:chomoi/app/config/constant/app_url_constant.dart';
 import 'package:chomoi/app/util/url_launcher.dart';
@@ -28,13 +29,13 @@ class HomeCarousel extends StatelessWidget {
                       onTap: e.image.isNotEmpty
                           ? () => UrlLauncher.openUrl(e.url)
                           : null,
-                      child: Image.network(
-                        e.image,
+                      child: CachedNetworkImage(
+                        imageUrl: e.image,
                         fit: BoxFit.fill,
                       ),
                     )
-                  : Image.network(
-                      AppUrlConstant.imageNoData,
+                  : CachedNetworkImage(
+                      imageUrl: AppUrlConstant.imageNoData,
                     ),
             )
             .toList(),

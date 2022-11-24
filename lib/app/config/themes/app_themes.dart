@@ -1,6 +1,7 @@
 // Declare all app ThemeData.
 import 'package:chomoi/app/config/resources/app_colors.dart';
 import 'package:chomoi/app/config/resources/app_fonts.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppThemes {
@@ -11,6 +12,10 @@ abstract class AppThemes {
     scaffoldBackgroundColor: AppColors.white,
     focusColor: AppColors.primaryColor,
     disabledColor: AppColors.disabledColor,
+    cupertinoOverrideTheme: const NoDefaultCupertinoThemeData(
+      primaryColor: AppColors.primaryContrastColor,
+      barBackgroundColor: AppColors.primaryColor,
+    ),
     appBarTheme: const AppBarTheme(
       color: AppColors.primaryContrastColor,
       elevation: 1,

@@ -32,6 +32,7 @@ class SearchController extends GetxController {
 
   @override
   void onReady() {
+
     _fetchSearch();
     super.onReady();
   }
@@ -60,6 +61,10 @@ class SearchController extends GetxController {
   }
 
   void routeToPostPage({required String search}) {
+    if (search.isEmpty) {
+      return;
+    }
+
     MainController.homeNavigator
         ?.popAndPushNamed(HomeTabNavigatorRoutes.post, arguments: {
       'search': search,

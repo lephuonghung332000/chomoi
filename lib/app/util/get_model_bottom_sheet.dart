@@ -24,6 +24,7 @@ extension ExtensionModalBottomSheet on GetInterface {
       clipBehavior: clipBehavior,
       constraints: constraints,
       barrierColor: barrierColor,
+      useSafeArea: false,
       isScrollControlled: isScrollControlled,
       useRootNavigator: useRootNavigator,
       isDismissible: isDismissible,

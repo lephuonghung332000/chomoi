@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chomoi/app/config/constant/app_constants.dart';
 import 'package:chomoi/app/config/resources/app_assets.dart';
 import 'package:chomoi/app/config/resources/app_colors.dart';
@@ -47,8 +48,8 @@ class CategoryRow extends StatelessWidget {
                     size: AppConstant.iconSize,
                   )
                 else
-                  Image.network(
-                    viewModel.subThumbnail,
+                  CachedNetworkImage(
+                    imageUrl: viewModel.subThumbnail,
                     width: AppConstant.iconSize,
                     height: AppConstant.iconSize,
                   ),

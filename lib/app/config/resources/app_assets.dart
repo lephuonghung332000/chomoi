@@ -54,6 +54,11 @@ class AppAssets {
   static const String iconGoWith = './assets/icons/icon_go_with.png';
   static const String iconStatistic = './assets/icons/icon_statistic.svg';
   static const String iconShutDownEye = './assets/icons/icon_shut_down_eye.svg';
+  static const String iconCamera = './assets/icons/icon_camera.svg';
+  static const String iconCameraOutline = './assets/icons/icon_camera_outline.svg';
+  static const String iconCameraAdd = './assets/icons/icon_camera_add.svg';
+  static const String iconCancelCircle = './assets/icons/icon_cancel_circle.svg';
+  static const String iconChecked = './assets/icons/icon_check.svg';
 
   /// Flags
   static String flag(String code) => './assets/flags/$code.png';

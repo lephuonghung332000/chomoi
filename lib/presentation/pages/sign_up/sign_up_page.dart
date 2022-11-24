@@ -207,7 +207,7 @@ class SignUpPage extends GetWidget<SignUpController> {
             ),
             onSelected: (value) {
               controller.setSelectedDistrict(value);
-              controller.getWards(wardId: value?.districtId);
+              controller.getWards(districtId: value?.districtId);
             },
             suffixIcon: controller.districtsState.maybeWhen(
               loading: () => const AppActivityIndicator(

@@ -184,6 +184,7 @@ class MainPage extends GetWidget<MainController> {
           onPressed: () =>
               _showCategoryBottomSheet(_buildCategoryList, context),
           backgroundColor: AppColors.primaryColor,
+          elevation: 0,
           child: const SvgIcon(
             icon: AppAssets.iconCreatePostActive,
             size: AppConstant.iconSize,

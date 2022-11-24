@@ -19,10 +19,10 @@ class CategoryListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.secondaryBackgroundColor,
+      backgroundColor: AppColors.primaryContrastColor,
       appBar: CustomAppBar(
         title: AppStrings.category_selection_title,
-        background: AppColors.secondaryBackgroundColor,
+        background: AppColors.primaryBackgroundColor,
         leading: AppBackButton(
           icon: const SvgIcon(
             icon: AppAssets.iconCancel,

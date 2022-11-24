@@ -36,7 +36,7 @@ class PostViewModel {
 
   String get firstImage => image?.first ?? '';
 
-  String get province => address?.split(',')[2] ?? '';
+  String get province => address?.split(',')[2].trim() ?? '';
 
   String get avatar => avatarUrl ?? '';
 

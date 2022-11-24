@@ -15,34 +15,40 @@ import 'package:get/get.dart';
 class CommentPage extends GetView<CommentController> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.secondaryBackgroundColor,
-      appBar: CustomAppBar(
-        title: AppStrings.all_comment_title,
-        leading: AppBackButton(
-          onBack: () => Navigator.of(context).pop(),
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.of(context).pop(controller.isAddNewComment);
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.secondaryBackgroundColor,
+        appBar: CustomAppBar(
+          title: AppStrings.all_comment_title,
+          leading: AppBackButton(
+            onBack: () => Navigator.of(context).pop(controller.isAddNewComment),
+          ),
         ),
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: NotificationListener(
-                onNotification: controller.onNotification,
-                child: CustomScrollView(
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics(),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: NotificationListener(
+                  onNotification: controller.onNotification,
+                  child: CustomScrollView(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics(),
+                    ),
+                    slivers: [
+                      _buildComment,
+                      _buildLoadMoreComment,
+                    ],
                   ),
-                  slivers: [
-                    _buildComment,
-                    _buildLoadMoreComment,
-                  ],
                 ),
               ),
-            ),
-            _buildCommentBox
-          ],
+              _buildCommentBox
+            ],
+          ),
         ),
       ),
     );
@@ -136,10 +142,9 @@ class CommentPage extends GetView<CommentController> {
                               AppStrings.post_text,
                               style:
                                   AppTextStyles.contentRegular15w400.copyWith(
-                                color:
-                                    controller.isEmptyComment
-                                        ? AppColors.blueSky
-                                        : AppColors.blueWater,
+                                color: controller.isEmptyComment
+                                    ? AppColors.blueSky
+                                    : AppColors.blueWater,
                               ),
                             ),
                           ),

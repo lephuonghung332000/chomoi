@@ -59,6 +59,10 @@ class CommentController extends GetxController {
 
   States<UserModel> get userState => _userState.value;
 
+  final _isAddNewComment = false.obs;
+
+  bool get isAddNewComment => _isAddNewComment.value;
+
   @override
   void onInit() {
     if (Get.arguments != null) {
@@ -126,12 +130,10 @@ class CommentController extends GetxController {
       }
     }, (value) async {
       _page = page;
-      if (value.comments.isNotEmpty) {
-        _total = value.total;
-        _comments.addAll(value.comments);
-        _commentState.value = States.success(entity: _comments);
-        _commentState.refresh();
-      }
+      _total = value.total;
+      _comments.addAll(value.comments);
+      _commentState.value = States.success(entity: _comments);
+      _commentState.refresh();
     });
     _isLoadingComment.value = false;
   }
@@ -163,6 +165,7 @@ class CommentController extends GetxController {
       _comments.clear();
       _fetchComment();
       commentController.clear();
+      _isAddNewComment.value = true;
     });
   }
 

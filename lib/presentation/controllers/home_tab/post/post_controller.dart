@@ -1,8 +1,14 @@
+import 'package:chomoi/app/config/constant/app_strings.dart';
+import 'package:chomoi/app/util/get_cupertino_dialog.dart';
+import 'package:chomoi/domain/models/request/search/search_request_model.dart';
 import 'package:chomoi/domain/models/response/category/category_model.dart';
 import 'package:chomoi/domain/models/response/country/province_model.dart';
 import 'package:chomoi/domain/models/response/post/post_model.dart';
+import 'package:chomoi/domain/models/response/user/user_model.dart';
 import 'package:chomoi/domain/models/state/states.dart';
 import 'package:chomoi/domain/usecases/post/fetch_post_use_case.dart';
+import 'package:chomoi/domain/usecases/search/add_search_use_case.dart';
+import 'package:chomoi/domain/usecases/user/fetch_user_use_case.dart';
 import 'package:chomoi/presentation/controllers/home_tab/home_tab_navigator.dart';
 import 'package:chomoi/presentation/controllers/main/main_controller.dart';
 import 'package:chomoi/presentation/routes/app_pages.dart';
@@ -12,11 +18,14 @@ import 'package:get/get.dart';
 
 class PostController extends GetxController {
   final FetchPostUseCase fetchPostUseCase;
+  final AddSearchUseCase addSearchUseCase;
+  final FetchUserUseCase fetchUserUseCase;
   int _total = 0;
-
 
   PostController({
     required this.fetchPostUseCase,
+    required this.addSearchUseCase,
+    required this.fetchUserUseCase,
   });
 
   final _postState = const States<List<PostModel>>.init(
@@ -49,6 +58,8 @@ class PostController extends GetxController {
 
   final _timePost = 'DESC'.obs;
 
+  String userId = '';
+
   String get timePost => _timePost.value;
 
   int _page = 1;
@@ -59,13 +70,25 @@ class PostController extends GetxController {
 
   final searchController = TextEditingController();
 
+  final _addSearchState = const States<Unit>.init(
+    entity: unit,
+  ).obs;
+
+  States<Unit> get addSearchState => _addSearchState.value;
+
+  final _userState = States<UserModel>.init(
+    entity: UserModel.empty(),
+  ).obs;
+
+  States<UserModel> get userState => _userState.value;
+
   @override
   void onInit() {
     _initArguments();
     super.onInit();
   }
 
-  void _initArguments() {
+  Future<void> _initArguments() async {
     // categoryId
     if (Get.arguments != null) {
       if (Get.arguments['categoryId'] != null) {
@@ -78,8 +101,43 @@ class PostController extends GetxController {
         final search = Get.arguments['search'] as String;
         _search.value = search;
         searchController.text = search;
+        await _fetchUser();
+        addSearch();
       }
     }
+  }
+
+  Future<void> _fetchUser() async {
+    _userState.value = const States.loading();
+    // call info myself
+    final result = await fetchUserUseCase.call(null);
+    result.fold((failure) {
+      _userState.value = States.failure(failure);
+    }, (value) {
+      _userState.value = States.success(entity: value);
+      userId = value.id;
+    });
+  }
+
+  Future<void> addSearch() async {
+    _addSearchState.value = const States.loading();
+    final result = await addSearchUseCase.call(
+      SearchRequestModel(
+        userId: userId,
+        key: _search.value,
+      ),
+    );
+    result.fold((failure) {
+      _addSearchState.value = States.failure(failure);
+      Get.cupertinoDialog(
+        title: AppStrings.error_title,
+        middleText: failure.toString(),
+        onConfirm: () => Get.back(),
+        barrierDismissible: false,
+      );
+    }, (value) async {
+      _addSearchState.value = States.success(entity: value);
+    });
   }
 
   @override
@@ -213,12 +271,10 @@ class PostController extends GetxController {
       }
     }, (value) async {
       _page = page;
-      if (value.posts.isNotEmpty) {
-        _total = value.total;
-        _posts.addAll(value.posts);
-        _postState.value = States.success(entity: _posts);
-        _postState.refresh();
-      }
+      _total = value.total;
+      _posts.addAll(value.posts);
+      _postState.value = States.success(entity: _posts);
+      _postState.refresh();
     });
     _isLoadingPost.value = false;
   }

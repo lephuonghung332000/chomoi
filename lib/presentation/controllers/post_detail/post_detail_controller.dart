@@ -111,7 +111,11 @@ class PostDetailController extends GetxController {
       arguments: {
         'post_id': _postDetail.value.id,
       },
-    );
+    )?.then((value) {
+      if (value) {
+        _fetchComment();
+      }
+    });
   }
 
   void routeRelatedPost() {

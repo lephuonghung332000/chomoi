@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chomoi/app/config/constant/app_constants.dart';
 import 'package:chomoi/app/config/resources/app_assets.dart';
 import 'package:chomoi/app/config/resources/app_colors.dart';
@@ -6,6 +7,7 @@ import 'package:chomoi/presentation/pages/home_tab/home/viewmodels/post_view_mod
 import 'package:chomoi/presentation/widgets/hbox.dart';
 import 'package:chomoi/presentation/widgets/svg_icon.dart';
 import 'package:chomoi/presentation/widgets/vbox.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PostHorizontalBox extends StatelessWidget {
@@ -54,10 +56,12 @@ class PostHorizontalBox extends StatelessWidget {
               borderRadius: const BorderRadius.all(
                 Radius.circular(2),
               ),
-              child: Image.network(
-                viewModel.firstImage,
+              child: CachedNetworkImage(
+                imageUrl: viewModel.firstImage,
                 height: double.infinity,
                 fit: BoxFit.cover,
+                errorWidget: (context, url, error) => const CupertinoActivityIndicator(),
+                placeholder: (context, url) => const CupertinoActivityIndicator(),
               ),
             ),
           ),

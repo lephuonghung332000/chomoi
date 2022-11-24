@@ -15,4 +15,6 @@ class AppUrlConstant {
       'https://lighthouse.chotot.com/_next/image?url=https%3A%2F%2Fcdn.chotot.com%2Fadmincentre%2FSDwFNRG5QRbMeZWWAa4zI7AL6eJdnzO8P6H_1DxTi4I%2Fpreset%3Araw%2Fplain%2Fc7ae341fb3dad555452cb23a8b903275-2741458990797599981.jpg&w=256&q=95';
   static const String termPage =
       'https://trogiup.chotot.com/nguoi-ban/tai-sao-chotot-vn-duyet-tin-truoc-khi-dang/?utm_source=chotot&utm_medium=user_protection&utm_campaign=user_protection_ad_view&_gl=1%2A1xv7ef0%2A_ga%2AMTUzODY0ODQyNC4xNjYxNDM1MjU1%2A_ga_XQVN5K27XX%2AMTY2ODA3NDU4OC43MC4xLjE2NjgwNzQ1ODkuNTkuMC4w&_ga=2.138826811.921293253.1666767427-1538648424.1661435255';
+  static const String createPostTermPage =
+      'https://trogiup.chotot.com/nguoi-ban/dang-tin/?_gl=1*1aiqq9q*_ga*MTUzODY0ODQyNC4xNjYxNDM1MjU1*_ga_XQVN5K27XX*MTY2ODc2MDM0Ny43OC4xLjE2Njg3NjA0MDUuMi4wLjA.&_ga=2.125342090.12334356.1668756712-1538648424.1661435255';
 }

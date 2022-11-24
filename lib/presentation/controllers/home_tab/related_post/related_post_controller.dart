@@ -65,12 +65,10 @@ class RelatedPostController extends GetxController {
       }
     }, (value) async {
       _page = page;
-      if (value.posts.isNotEmpty) {
-        _total = value.total;
-        _posts.addAll(value.posts);
-        _postState.value = States.success(entity: _posts);
-        _postState.refresh();
-      }
+      _total = value.total;
+      _posts.addAll(value.posts);
+      _postState.value = States.success(entity: _posts);
+      _postState.refresh();
     });
     _isLoadingPost.value = false;
   }

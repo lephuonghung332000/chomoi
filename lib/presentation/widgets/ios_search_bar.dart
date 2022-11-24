@@ -22,8 +22,13 @@ class IOSSearchBar extends StatefulWidget {
     this.onActiveSearch,
     this.onCancel,
     this.onSubmit,
+    this.color = AppColors.white,
+    this.colorSearchBar = AppColors.white,
     this.onUpdate,
     this.height = 60,
+    this.borderRadius,
+    this.isShowBackButton = true,
+    this.prefixIcon = const Icon(CupertinoIcons.search),
   }) : super(key: key);
 
   final String? placeholder;
@@ -32,11 +37,17 @@ class IOSSearchBar extends StatefulWidget {
 
   final bool alwaysShowCancelButton;
 
+  final bool isShowBackButton;
+
   final bool autofocus;
 
   final bool enable;
 
   final bool isShowChat;
+
+  final Color color;
+
+  final Color colorSearchBar;
 
   final TextEditingController? controller;
 
@@ -51,6 +62,10 @@ class IOSSearchBar extends StatefulWidget {
   final ValueChanged<String>? onSubmit;
 
   final double height;
+
+  final BorderRadius? borderRadius;
+
+  final Widget prefixIcon;
 
   @override
   State<IOSSearchBar> createState() => _IOSSearchBarState();
@@ -132,9 +147,8 @@ class _IOSSearchBarState extends State<IOSSearchBar>
     return IntrinsicHeight(
       child: Row(
         children: <Widget>[
-          if (widget.alwaysShowCancelButton)
-            _buildCancelButton()
-          else
+          if (widget.alwaysShowCancelButton) _buildCancelButton(),
+          if (widget.isShowBackButton)
             AnimatedBuilder(
               animation: _animation,
               builder: (BuildContext context, Widget? child) {
@@ -163,12 +177,13 @@ class _IOSSearchBarState extends State<IOSSearchBar>
               ),
             ),
           Expanded(child: _buildSearchTextField()),
-          const HBox(16),
-          if (widget.isShowChat)
+          if (widget.isShowChat) ...[
+            const HBox(16),
             const SvgIcon(
               icon: AppAssets.iconChat,
               size: AppConstant.iconSize,
             )
+          ]
         ],
       ),
     );
@@ -195,13 +210,14 @@ class _IOSSearchBarState extends State<IOSSearchBar>
       placeholderStyle: AppTextStyles.contentRegular15w400.apply(
         color: AppColors.tertiaryTextColor,
       ),
+      prefixIcon: widget.prefixIcon,
       autocorrect: false,
       autofocus: widget.autofocus,
       style: AppTextStyles.titleMediumRegular17w400.apply(
         color: AppColors.primaryTextColor,
       ),
-      borderRadius: BorderRadius.circular(5),
-      backgroundColor: AppColors.white,
+      backgroundColor: widget.color,
+      borderRadius: widget.borderRadius,
       onTap: () {
         _hasFocus.value = true;
       },

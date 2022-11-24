@@ -70,58 +70,54 @@ class _PostDetailPageState extends State<PostDetailPage> {
     );
   }
 
-  Widget get _buildFooter =>
-      GetX<PostDetailController>(
+  Widget get _buildFooter => GetX<PostDetailController>(
         global: false,
         init: controller,
-        builder: (controller) =>
-            controller.userState.maybeWhen(
-                success: (entity) {
-                  final viewModel = PostViewModel.fromPost(
-                      controller.postDetail);
-                  return (entity.email.compareTo(viewModel.emailUser) != 0)
-                      ? IntrinsicHeight(
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 4,
-                          child: _buildPhoneItem(
-                            AppAssets.iconCall,
-                            AppStrings.call_action_text,
-                            viewModel.phoneUser,
+        builder: (controller) => controller.userState.maybeWhen(
+            success: (entity) {
+              final viewModel = PostViewModel.fromPost(controller.postDetail);
+              return (entity.email.compareTo(viewModel.emailUser) != 0)
+                  ? IntrinsicHeight(
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 4,
+                            child: _buildPhoneItem(
+                              AppAssets.iconCall,
+                              AppStrings.call_action_text,
+                              viewModel.phoneUser,
+                            ),
                           ),
-                        ),
-                        const VerticalDivider(
-                          width: 1,
-                          color: AppColors.greyStorm,
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: _buildMessageItem(
-                              AppAssets.iconSms, AppStrings.sms_action_text,
-                              data: viewModel.phoneUser),
-                        ),
-                        const VerticalDivider(
-                          width: 2,
-                          color: AppColors.greyStorm,
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: _buildMessageItem(
-                            AppAssets.iconChatDetail,
-                            AppStrings.chat_action_text,
+                          const VerticalDivider(
+                            width: 1,
+                            color: AppColors.greyStorm,
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-                      : const SizedBox();
-                },
-                orElse: () => const SizedBox()),
+                          Expanded(
+                            flex: 3,
+                            child: _buildMessageItem(
+                                AppAssets.iconSms, AppStrings.sms_action_text,
+                                data: viewModel.phoneUser),
+                          ),
+                          const VerticalDivider(
+                            width: 2,
+                            color: AppColors.greyStorm,
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: _buildMessageItem(
+                              AppAssets.iconChatDetail,
+                              AppStrings.chat_action_text,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : const SizedBox();
+            },
+            orElse: () => const SizedBox()),
       );
 
-  Widget get _buildTerm =>
-      SliverToBoxAdapter(
+  Widget get _buildTerm => SliverToBoxAdapter(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           color: AppColors.white,
@@ -145,156 +141,147 @@ class _PostDetailPageState extends State<PostDetailPage> {
         ),
       );
 
-  Widget get _buildSpace =>
-      const SliverToBoxAdapter(
+  Widget get _buildSpace => const SliverToBoxAdapter(
         child: VBox(30),
       );
 
-  Widget get _buildCommentPost =>
-      GetX<PostDetailController>(
+  Widget get _buildCommentPost => GetX<PostDetailController>(
         global: false,
         init: controller,
-        builder: (controller) =>
-            SliverToBoxAdapter(
-              child: controller.commentState.when(
-                  init: (entity) => const SizedBox.shrink(),
-                  loading: () =>
-                  const Padding(
+        builder: (controller) => SliverToBoxAdapter(
+          child: controller.commentState.when(
+              init: (entity) => const SizedBox.shrink(),
+              loading: () => const Padding(
                     padding: EdgeInsets.symmetric(vertical: 10),
                     child: LoadingScreen(),
                   ),
-                  failure: (exception) => const SizedBox.shrink(),
-                  success: (comment) {
-                    return Container(
-                      color: AppColors.white,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Divider(
-                            color: AppColors.greyStorm,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                  child: FittedBox(
-                                    child: Text(
-                                      '${AppStrings.comment_title} (${controller
-                                          .total})',
-                                      style: AppTextStyles.contentBold15w700,
-                                    ),
-                                  ),
-                                ),
-                                if (controller.total > 0)
-                                  GestureDetector(
-                                    onTap: controller.routeAllComment,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: AppColors.greyStorm,
-                                        ),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(6),
-                                        child: Text(
-                                          AppStrings.see_more_comment_title,
-                                          style: AppTextStyles
-                                              .contentRegular15w400
-                                              .copyWith(
-                                              color: AppColors.primaryColor),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                              ],
-                            ),
-                          ),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) =>
-                                CommentRow(
-                                  viewModel:
-                                  CommentViewModel.fromComment(comment[index]),
-                                ),
-                            itemCount: comment.length,
-                          ),
-                          const Divider(
-                            color: AppColors.greyStorm,
-                          ),
-                        ],
+              failure: (exception) => const SizedBox.shrink(),
+              success: (comment) {
+                return Container(
+                  color: AppColors.white,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Divider(
+                        color: AppColors.greyStorm,
                       ),
-                    );
-                  }),
-            ),
-      );
-
-  Widget _buildRelatedPost(BuildContext context) =>
-      GetX<PostDetailController>(
-          global: false,
-          init: controller,
-          builder: (controller) {
-            final theme = Theme.of(context);
-            return SliverToBoxAdapter(
-              child: controller.postState.when(
-                loading: () =>
-                const Padding(
-                    padding: EdgeInsets.only(top: 10), child: LoadingScreen()),
-                success: (entity) =>
-                    Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: AppColors.white,
-                            border: entity.isNotEmpty
-                                ? Border(
-                              bottom: BorderSide(
-                                color: theme.dividerColor,
-                                width: 0.5,
-                              ),
-                            )
-                                : null,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.all(12),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Flexible(
+                              child: FittedBox(
                                 child: Text(
-                                  AppStrings.related_post_title,
+                                  '${AppStrings.comment_title} (${controller.total})',
                                   style: AppTextStyles.contentBold15w700,
                                 ),
                               ),
-                              SizedBox(
-                                height: AppConstant.heightPostViewVertical,
-                                child: RelatedPostListView(
-                                    posts: entity,
-                                    onTap: (post) {
-                                      controller.routePostDetail(
-                                          postModel: post);
-                                    }),
+                            ),
+                            GestureDetector(
+                              onTap: controller.routeAllComment,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: AppColors.greyStorm,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(6),
+                                  child: Text(
+                                    controller.total > 0
+                                        ? AppStrings.see_more_comment_title
+                                        : AppStrings.write_comment_hint_text,
+                                    style: AppTextStyles.contentRegular15w400
+                                        .copyWith(
+                                            color: AppColors.primaryColor),
+                                  ),
+                                ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        if (entity.isNotEmpty) _buildButtonSeeAll
-                      ],
-                    ),
-                failure: (exception) => const SizedBox.shrink(),
-                init: (entity) => const SizedBox.shrink(),
-              ),
-            );
-          });
+                      ),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) => CommentRow(
+                          viewModel:
+                              CommentViewModel.fromComment(comment[index]),
+                        ),
+                        itemCount: comment.length,
+                      ),
+                      const Divider(
+                        color: AppColors.greyStorm,
+                      ),
+                    ],
+                  ),
+                );
+              }),
+        ),
+      );
 
-  Widget _buildTermItem({required String icon,
-    required String text,
-    required bool italic,
-    required String moreText}) =>
+  Widget _buildRelatedPost(BuildContext context) => GetX<PostDetailController>(
+      global: false,
+      init: controller,
+      builder: (controller) {
+        final theme = Theme.of(context);
+        return SliverToBoxAdapter(
+          child: controller.postState.when(
+            loading: () => const Padding(
+                padding: EdgeInsets.only(top: 10), child: LoadingScreen()),
+            success: (entity) => Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    border: entity.isNotEmpty
+                        ? Border(
+                            bottom: BorderSide(
+                              color: theme.dividerColor,
+                              width: 0.5,
+                            ),
+                          )
+                        : null,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(12),
+                        child: Text(
+                          AppStrings.related_post_title,
+                          style: AppTextStyles.contentBold15w700,
+                        ),
+                      ),
+                      SizedBox(
+                        height: AppConstant.heightPostViewVertical,
+                        child: RelatedPostListView(
+                            posts: entity,
+                            onTap: (post) {
+                              controller.routePostDetail(postModel: post);
+                            }),
+                      ),
+                    ],
+                  ),
+                ),
+                if (entity.isNotEmpty) _buildButtonSeeAll
+              ],
+            ),
+            failure: (exception) => const SizedBox.shrink(),
+            init: (entity) => const SizedBox.shrink(),
+          ),
+        );
+      });
+
+  Widget _buildTermItem(
+          {required String icon,
+          required String text,
+          required bool italic,
+          required String moreText}) =>
       Row(
         children: [
           Image.asset(
@@ -375,8 +362,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
         ),
       );
 
-  Widget get _buildDivider =>
-      SliverToBoxAdapter(
+  Widget get _buildDivider => SliverToBoxAdapter(
         child: Container(
           color: AppColors.white,
           child: const Divider(
@@ -385,9 +371,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
         ),
       );
 
-  Widget get _buildButtonSeeAll =>
-      GestureDetector(
-        onTap: () =>  controller.routeRelatedPost(),
+  Widget get _buildButtonSeeAll => GestureDetector(
+        onTap: () => controller.routeRelatedPost(),
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 16),
           color: AppColors.white,
@@ -411,8 +396,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
         ),
       );
 
-  Widget get _buildHeader =>
-      SliverPinnedHeader(
+  Widget get _buildHeader => SliverPinnedHeader(
         child: Container(
           color: AppColors.primaryColor,
           alignment: Alignment.bottomCenter,
@@ -436,8 +420,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
         ),
       );
 
-  Widget _buildGalleryView(BuildContext context) =>
-      GetX<PostDetailController>(
+  Widget _buildGalleryView(BuildContext context) => GetX<PostDetailController>(
         global: false,
         init: controller,
         builder: (controller) {
@@ -463,7 +446,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   itemCount: controller.postDetail.images.length,
                   loadingBuilder: (context, progress) => const LoadingScreen(),
                   backgroundDecoration:
-                  const BoxDecoration(color: Colors.white),
+                      const BoxDecoration(color: Colors.white),
                   onPageChanged: controller.setSelectedIndex,
                 ),
               ),
@@ -472,8 +455,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
         },
       );
 
-  Widget get _buildInfoPost =>
-      GetX<PostDetailController>(
+  Widget get _buildInfoPost => GetX<PostDetailController>(
         global: false,
         init: controller,
         builder: (controller) {
@@ -557,8 +539,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
         },
       );
 
-  Widget get _buildContentPost =>
-      GetX<PostDetailController>(
+  Widget get _buildContentPost => GetX<PostDetailController>(
         global: false,
         init: controller,
         builder: (controller) {
@@ -573,8 +554,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
         },
       );
 
-  Widget get _buildUserInfo =>
-      GetX<PostDetailController>(
+  Widget get _buildUserInfo => GetX<PostDetailController>(
         global: false,
         init: controller,
         builder: (controller) {
@@ -616,7 +596,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                                 child: Text(
                                   viewModel.dateJoinPost,
                                   style:
-                                  AppTextStyles.tinyRegular10w400.copyWith(
+                                      AppTextStyles.tinyRegular10w400.copyWith(
                                     color: AppColors.greyStorm,
                                   ),
                                   overflow: TextOverflow.ellipsis,
@@ -634,7 +614,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: Text(
                       AppStrings.see_page_text,
                       style: AppTextStyles.contentRegular15w400
@@ -648,24 +628,22 @@ class _PostDetailPageState extends State<PostDetailPage> {
         },
       );
 
-  void _openGallery(BuildContext context) =>
-      Navigator.push(
+  void _openGallery(BuildContext context) => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              GalleryPhotoViewWrapper(
-                galleryItems: controller.postDetail.images
-                    .map(
-                      (e) => GalleryExampleItem(id: e, resource: e),
+          builder: (context) => GalleryPhotoViewWrapper(
+            galleryItems: controller.postDetail.images
+                .map(
+                  (e) => GalleryExampleItem(id: e, resource: e),
                 )
-                    .toList(),
-                backgroundDecoration: const BoxDecoration(
-                  color: AppColors.black,
-                ),
-                initialIndex: controller.selectedIndex,
-                scrollDirection: Axis.horizontal,
-                loadingBuilder: (context, progress) => const LoadingScreen(),
-              ),
+                .toList(),
+            backgroundDecoration: const BoxDecoration(
+              color: AppColors.black,
+            ),
+            initialIndex: controller.selectedIndex,
+            scrollDirection: Axis.horizontal,
+            loadingBuilder: (context, progress) => const LoadingScreen(),
+          ),
         ),
       );
 }

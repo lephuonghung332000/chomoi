@@ -1,9 +1,11 @@
 import 'package:chomoi/app/services/auth_service..dart';
+import 'package:chomoi/data/dto/request/post/post_request_dto.dart';
 import 'package:chomoi/data/providers/network/api_endpoint.dart';
 import 'package:chomoi/data/providers/network/api_provider.dart';
 import 'package:chomoi/data/providers/network/api_request_representable.dart';
+import 'package:get/get_connect/http/src/multipart/form_data.dart';
 
-enum PostType { fetchPost, fetchMyPost }
+enum PostType { fetchPost, fetchMyPost, addPost }
 
 class PostAPI implements APIRequestRepresentable {
   final PostType type;
@@ -14,16 +16,17 @@ class PostAPI implements APIRequestRepresentable {
   String? province;
   String? search;
   int? userId;
+  final PostRequestDto? postRequestDto;
 
-  PostAPI._({
-    required this.type,
-    this.status,
-    this.timePost,
-    this.categoryId,
-    this.province,
-    this.search,
-    this.page,
-  });
+  PostAPI._(
+      {required this.type,
+      this.status,
+      this.timePost,
+      this.categoryId,
+      this.province,
+      this.search,
+      this.page,
+      this.postRequestDto});
 
   PostAPI.fetchPost({
     String? status,
@@ -49,6 +52,13 @@ class PostAPI implements APIRequestRepresentable {
           status: status,
         );
 
+  PostAPI.addPost({
+    required PostRequestDto postRequestDto,
+  }) : this._(
+          type: PostType.addPost,
+          postRequestDto: postRequestDto,
+        );
+
   @override
   String get endpoint => '${APIEndpoint.choMoiApi}post';
 
@@ -59,12 +69,19 @@ class PostAPI implements APIRequestRepresentable {
         return userId != null ? '/$userId' : '';
       case PostType.fetchMyPost:
         return '/currentUser';
+      case PostType.addPost:
+        return '/addPost';
     }
   }
 
   @override
   HTTPMethod get method {
-    return HTTPMethod.get;
+    switch (type) {
+      case PostType.addPost:
+        return HTTPMethod.get;
+      default:
+        return HTTPMethod.post;
+    }
   }
 
   @override
@@ -102,17 +119,25 @@ class PostAPI implements APIRequestRepresentable {
         }
         return queryPost;
       case PostType.fetchMyPost:
-        final Map<String, String> queryMyPost = {
-        };
+        final Map<String, String> queryMyPost = {};
         if (status != null) {
           queryMyPost['status'] = '$status';
         }
         return queryMyPost;
+      case PostType.addPost:
+        return null;
     }
   }
 
   @override
-  Null get body => null;
+  dynamic get body {
+    switch (type) {
+      case PostType.addPost:
+        return FormData(postRequestDto!.toJson());
+      default:
+        return null;
+    }
+  }
 
   @override
   Future request() {

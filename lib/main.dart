@@ -16,7 +16,7 @@ void _configAppStyle() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: AppColors.primaryColor,
+    statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light
   ));
   EasyLoading.instance

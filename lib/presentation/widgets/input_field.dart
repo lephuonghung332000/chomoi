@@ -1,8 +1,10 @@
 import 'package:chomoi/app/config/constant/app_strings.dart';
 import 'package:chomoi/app/config/resources/app_colors.dart';
 import 'package:chomoi/app/config/resources/app_textstyles.dart';
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class InputField extends StatefulWidget {
   final TextEditingController controller;
@@ -16,7 +18,11 @@ class InputField extends StatefulWidget {
   final Widget? suffixIcon;
   final String? Function(String?)? validator;
   final VoidCallback? onTap;
+  final int? maxLength;
+  final int? maxLine;
+  final ValueChanged<String>? onChanged;
   final EdgeInsets contentPadding;
+  final List<TextInputFormatter> inputFormatters;
 
   const InputField({
     required this.controller,
@@ -27,11 +33,15 @@ class InputField extends StatefulWidget {
     this.style = AppTextStyles.contentRegular15w400,
     this.validator,
     this.label,
+    this.maxLength,
+    this.maxLine,
     this.suffixIcon,
+    this.onChanged,
     this.readOnly = false,
     this.contentPadding =
         const EdgeInsets.symmetric(vertical: 10, horizontal: 7),
     this.onTap,
+    this.inputFormatters = const [],
   });
 
   @override
@@ -68,6 +78,9 @@ class _InputFieldState extends State<InputField> {
   Widget build(BuildContext context) {
     return TextFormField(
       onTap: widget.onTap,
+      maxLength: widget.maxLength,
+      maxLines: widget.maxLine ?? 1,
+      inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
         contentPadding: widget.contentPadding,
         focusedBorder: OutlineInputBorder(
@@ -105,6 +118,12 @@ class _InputFieldState extends State<InputField> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: widget.controller,
       style: widget.style,
+      onChanged: (text) {
+        widget.onChanged?.call(text);
+        widget.controller.selection = TextSelection.fromPosition(
+          TextPosition(offset: widget.controller.text.length),
+        );
+      },
       keyboardType: widget.keyboardType,
       obscureText: widget.password && !isShowPassword,
       autocorrect: false,

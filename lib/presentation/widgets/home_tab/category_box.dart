@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chomoi/app/config/constant/app_constants.dart';
 import 'package:chomoi/app/config/resources/app_textstyles.dart';
 import 'package:chomoi/domain/models/response/category/category_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CategoryBox extends StatelessWidget {
@@ -21,8 +23,10 @@ class CategoryBox extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconButton(
-            icon: Image.network(
-              categoryModel.thumbnail,
+            icon: CachedNetworkImage(
+              imageUrl: categoryModel.thumbnail,
+              errorWidget: (context, url, error) => const CupertinoActivityIndicator(),
+              placeholder: (context, url) => const CupertinoActivityIndicator(),
             ),
             padding: const EdgeInsets.all(6),
             onPressed: onPress,

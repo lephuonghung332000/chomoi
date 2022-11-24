@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chomoi/app/config/constant/app_constants.dart';
 import 'package:chomoi/app/config/resources/app_textstyles.dart';
 import 'package:chomoi/presentation/controllers/home_tab/home/home_controller.dart';
@@ -18,7 +19,7 @@ class UtilityBox extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconButton(
-            icon: Image.network(selectBox.iconLink),
+            icon: CachedNetworkImage(imageUrl: selectBox.iconLink),
             padding: const EdgeInsets.all(6),
             onPressed: onPress,
           ),
