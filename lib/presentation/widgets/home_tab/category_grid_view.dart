@@ -1,3 +1,4 @@
+import 'package:chomoi/app/config/constant/app_constants.dart';
 import 'package:chomoi/domain/models/response/category/category_model.dart';
 import 'package:chomoi/presentation/controllers/home_tab/home/home_controller.dart';
 import 'package:chomoi/presentation/widgets/home_tab/category_box.dart';
@@ -15,18 +16,22 @@ class CategoryGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StaggeredGridView.countBuilder(
-      physics: const BouncingScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      crossAxisSpacing: 12,
-      crossAxisCount: 4,
-      itemCount: categories.length,
-      itemBuilder: (context, index) => CategoryBox(
-        categoryModel: categories[index],
-        onPress: () => Get.find<HomeController>()
-            .routeToPostPage(category: categories[index]),
+    return SizedBox(
+      height: AppConstant.heightCategoryView,
+      child: StaggeredGridView.countBuilder(
+        physics: const BouncingScrollPhysics(),
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        crossAxisSpacing: 12,
+        crossAxisCount: 4,
+        itemCount: categories.length,
+        itemBuilder: (context, index) => CategoryBox(
+          categoryModel: categories[index],
+          onPress: () => Get.find<HomeController>()
+              .routeToPostPage(category: categories[index]),
+        ),
+        staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
       ),
-      staggeredTileBuilder: (index) => const StaggeredTile.fit(2),
     );
   }
 }

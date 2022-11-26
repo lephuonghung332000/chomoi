@@ -26,7 +26,7 @@ class _$PostRequestModelTearOff {
       required String categoryId,
       required String userId,
       required String description,
-      required List<File?> file}) {
+      required List<MultipartFile> files}) {
     return _PostRequestModel(
       title: title,
       brandId: brandId,
@@ -35,7 +35,7 @@ class _$PostRequestModelTearOff {
       categoryId: categoryId,
       userId: userId,
       description: description,
-      file: file,
+      files: files,
     );
   }
 }
@@ -52,7 +52,7 @@ mixin _$PostRequestModel {
   String get categoryId => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
-  List<File?> get file => throw _privateConstructorUsedError;
+  List<MultipartFile> get files => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostRequestModelCopyWith<PostRequestModel> get copyWith =>
@@ -72,7 +72,7 @@ abstract class $PostRequestModelCopyWith<$Res> {
       String categoryId,
       String userId,
       String description,
-      List<File?> file});
+      List<MultipartFile> files});
 }
 
 /// @nodoc
@@ -93,7 +93,7 @@ class _$PostRequestModelCopyWithImpl<$Res>
     Object? categoryId = freezed,
     Object? userId = freezed,
     Object? description = freezed,
-    Object? file = freezed,
+    Object? files = freezed,
   }) {
     return _then(_value.copyWith(
       title: title == freezed
@@ -124,10 +124,10 @@ class _$PostRequestModelCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      file: file == freezed
-          ? _value.file
-          : file // ignore: cast_nullable_to_non_nullable
-              as List<File?>,
+      files: files == freezed
+          ? _value.files
+          : files // ignore: cast_nullable_to_non_nullable
+              as List<MultipartFile>,
     ));
   }
 }
@@ -147,7 +147,7 @@ abstract class _$PostRequestModelCopyWith<$Res>
       String categoryId,
       String userId,
       String description,
-      List<File?> file});
+      List<MultipartFile> files});
 }
 
 /// @nodoc
@@ -170,7 +170,7 @@ class __$PostRequestModelCopyWithImpl<$Res>
     Object? categoryId = freezed,
     Object? userId = freezed,
     Object? description = freezed,
-    Object? file = freezed,
+    Object? files = freezed,
   }) {
     return _then(_PostRequestModel(
       title: title == freezed
@@ -201,10 +201,10 @@ class __$PostRequestModelCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
-      file: file == freezed
-          ? _value.file
-          : file // ignore: cast_nullable_to_non_nullable
-              as List<File?>,
+      files: files == freezed
+          ? _value.files
+          : files // ignore: cast_nullable_to_non_nullable
+              as List<MultipartFile>,
     ));
   }
 }
@@ -220,7 +220,7 @@ class _$_PostRequestModel implements _PostRequestModel {
       required this.categoryId,
       required this.userId,
       required this.description,
-      required this.file});
+      required this.files});
 
   @override
   final String title;
@@ -237,11 +237,11 @@ class _$_PostRequestModel implements _PostRequestModel {
   @override
   final String description;
   @override
-  final List<File?> file;
+  final List<MultipartFile> files;
 
   @override
   String toString() {
-    return 'PostRequestModel(title: $title, brandId: $brandId, address: $address, price: $price, categoryId: $categoryId, userId: $userId, description: $description, file: $file)';
+    return 'PostRequestModel(title: $title, brandId: $brandId, address: $address, price: $price, categoryId: $categoryId, userId: $userId, description: $description, files: $files)';
   }
 
   @override
@@ -258,7 +258,7 @@ class _$_PostRequestModel implements _PostRequestModel {
             const DeepCollectionEquality().equals(other.userId, userId) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.file, file));
+            const DeepCollectionEquality().equals(other.files, files));
   }
 
   @override
@@ -271,7 +271,7 @@ class _$_PostRequestModel implements _PostRequestModel {
       const DeepCollectionEquality().hash(categoryId),
       const DeepCollectionEquality().hash(userId),
       const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(file));
+      const DeepCollectionEquality().hash(files));
 
   @JsonKey(ignore: true)
   @override
@@ -288,7 +288,7 @@ abstract class _PostRequestModel implements PostRequestModel {
       required String categoryId,
       required String userId,
       required String description,
-      required List<File?> file}) = _$_PostRequestModel;
+      required List<MultipartFile> files}) = _$_PostRequestModel;
 
   @override
   String get title;
@@ -305,7 +305,7 @@ abstract class _PostRequestModel implements PostRequestModel {
   @override
   String get description;
   @override
-  List<File?> get file;
+  List<MultipartFile> get files;
   @override
   @JsonKey(ignore: true)
   _$PostRequestModelCopyWith<_PostRequestModel> get copyWith =>

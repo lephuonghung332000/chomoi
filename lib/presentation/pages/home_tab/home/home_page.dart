@@ -144,11 +144,8 @@ class HomePage extends GetView<HomeController> {
                     ),
                   ),
                   const VBox(10),
-                  SizedBox(
-                    height: AppConstant.heightCategoryView,
-                    child: CategoryGridView(
-                      categories: entity,
-                    ),
+                  CategoryGridView(
+                    categories: entity,
                   )
                 ],
               ),

@@ -42,17 +42,21 @@ class MyPostPage extends GetView<MyPostController> {
     );
   }
 
-  Widget _buildHeader(BuildContext context) => SliverPinnedHeader(
+  Widget _buildHeader(BuildContext context) =>
+      SliverPinnedHeader(
         child: Column(
           children: [_buildUserName(context), _buildTabbar],
         ),
       );
 
-  Widget _buildUserName(BuildContext context) => Container(
+  Widget _buildUserName(BuildContext context) =>
+      Container(
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(
-              color: Theme.of(context).dividerColor,
+              color: Theme
+                  .of(context)
+                  .dividerColor,
               width: 0.5,
             ),
           ),
@@ -66,11 +70,18 @@ class MyPostPage extends GetView<MyPostController> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Jay Jay',
-              style: AppTextStyles.titleMediumBold17w700,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+            GetX<MyPostController>(
+              builder: (controller) {
+                return Text(
+                  controller.userState.maybeWhen(
+                    orElse: () => '',
+                    success: (user) => user.name,
+                  ),
+                  style: AppTextStyles.titleMediumBold17w700,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                );
+              },
             ),
             Container(
               decoration: BoxDecoration(
@@ -94,7 +105,8 @@ class MyPostPage extends GetView<MyPostController> {
         ),
       );
 
-  Widget get _buildTabbar => Material(
+  Widget get _buildTabbar =>
+      Material(
         color: AppColors.white,
         child: TabBar(
           controller: controller.tabController,
@@ -107,7 +119,8 @@ class MyPostPage extends GetView<MyPostController> {
         ),
       );
 
-  List<Widget> get _tabs => [
+  List<Widget> get _tabs =>
+      [
         GetX<MyPostController>(
           builder: (controller) {
             return PostTab(
@@ -140,7 +153,8 @@ class MyPostPage extends GetView<MyPostController> {
         ),
       ];
 
-  Widget get _buildBody => SliverFillRemaining(
+  Widget get _buildBody =>
+      SliverFillRemaining(
         child: GetX<MyPostController>(
           builder: (controller) {
             return TabBarView(
@@ -155,39 +169,45 @@ class MyPostPage extends GetView<MyPostController> {
         ),
       );
 
-  Widget get _buildAcceptPost => controller.postAcceptState.when(
+  Widget get _buildAcceptPost =>
+      controller.postAcceptState.when(
         loading: () => const LoadingScreen(),
-        success: (post) => MyPostListView(
-          posts: post.posts,
-          onTap: (post) {
-            controller.routePostDetail(postModel: post);
-          },
-        ),
+        success: (post) =>
+            MyPostListView(
+              posts: post.posts,
+              onTap: (post) {
+                controller.routePostDetail(postModel: post);
+              },
+            ),
         failure: (exception) => const SizedBox.shrink(),
         init: (_) => const LoadingScreen(),
       );
 
-  Widget get _buildPendingPost => controller.postPendingState.when(
+  Widget get _buildPendingPost =>
+      controller.postPendingState.when(
         loading: () => const LoadingScreen(),
-        success: (post) => MyPostListView(
-          posts: post.posts,
-          onTap: (post) {
-            controller.routePostDetail(postModel: post);
-          },
-        ),
+        success: (post) =>
+            MyPostListView(
+              posts: post.posts,
+              onTap: (post) {
+                controller.routePostDetail(postModel: post);
+              },
+            ),
         failure: (exception) => const SizedBox.shrink(),
         init: (_) => const LoadingScreen(),
       );
 
-  Widget get _buildRejectPost => controller.postRejectState.when(
+  Widget get _buildRejectPost =>
+      controller.postRejectState.when(
         loading: () => const LoadingScreen(),
-        success: (post) => MyPostListView(
-          posts: post.posts,
-          onTap: (post) {
-            controller.routePostDetail(postModel: post);
-          },
-          isReject: true,
-        ),
+        success: (post) =>
+            MyPostListView(
+              posts: post.posts,
+              onTap: (post) {
+                controller.routePostDetail(postModel: post);
+              },
+              isReject: true,
+            ),
         failure: (exception) => const SizedBox.shrink(),
         init: (_) => const LoadingScreen(),
       );

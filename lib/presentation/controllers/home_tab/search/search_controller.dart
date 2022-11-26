@@ -32,7 +32,6 @@ class SearchController extends GetxController {
 
   @override
   void onReady() {
-
     _fetchSearch();
     super.onReady();
   }

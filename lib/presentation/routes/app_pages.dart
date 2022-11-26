@@ -1,4 +1,5 @@
 import 'package:chomoi/presentation/controllers/create_post/create_post_binding.dart';
+import 'package:chomoi/presentation/controllers/create_post_success/create_post_success_binding.dart';
 import 'package:chomoi/presentation/controllers/home_tab/category_selection/category_selection_binding.dart';
 import 'package:chomoi/presentation/controllers/home_tab/comment/comment_binding.dart';
 import 'package:chomoi/presentation/controllers/home_tab/home/home_binding.dart';
@@ -15,6 +16,7 @@ import 'package:chomoi/presentation/controllers/setting_tab/setting_binding.dart
 import 'package:chomoi/presentation/controllers/sign_up/sign_up_binding.dart';
 import 'package:chomoi/presentation/controllers/splash/splash_binding.dart';
 import 'package:chomoi/presentation/pages/create_post/create_post_page.dart';
+import 'package:chomoi/presentation/pages/create_post_success/create_post_success_page.dart';
 import 'package:chomoi/presentation/pages/home_tab/category_selection/category_selection_page.dart';
 import 'package:chomoi/presentation/pages/home_tab/comment/comment_page.dart';
 import 'package:chomoi/presentation/pages/home_tab/home/home_page.dart';
@@ -35,6 +37,7 @@ import 'package:get/get.dart';
 class AppPages {
   static final pages = [
     createPostPage,
+    createPostSuccessPage,
     commentPage,
     categorySelectionPage,
     homePage,
@@ -82,6 +85,16 @@ class AppPages {
       page: () => CommentPage(),
       binding: CommentBinding(),
       transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 700),
+    ),
+  );
+  static final createPostSuccessPage = AppPages(
+    name: _AppRoutes.createPostSucces,
+    page: GetPage(
+      name: _AppRoutes.createPostSucces,
+      page: () => CreatePostSuccessPage(),
+      binding: CreatePostSuccessBinding(),
+      transition: Transition.rightToLeft,
       transitionDuration: const Duration(milliseconds: 700),
     ),
   );
@@ -215,6 +228,7 @@ class AppPages {
 
 abstract class _AppRoutes {
   static const createPost = '/createPost';
+  static const createPostSucces = '/createPostSucces';
   static const home = '/home_tab';
   static const comment = '/comment';
   static const login = '/login';

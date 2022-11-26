@@ -1,5 +1,4 @@
-import 'package:chomoi/app/services/auth_service..dart';
-import 'package:chomoi/data/providers/network/api_endpoint.dart';
+import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/data/providers/network/api_provider.dart';
 import 'package:chomoi/data/providers/network/api_request_representable.dart';
 
@@ -15,7 +14,7 @@ class UserAPI implements APIRequestRepresentable {
       : this._(type: UserType.fetchUser, userId: userId);
 
   @override
-  String get endpoint => '${APIEndpoint.choMoiApi}user';
+  String get endpoint => 'user';
 
   @override
   String get path {
@@ -26,18 +25,7 @@ class UserAPI implements APIRequestRepresentable {
   }
 
   @override
-  HTTPMethod get method {
-    return HTTPMethod.get;
-  }
-
-  @override
   Map<String, String> get headers {
-    final token = AuthService.get.accessToken();
-    if (token != null) {
-      return {
-        'Authorization': 'Bearer $token',
-      };
-    }
     return {};
   }
 
@@ -49,7 +37,7 @@ class UserAPI implements APIRequestRepresentable {
 
   @override
   Future request() {
-    return APIProvider.instance.request(this);
+    return APIProvider.instance.get(this);
   }
 
   @override

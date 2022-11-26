@@ -7,20 +7,20 @@ import 'package:chomoi/domain/models/response/country/province_model.dart';
 import 'package:chomoi/domain/models/response/country/ward_model.dart';
 import 'package:chomoi/domain/repositories/country/country_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class CountryRepositoryImpl extends CountryRepository {
-
   @override
-  Future<Either<Exception, List<DistrictModel>>> fetchDistricts(
+  Future<Either<DioError, List<DistrictModel>>> fetchDistricts(
           {required int provinceId}) =>
       Task(
         () => CountryAPI.fetchDistrict(provinceId).request(),
       )
           .attempt()
           .map(
-            (either) => either.leftMap<Exception>(
+            (either) => either.leftMap<DioError>(
               (l) {
-                return l as Exception;
+                return l as DioError;
               },
             ).map(
               (response) => DistrictModel.fromDto(
@@ -31,14 +31,14 @@ class CountryRepositoryImpl extends CountryRepository {
           .run();
 
   @override
-  Future<Either<Exception, List<ProvinceModel>>> fetchProvinces() => Task(
+  Future<Either<DioError, List<ProvinceModel>>> fetchProvinces() => Task(
         () => CountryAPI.fetchProvince().request(),
       )
           .attempt()
           .map(
-            (either) => either.leftMap<Exception>(
+            (either) => either.leftMap<DioError>(
               (l) {
-                return l as Exception;
+                return l as DioError;
               },
             ).map(
               (response) => ProvinceModel.fromDto(
@@ -49,16 +49,16 @@ class CountryRepositoryImpl extends CountryRepository {
           .run();
 
   @override
-  Future<Either<Exception, List<WardModel>>> fetchWards(
+  Future<Either<DioError, List<WardModel>>> fetchWards(
           {required int districtId}) =>
       Task(
         () => CountryAPI.fetchWard(districtId).request(),
       )
           .attempt()
           .map(
-            (either) => either.leftMap<Exception>(
+            (either) => either.leftMap<DioError>(
               (l) {
-                return l as Exception;
+                return l as DioError;
               },
             ).map(
               (response) => WardModel.fromDto(

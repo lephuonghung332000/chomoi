@@ -28,7 +28,7 @@ class _$StatesTearOff {
     return _loadingState<T>();
   }
 
-  _failureState<T> failure<T>(Exception exception) {
+  _failureState<T> failure<T>(DioError exception) {
     return _failureState<T>(
       exception,
     );
@@ -50,7 +50,7 @@ mixin _$States<T> {
   TResult when<TResult extends Object?>({
     required TResult Function(T entity) init,
     required TResult Function() loading,
-    required TResult Function(Exception exception) failure,
+    required TResult Function(DioError exception) failure,
     required TResult Function(T entity) success,
   }) =>
       throw _privateConstructorUsedError;
@@ -58,7 +58,7 @@ mixin _$States<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(T entity)? init,
     TResult Function()? loading,
-    TResult Function(Exception exception)? failure,
+    TResult Function(DioError exception)? failure,
     TResult Function(T entity)? success,
   }) =>
       throw _privateConstructorUsedError;
@@ -66,7 +66,7 @@ mixin _$States<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T entity)? init,
     TResult Function()? loading,
-    TResult Function(Exception exception)? failure,
+    TResult Function(DioError exception)? failure,
     TResult Function(T entity)? success,
     required TResult orElse(),
   }) =>
@@ -179,7 +179,7 @@ class _$_initState<T> implements _initState<T> {
   TResult when<TResult extends Object?>({
     required TResult Function(T entity) init,
     required TResult Function() loading,
-    required TResult Function(Exception exception) failure,
+    required TResult Function(DioError exception) failure,
     required TResult Function(T entity) success,
   }) {
     return init(entity);
@@ -190,7 +190,7 @@ class _$_initState<T> implements _initState<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(T entity)? init,
     TResult Function()? loading,
-    TResult Function(Exception exception)? failure,
+    TResult Function(DioError exception)? failure,
     TResult Function(T entity)? success,
   }) {
     return init?.call(entity);
@@ -201,7 +201,7 @@ class _$_initState<T> implements _initState<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T entity)? init,
     TResult Function()? loading,
-    TResult Function(Exception exception)? failure,
+    TResult Function(DioError exception)? failure,
     TResult Function(T entity)? success,
     required TResult orElse(),
   }) {
@@ -300,7 +300,7 @@ class _$_loadingState<T> implements _loadingState<T> {
   TResult when<TResult extends Object?>({
     required TResult Function(T entity) init,
     required TResult Function() loading,
-    required TResult Function(Exception exception) failure,
+    required TResult Function(DioError exception) failure,
     required TResult Function(T entity) success,
   }) {
     return loading();
@@ -311,7 +311,7 @@ class _$_loadingState<T> implements _loadingState<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(T entity)? init,
     TResult Function()? loading,
-    TResult Function(Exception exception)? failure,
+    TResult Function(DioError exception)? failure,
     TResult Function(T entity)? success,
   }) {
     return loading?.call();
@@ -322,7 +322,7 @@ class _$_loadingState<T> implements _loadingState<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T entity)? init,
     TResult Function()? loading,
-    TResult Function(Exception exception)? failure,
+    TResult Function(DioError exception)? failure,
     TResult Function(T entity)? success,
     required TResult orElse(),
   }) {
@@ -379,7 +379,7 @@ abstract class _$failureStateCopyWith<T, $Res> {
   factory _$failureStateCopyWith(
           _failureState<T> value, $Res Function(_failureState<T>) then) =
       __$failureStateCopyWithImpl<T, $Res>;
-  $Res call({Exception exception});
+  $Res call({DioError exception});
 }
 
 /// @nodoc
@@ -400,7 +400,7 @@ class __$failureStateCopyWithImpl<T, $Res> extends _$StatesCopyWithImpl<T, $Res>
       exception == freezed
           ? _value.exception
           : exception // ignore: cast_nullable_to_non_nullable
-              as Exception,
+              as DioError,
     ));
   }
 }
@@ -411,7 +411,7 @@ class _$_failureState<T> implements _failureState<T> {
   const _$_failureState(this.exception);
 
   @override
-  final Exception exception;
+  final DioError exception;
 
   @override
   String toString() {
@@ -440,7 +440,7 @@ class _$_failureState<T> implements _failureState<T> {
   TResult when<TResult extends Object?>({
     required TResult Function(T entity) init,
     required TResult Function() loading,
-    required TResult Function(Exception exception) failure,
+    required TResult Function(DioError exception) failure,
     required TResult Function(T entity) success,
   }) {
     return failure(exception);
@@ -451,7 +451,7 @@ class _$_failureState<T> implements _failureState<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(T entity)? init,
     TResult Function()? loading,
-    TResult Function(Exception exception)? failure,
+    TResult Function(DioError exception)? failure,
     TResult Function(T entity)? success,
   }) {
     return failure?.call(exception);
@@ -462,7 +462,7 @@ class _$_failureState<T> implements _failureState<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T entity)? init,
     TResult Function()? loading,
-    TResult Function(Exception exception)? failure,
+    TResult Function(DioError exception)? failure,
     TResult Function(T entity)? success,
     required TResult orElse(),
   }) {
@@ -511,9 +511,9 @@ class _$_failureState<T> implements _failureState<T> {
 }
 
 abstract class _failureState<T> implements States<T> {
-  const factory _failureState(Exception exception) = _$_failureState<T>;
+  const factory _failureState(DioError exception) = _$_failureState<T>;
 
-  Exception get exception;
+  DioError get exception;
   @JsonKey(ignore: true)
   _$failureStateCopyWith<T, _failureState<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -585,7 +585,7 @@ class _$_successState<T> implements _successState<T> {
   TResult when<TResult extends Object?>({
     required TResult Function(T entity) init,
     required TResult Function() loading,
-    required TResult Function(Exception exception) failure,
+    required TResult Function(DioError exception) failure,
     required TResult Function(T entity) success,
   }) {
     return success(entity);
@@ -596,7 +596,7 @@ class _$_successState<T> implements _successState<T> {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(T entity)? init,
     TResult Function()? loading,
-    TResult Function(Exception exception)? failure,
+    TResult Function(DioError exception)? failure,
     TResult Function(T entity)? success,
   }) {
     return success?.call(entity);
@@ -607,7 +607,7 @@ class _$_successState<T> implements _successState<T> {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T entity)? init,
     TResult Function()? loading,
-    TResult Function(Exception exception)? failure,
+    TResult Function(DioError exception)? failure,
     TResult Function(T entity)? success,
     required TResult orElse(),
   }) {

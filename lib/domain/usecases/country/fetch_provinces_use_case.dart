@@ -3,9 +3,10 @@ import 'package:chomoi/data/repositories/country/country_repository_impl.dart';
 import 'package:chomoi/domain/models/response/country/province_model.dart';
 import 'package:chomoi/domain/repositories/country/country_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class FetchProvincesUseCase
-    extends NoParamUseCase<Either<Exception, List<ProvinceModel>>> {
+    extends NoParamUseCase<Either<DioError, List<ProvinceModel>>> {
   late final CountryRepository _repo;
 
   FetchProvincesUseCase({CountryRepository? countryRepository}) {
@@ -13,7 +14,7 @@ class FetchProvincesUseCase
   }
 
   @override
-  Future<Either<Exception, List<ProvinceModel>>> call() {
+  Future<Either<DioError, List<ProvinceModel>>> call() {
     return _repo.fetchProvinces();
   }
 }

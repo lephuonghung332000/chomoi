@@ -12,12 +12,12 @@ PostRequestDto _$PostRequestDtoFromJson(Map<String, dynamic> json) =>
       brandId: json['brand_id'] as String?,
       address: json['address'] as String?,
       price: json['price'] as int?,
-      categoryId: json['categoryId'] as String?,
+      categoryId: json['category_id'] as String?,
       userId: json['user_id'] as String?,
       description: json['description'] as String?,
-      file: (json['file'] as List<dynamic>)
-          .map((e) => _$JsonConverterFromJson<MultipartFile, File?>(
-              e, const FileListConverter().fromJson))
+      files: (json['files'] as List<dynamic>)
+          .map((e) =>
+              const FileConverterSerialize().fromJson(e as MultipartFile))
           .toList(),
     );
 
@@ -27,14 +27,9 @@ Map<String, dynamic> _$PostRequestDtoToJson(PostRequestDto instance) =>
       'brand_id': instance.brandId,
       'address': instance.address,
       'price': instance.price,
-      'categoryId': instance.categoryId,
+      'category_id': instance.categoryId,
       'description': instance.description,
       'user_id': instance.userId,
-      'file': instance.file.map(const FileListConverter().toJson).toList(),
+      'files':
+          instance.files.map(const FileConverterSerialize().toJson).toList(),
     };
-
-Value? _$JsonConverterFromJson<Json, Value>(
-  Object? json,
-  Value? Function(Json json) fromJson,
-) =>
-    json == null ? null : fromJson(json as Json);

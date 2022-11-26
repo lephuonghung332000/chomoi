@@ -21,12 +21,13 @@ class AuthAPI implements APIRequestRepresentable {
 
   AuthAPI.refreshToken() : this._(type: AuthType.refreshToken);
 
-  AuthAPI.signUp(SignUpRequestDto signUpRequestDto) : this._(type: AuthType.signUp,signUpRequestDto: signUpRequestDto);
+  AuthAPI.signUp(SignUpRequestDto signUpRequestDto)
+      : this._(type: AuthType.signUp, signUpRequestDto: signUpRequestDto);
 
   AuthAPI.logout() : this._(type: AuthType.logout);
 
   @override
-  String get endpoint => '${APIEndpoint.choMoiApi}auth';
+  String get endpoint => 'auth';
 
   @override
   String get path {
@@ -40,11 +41,6 @@ class AuthAPI implements APIRequestRepresentable {
       case AuthType.refreshToken:
         return '/refreshToken';
     }
-  }
-
-  @override
-  HTTPMethod get method {
-    return HTTPMethod.post;
   }
 
   @override
@@ -68,7 +64,10 @@ class AuthAPI implements APIRequestRepresentable {
 
   @override
   Future request() {
-    return APIProvider.instance.request(this);
+    if (type == AuthType.refreshToken) {
+      return APIProvider().post(this);
+    }
+    return APIProvider.instance.post(this);
   }
 
   @override

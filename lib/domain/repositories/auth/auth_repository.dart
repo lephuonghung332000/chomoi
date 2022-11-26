@@ -5,17 +5,18 @@ import 'package:chomoi/domain/models/response/auth/logout_information_model.dart
 import 'package:chomoi/domain/models/response/auth/refresh_new_token_model.dart';
 import 'package:chomoi/domain/models/response/auth/sign_up_information_model.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 abstract class AuthenticationRepository {
-  Future<Either<Exception, SignUpInformationModel>> signUp(
+  Future<Either<DioError, SignUpInformationModel>> signUp(
     SignUpRequestModel signUpRequestModel,
   );
 
-  Future<Either<Exception, LoginInformationModel>> login(
+  Future<Either<DioError, LoginInformationModel>> login(
     LoginRequestModel loginRequestModel,
   );
 
-  Future<Either<Exception, RefreshNewTokenModel>> refreshNewToken();
+  Future<Either<DioError, RefreshNewTokenModel>> refreshNewToken();
 
-  Future<Either<Exception, LogoutInformationModel>> logout();
+  Future<Either<DioError, LogoutInformationModel>> logout();
 }

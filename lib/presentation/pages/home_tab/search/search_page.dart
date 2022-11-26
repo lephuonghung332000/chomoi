@@ -42,7 +42,7 @@ class SearchPage extends GetView<SearchController> {
             placeholder: AppStrings.search_hint_text,
             controller: controller.searchController,
             autofocus: true,
-            onSubmit: (text){
+            onSubmit: (text) {
               controller.debounce.run(() {
                 controller.routeToPostPage(search: text);
               });
@@ -106,8 +106,9 @@ class SearchPage extends GetView<SearchController> {
                     viewModel: SearchViewModel.fromSearch(
                       entity[index],
                     ),
-                    onTap: () =>
-                        controller.routeToPostPage(search: entity[index].key),
+                    onTap: () => controller.routeToPostPage(
+                      search: entity[index].key,
+                    ),
                   );
                 },
                 childCount: entity.length,

@@ -3,6 +3,7 @@ import 'package:chomoi/domain/models/response/category/category_model.dart';
 import 'package:chomoi/presentation/pages/main/main_page.dart';
 import 'package:chomoi/presentation/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
@@ -23,7 +24,8 @@ extension TabItemExt on TabType {
   }
 }
 
-class MainController extends GetxController {
+class MainController extends GetxController
+    with GetSingleTickerProviderStateMixin {
   static Map<TabType, GlobalKey<NavigatorState>?> navigatorKeys = {
     TabType.home: Get.nestedKey(TabType.home),
     TabType.my_post: Get.nestedKey(TabType.my_post),
@@ -31,6 +33,14 @@ class MainController extends GetxController {
     TabType.notification: Get.nestedKey(TabType.notification),
     TabType.setting: Get.nestedKey(TabType.setting),
   };
+
+  late TabController tabController;
+
+  @override
+  void onInit() {
+    tabController = TabController(length: navigatorKeys.length, vsync: this);
+    super.onInit();
+  }
 
   static NavigatorState? get homeNavigator =>
       navigatorKeys[TabType.home]?.currentState;
@@ -64,6 +74,8 @@ class MainController extends GetxController {
   }
 
   void currentTabChanged(int index) async {
+    tabController.index = index;
+
     // If user select same tab
     final TabType tab = allTabs[index];
     if (_currentTab == tab) {

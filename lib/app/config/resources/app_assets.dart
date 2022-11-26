@@ -59,6 +59,7 @@ class AppAssets {
   static const String iconCameraAdd = './assets/icons/icon_camera_add.svg';
   static const String iconCancelCircle = './assets/icons/icon_cancel_circle.svg';
   static const String iconChecked = './assets/icons/icon_check.svg';
+  static const String iconCheckedCircle = './assets/icons/icon_check_circle.svg';
 
   /// Flags
   static String flag(String code) => './assets/flags/$code.png';

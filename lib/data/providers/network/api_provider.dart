@@ -1,127 +1,207 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:get/get_connect/connect.dart';
+import 'package:chomoi/app/services/auth_service.dart';
+import 'package:chomoi/data/providers/network/api_endpoint.dart';
+import 'package:dio/dio.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
 import 'api_request_representable.dart';
 
 class APIProvider {
-  static const requestTimeOut = Duration(seconds: 25);
-  final _client = GetConnect(timeout: requestTimeOut);
+  final Dio _client = createDio();
 
   static final _singleton = APIProvider();
 
   static APIProvider get instance => _singleton;
 
-  Future request(APIRequestRepresentable request) async {
+  static Dio createDio() {
+    final dio = Dio(BaseOptions(
+      baseUrl: APIEndpoint.choMoiApi,
+      connectTimeout: 20 * 1000,
+      receiveTimeout: 20 * 1000,
+      receiveDataWhenStatusError: true,
+    ));
+
+    dio.interceptors.add(
+      PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseBody: true,
+          responseHeader: true,
+          error: true,
+          compact: true,
+          maxWidth: 90),
+    );
+
+    dio.interceptors.addAll({
+      AppInterceptors(),
+    });
+
+    return dio;
+  }
+
+  Future post(APIRequestRepresentable request) async {
     try {
-      final response = await _client.request(
+      final response = await _client.post(
         request.url,
-        request.method.string,
-        headers: request.headers,
-        query: request.query,
-        body: request.body,
+        data: request.body,
+        queryParameters: request.query,
+        options: Options(headers: request.headers),
       );
-      return _returnResponse(response);
-    } on TimeoutException catch (_) {
-      throw TimeOutException(null);
-    } on SocketException {
-      throw FetchDataException('No Internet connection');
+      return response.data;
+    } on DioError catch (ex) {
+      sendError(ex);
     }
   }
 
-  dynamic _returnResponse(Response<dynamic> response) {
-    switch (response.statusCode) {
-      case 200:
-      case 201:
-        return response.body;
-      case 400:
-        throw BadRequestException(response.body.toString());
-      case 401:
-        throw UnauthorisedException(response.body.toString());
-      case 403:
-        throw UnauthorisedException(response.body.toString());
-      case 404:
-        throw BadRequestException('Not found');
-      case 500:
-        throw InternalServerException('Internal Server Error');
-      default:
-        throw FetchDataException(
-            'Error occured while Communication with Server with StatusCode : ${response.statusCode}');
+  Future get(APIRequestRepresentable request) async {
+    try {
+      final response = await _client.get(
+        request.url,
+        queryParameters: request.query,
+        options: Options(headers: request.headers),
+      );
+      return response.data;
+    } on DioError catch (ex) {
+      sendError(ex);
     }
   }
 }
 
-class AppException implements Exception {
-  final String code;
-  final String message;
-  final dynamic details;
+void sendError(DioError ex) {
+  switch (ex.type) {
+    case DioErrorType.connectTimeout:
+    case DioErrorType.sendTimeout:
+    case DioErrorType.receiveTimeout:
+      throw DeadlineExceededException(ex.requestOptions);
+    case DioErrorType.response:
+      switch (ex.response?.statusCode) {
+        case 400:
+          throw BadRequestException(ex.requestOptions);
+        case 404:
+          throw NotFoundException(ex.requestOptions);
+        case 409:
+          throw ConflictException(ex.requestOptions);
+        case 500:
+          throw InternalServerErrorException(ex.requestOptions);
+      }
+      break;
+    case DioErrorType.cancel:
+      break;
+    case DioErrorType.other:
+      throw NoInternetConnectionException(ex.requestOptions);
+  }
+}
 
-  AppException({required this.code, required this.message, this.details});
+class AppInterceptors extends QueuedInterceptorsWrapper {
+  @override
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    final token = AuthService.get.accessToken();
+    if (token?.isNotEmpty ?? false) {
+      options.headers['Authorization'] = 'Bearer $token';
+    }
+
+    return handler.next(options);
+  }
+
+  @override
+  Future<void> onError(DioError err, ErrorInterceptorHandler handler) async {
+    if (err.response?.statusCode == 401 || err.response?.statusCode == 403) {
+      await handleTokenExpire(err, handler);
+    }
+
+    return handler.next(err);
+  }
+}
+
+Future<void> handleTokenExpire(
+  DioError err,
+  ErrorInterceptorHandler handler,
+) async {
+  final dio = Dio();
+  final token = AuthService.get.accessToken();
+
+  if (err.requestOptions.headers['Authorization'] != 'Bearer $token') {
+    if (token?.isNotEmpty ?? false) {
+      err.requestOptions.headers['Authorization'] = 'Bearer $token';
+    }
+
+    final response = await dio.fetch(err.requestOptions);
+    return handler.resolve(response);
+  }
+
+  await AuthService.get.clearToken();
+  final success = await AuthService.get.refreshToken();
+  if (success) {
+    if (token?.isNotEmpty ?? false) {
+      err.requestOptions.headers['Authorization'] = 'Bearer $token';
+    }
+
+    final response = await dio.fetch(err.requestOptions);
+    return handler.resolve(response);
+  }
+}
+
+class BadRequestException extends DioError {
+  BadRequestException(RequestOptions r) : super(requestOptions: r);
 
   @override
   String toString() {
-    return message;
+    return 'Invalid request';
   }
 }
 
-class FetchDataException extends AppException {
-  FetchDataException(String? details)
-      : super(
-          code: 'fetch-data',
-          message: 'Error During Communication',
-          details: details,
-        );
+class InternalServerErrorException extends DioError {
+  InternalServerErrorException(RequestOptions r) : super(requestOptions: r);
+
+  @override
+  String toString() {
+    return 'Unknown error occurred, please try again later.';
+  }
 }
 
-class InternalServerException extends AppException {
-  InternalServerException(String? details)
-      : super(
-          code: 'internal-server',
-          message: 'Internal server Exception',
-          details: details,
-        );
+class ConflictException extends DioError {
+  ConflictException(RequestOptions r) : super(requestOptions: r);
+
+  @override
+  String toString() {
+    return 'Conflict occurred';
+  }
 }
 
-class BadRequestException extends AppException {
-  BadRequestException(String? details)
-      : super(
-          code: 'invalid-request',
-          message: 'Invalid Request',
-          details: details,
-        );
+class UnauthorizedException extends DioError {
+  UnauthorizedException(RequestOptions r) : super(requestOptions: r);
+
+  @override
+  String toString() {
+    return 'Access denied';
+  }
 }
 
-class UnauthorisedException extends AppException {
-  UnauthorisedException(String? details)
-      : super(
-          code: 'unauthorised',
-          message: 'Unauthorised',
-          details: details,
-        );
+class NotFoundException extends DioError {
+  NotFoundException(RequestOptions r) : super(requestOptions: r);
+
+  @override
+  String toString() {
+    return 'The requested information could not be found';
+  }
 }
 
-class InvalidInputException extends AppException {
-  InvalidInputException(String? details)
-      : super(
-          code: 'invalid-input',
-          message: 'Invalid Input',
-          details: details,
-        );
+class NoInternetConnectionException extends DioError {
+  NoInternetConnectionException(RequestOptions r) : super(requestOptions: r);
+
+  @override
+  String toString() {
+    return 'No internet connection detected, please try again.';
+  }
 }
 
-class AuthenticationException extends AppException {
-  AuthenticationException(String? details)
-      : super(
-          code: 'authentication-failed',
-          message: 'Authentication Failed',
-          details: details,
-        );
-}
+class DeadlineExceededException extends DioError {
+  DeadlineExceededException(RequestOptions r) : super(requestOptions: r);
 
-class TimeOutException extends AppException {
-  TimeOutException(String? details)
-      : super(
-          code: 'request-timeout',
-          message: 'Request TimeOut',
-          details: details,
-        );
+  @override
+  String toString() {
+    return 'The connection has timed out, please try again.';
+  }
 }

@@ -1,9 +1,8 @@
-import 'package:chomoi/app/services/auth_service..dart';
+import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/data/dto/request/post/post_request_dto.dart';
-import 'package:chomoi/data/providers/network/api_endpoint.dart';
 import 'package:chomoi/data/providers/network/api_provider.dart';
 import 'package:chomoi/data/providers/network/api_request_representable.dart';
-import 'package:get/get_connect/http/src/multipart/form_data.dart';
+import 'package:dio/dio.dart';
 
 enum PostType { fetchPost, fetchMyPost, addPost }
 
@@ -60,7 +59,7 @@ class PostAPI implements APIRequestRepresentable {
         );
 
   @override
-  String get endpoint => '${APIEndpoint.choMoiApi}post';
+  String get endpoint => 'post';
 
   @override
   String get path {
@@ -75,23 +74,7 @@ class PostAPI implements APIRequestRepresentable {
   }
 
   @override
-  HTTPMethod get method {
-    switch (type) {
-      case PostType.addPost:
-        return HTTPMethod.get;
-      default:
-        return HTTPMethod.post;
-    }
-  }
-
-  @override
   Map<String, String> get headers {
-    final token = AuthService.get.accessToken();
-    if (token != null) {
-      return {
-        'Authorization': 'Bearer $token',
-      };
-    }
     return {};
   }
 
@@ -133,7 +116,7 @@ class PostAPI implements APIRequestRepresentable {
   dynamic get body {
     switch (type) {
       case PostType.addPost:
-        return FormData(postRequestDto!.toJson());
+        return FormData.fromMap(postRequestDto!.toJson());
       default:
         return null;
     }
@@ -141,7 +124,12 @@ class PostAPI implements APIRequestRepresentable {
 
   @override
   Future request() {
-    return APIProvider.instance.request(this);
+    switch (type) {
+      case PostType.addPost:
+        return APIProvider.instance.post(this);
+      default:
+        return APIProvider.instance.get(this);
+    }
   }
 
   @override

@@ -21,17 +21,17 @@ class AdsModel with _$AdsModel {
         title: '',
       );
 
-  static List<AdsModel> fromDto(AdsDto dto) {
-    return List<AdsModel>.from(
-      dto.data.map<AdsModel>(
-        (e) => AdsModel(
-          id: e.id,
-          image: e.image,
-          url: e.url,
-          content: e.content,
-          title: e.title,
+    static List<AdsModel> fromDto(AdsDto dto) {
+      return List<AdsModel>.from(
+        dto.data.map<AdsModel>(
+          (e) => AdsModel(
+            id: e.id,
+            image: e.image,
+            url: e.url,
+            content: e.content,
+            title: e.title,
+          ),
         ),
-      ),
-    );
-  }
+      );
+    }
 }

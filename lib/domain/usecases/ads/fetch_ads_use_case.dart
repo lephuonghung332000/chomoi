@@ -3,9 +3,10 @@ import 'package:chomoi/data/repositories/ads/ads_repository_impl.dart';
 import 'package:chomoi/domain/models/response/ads/ads_model.dart';
 import 'package:chomoi/domain/repositories/ads/ads_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class FetchAdsUseCase
-    extends NoParamUseCase<Either<Exception, List<AdsModel>>> {
+    extends NoParamUseCase<Either<DioError, List<AdsModel>>> {
   late final AdsRepository _repo;
 
   FetchAdsUseCase({AdsRepository? adsRepository}) {
@@ -13,7 +14,7 @@ class FetchAdsUseCase
   }
 
   @override
-  Future<Either<Exception, List<AdsModel>>> call() {
+  Future<Either<DioError, List<AdsModel>>> call() {
     return _repo.fetchAds();
   }
 }

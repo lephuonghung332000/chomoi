@@ -124,6 +124,10 @@ class AppStrings {
   static const recommend_text = 'ĐỀ XUẤT';
   static const search_brand_text = 'Tìm hãng';
   static const search_province_text = 'Tìm tỉnh, thành phố';
+  static const complete_post_text = 'Bạn đã hoàn tất đăng tin';
+  static const process_pending_post_text = 'Chợ Mới đang tiến hành duyệt tin đăng của bạn';
+  static const wait_for_process_post_text = 'Đợi duyệt';
+  static const back_to_home_text = 'Trở về trang chủ';
   static String accept_post_title(int total) => 'ĐANG HIỂN THỊ ($total)';
   static String pending_post_title(int total) => 'CHỜ DUYỆT ($total)';
   static String reject_post_title(int total) => 'BỊ TỪ CHỐI ($total)';

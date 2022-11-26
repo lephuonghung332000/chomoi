@@ -7,9 +7,10 @@ import 'package:chomoi/domain/models/response/post/post_model.dart';
 import 'package:chomoi/domain/repositories/comment/comment_repository.dart';
 import 'package:chomoi/domain/repositories/post/post_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class FetchCommentUseCase extends ParamUseCase<
-    Either<Exception, CommentPagingModel>, Tuple2<String?, int?>> {
+    Either<DioError, CommentPagingModel>, Tuple2<String?, int?>> {
   late final CommentRepository _repo;
 
   FetchCommentUseCase({CommentRepository? commentRepository}) {
@@ -17,7 +18,7 @@ class FetchCommentUseCase extends ParamUseCase<
   }
 
   @override
-  Future<Either<Exception, CommentPagingModel>> call(params) {
+  Future<Either<DioError, CommentPagingModel>> call(params) {
     return _repo.fetchComment(
       postId: params.value1,
       page: params.value2,

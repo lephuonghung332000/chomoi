@@ -3,7 +3,7 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:chomoi/app/config/resources/app_colors.dart';
+import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'post_request_model.freezed.dart';
@@ -18,7 +18,7 @@ class PostRequestModel with _$PostRequestModel {
     required String categoryId,
     required String userId,
     required String description,
-    required List<File?> file,
+    required List<MultipartFile> files,
   }) = _PostRequestModel;
 
   factory PostRequestModel.empty() => PostRequestModel(
@@ -29,6 +29,6 @@ class PostRequestModel with _$PostRequestModel {
         price: 0,
         categoryId: '',
         description: '',
-        file: [],
+    files: [],
       );
 }

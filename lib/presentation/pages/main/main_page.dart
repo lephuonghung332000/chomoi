@@ -203,6 +203,7 @@ class MainPage extends GetWidget<MainController> {
           bottomNavigationBar: (currentIndex, onTap) => StyleProvider(
             style: CustomAppBarStyle(),
             child: ConvexAppBar(
+              controller: controller.tabController,
               style: TabStyle.fixed,
               initialActiveIndex: currentIndex,
               color: AppColors.tertiaryTextColor,

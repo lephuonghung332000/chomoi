@@ -1,6 +1,5 @@
-import 'package:chomoi/app/services/auth_service..dart';
+import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/data/dto/request/comment/comment_request_dto.dart';
-import 'package:chomoi/data/providers/network/api_endpoint.dart';
 import 'package:chomoi/data/providers/network/api_provider.dart';
 import 'package:chomoi/data/providers/network/api_request_representable.dart';
 import 'dart:convert';
@@ -35,7 +34,7 @@ class CommentAPI implements APIRequestRepresentable {
         );
 
   @override
-  String get endpoint => '${APIEndpoint.choMoiApi}comment';
+  String get endpoint => 'comment';
 
   @override
   String get path {
@@ -48,23 +47,7 @@ class CommentAPI implements APIRequestRepresentable {
   }
 
   @override
-  HTTPMethod get method {
-    switch (type) {
-      case CommentType.fetchComment:
-        return HTTPMethod.get;
-      case CommentType.addComment:
-        return HTTPMethod.post;
-    }
-  }
-
-  @override
   Map<String, String> get headers {
-    final token = AuthService.get.accessToken();
-    if (token != null) {
-      return {
-        'Authorization': 'Bearer $token',
-      };
-    }
     return {};
   }
 
@@ -92,7 +75,12 @@ class CommentAPI implements APIRequestRepresentable {
 
   @override
   Future request() {
-    return APIProvider.instance.request(this);
+    switch (type) {
+      case CommentType.fetchComment:
+        return APIProvider.instance.get(this);
+      case CommentType.addComment:
+        return APIProvider.instance.post(this);
+    }
   }
 
   @override

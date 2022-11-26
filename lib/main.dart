@@ -21,21 +21,21 @@ void _configAppStyle() {
   ));
   EasyLoading.instance
     ..loadingStyle = EasyLoadingStyle.custom
-    ..indicatorType = EasyLoadingIndicatorType.circle
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
     ..maskType = EasyLoadingMaskType.custom
     ..toastPosition = EasyLoadingToastPosition.center
     ..animationStyle = EasyLoadingAnimationStyle.scale
     ..textAlign = TextAlign.center
-    ..indicatorSize = 40.0
-    ..radius = 10.0
+    ..indicatorSize = 45.0
+    ..radius = 6.0
     ..fontSize = 15
     ..progressWidth = 2
     ..lineWidth = 4
     ..textColor = AppColors.primaryTextColor
     ..indicatorColor = AppColors.primaryColor
     ..progressColor = AppColors.primaryColor
-    ..backgroundColor = Colors.transparent
-    ..maskColor = Colors.black54
+    ..backgroundColor = AppColors.greyStorm
+    ..maskColor = AppColors.black
     ..boxShadow = []
     ..userInteractions = false
     ..dismissOnTap = false;

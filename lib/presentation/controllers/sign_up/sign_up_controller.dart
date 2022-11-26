@@ -1,5 +1,5 @@
 import 'package:chomoi/app/config/constant/app_strings.dart';
-import 'package:chomoi/app/services/auth_service..dart';
+import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/app/util/gender.dart';
 import 'package:chomoi/app/util/get_cupertino_dialog.dart';
 import 'package:chomoi/domain/models/request/auth/sign_up_request_model.dart';

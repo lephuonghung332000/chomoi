@@ -1,8 +1,7 @@
 import 'dart:convert';
 
-import 'package:chomoi/app/services/auth_service..dart';
+import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/data/dto/request/search/search_request_dto.dart';
-import 'package:chomoi/data/providers/network/api_endpoint.dart';
 import 'package:chomoi/data/providers/network/api_provider.dart';
 import 'package:chomoi/data/providers/network/api_request_representable.dart';
 
@@ -30,7 +29,7 @@ class SearchApi implements APIRequestRepresentable {
         );
 
   @override
-  String get endpoint => '${APIEndpoint.choMoiApi}search';
+  String get endpoint => 'search';
 
   @override
   String get path {
@@ -39,16 +38,6 @@ class SearchApi implements APIRequestRepresentable {
         return '/';
       case SearchType.addSearch:
         return '/addSearch';
-    }
-  }
-
-  @override
-  HTTPMethod get method {
-    switch (type) {
-      case SearchType.fetchSearch:
-        return HTTPMethod.get;
-      case SearchType.addSearch:
-        return HTTPMethod.post;
     }
   }
 
@@ -78,7 +67,12 @@ class SearchApi implements APIRequestRepresentable {
 
   @override
   Future request() {
-    return APIProvider.instance.request(this);
+    switch (type) {
+      case SearchType.addSearch:
+        return APIProvider.instance.post(this);
+      default:
+        return APIProvider.instance.get(this);
+    }
   }
 
   @override

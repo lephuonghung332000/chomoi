@@ -3,9 +3,10 @@ import 'package:chomoi/data/repositories/post/post_repository_impl.dart';
 import 'package:chomoi/domain/models/response/post/post_paging_model.dart';
 import 'package:chomoi/domain/repositories/post/post_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
-class FetchPostUseCase extends ParamUseCase<Either<Exception, PostPagingModel>,
-    Tuple6<String?, String?, String?, String?, String?, int?>> {
+class FetchPostUseCase extends ParamUseCase<Either<DioError, PostPagingModel>,
+    Tuple5< String?, String?, String?, String?, int?>> {
   late final PostRepository _repo;
 
   FetchPostUseCase({PostRepository? postRepository}) {
@@ -13,14 +14,14 @@ class FetchPostUseCase extends ParamUseCase<Either<Exception, PostPagingModel>,
   }
 
   @override
-  Future<Either<Exception, PostPagingModel>> call(params) {
+  Future<Either<DioError, PostPagingModel>> call(params) {
     return _repo.fetchPost(
-      status: params.value1,
-      timePost: params.value2,
-      categoryId: params.value3,
-      province: params.value4,
-      search: params.value5,
-      page: params.value6,
+      status: 'accept',
+      timePost: params.value1,
+      categoryId: params.value2,
+      province: params.value3,
+      search: params.value4,
+      page: params.value5,
     );
   }
 }

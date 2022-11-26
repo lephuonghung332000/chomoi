@@ -1,4 +1,3 @@
-import 'package:chomoi/data/providers/network/api_endpoint.dart';
 import 'package:chomoi/data/providers/network/api_provider.dart';
 import 'package:chomoi/data/providers/network/api_request_representable.dart';
 
@@ -26,7 +25,7 @@ class CountryAPI implements APIRequestRepresentable {
   );
 
   @override
-  String get endpoint => '${APIEndpoint.countryApi}province';
+  String get endpoint => 'province';
 
   @override
   String get path {
@@ -41,11 +40,6 @@ class CountryAPI implements APIRequestRepresentable {
   }
 
   @override
-  HTTPMethod get method {
-    return HTTPMethod.get;
-  }
-
-  @override
   Map<String, String>? get headers => null;
 
   @override
@@ -56,7 +50,7 @@ class CountryAPI implements APIRequestRepresentable {
 
   @override
   Future request() {
-    return APIProvider.instance.request(this);
+    return APIProvider.instance.get(this);
   }
 
   @override

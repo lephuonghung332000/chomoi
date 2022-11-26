@@ -1,5 +1,3 @@
-import 'package:chomoi/app/config/constant/app_strings.dart';
-import 'package:chomoi/app/util/get_cupertino_dialog.dart';
 import 'package:chomoi/domain/models/request/search/search_request_model.dart';
 import 'package:chomoi/domain/models/response/category/category_model.dart';
 import 'package:chomoi/domain/models/response/country/province_model.dart';
@@ -129,12 +127,6 @@ class PostController extends GetxController {
     );
     result.fold((failure) {
       _addSearchState.value = States.failure(failure);
-      Get.cupertinoDialog(
-        title: AppStrings.error_title,
-        middleText: failure.toString(),
-        onConfirm: () => Get.back(),
-        barrierDismissible: false,
-      );
     }, (value) async {
       _addSearchState.value = States.success(entity: value);
     });
@@ -244,7 +236,6 @@ class PostController extends GetxController {
   }
 
   Future<void> _fetchPost({
-    String? status,
     String? timePost,
     String? categoryId,
     String? province,
@@ -264,7 +255,7 @@ class PostController extends GetxController {
       _postState.value = const States.loading();
     }
     final result = await fetchPostUseCase
-        .call(Tuple6(status, timePost, categoryId, province, search, page));
+        .call(Tuple5(timePost, categoryId, province, search, page));
     result.fold((failure) {
       if (page == 1) {
         _postState.value = States.failure(failure);

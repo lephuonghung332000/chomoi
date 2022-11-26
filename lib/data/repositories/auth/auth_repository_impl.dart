@@ -13,10 +13,11 @@ import 'package:chomoi/domain/models/response/auth/refresh_new_token_model.dart'
 import 'package:chomoi/domain/models/response/auth/sign_up_information_model.dart';
 import 'package:chomoi/domain/repositories/auth/auth_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class AuthenticationRepositoryImpl extends AuthenticationRepository {
   @override
-  Future<Either<Exception, LoginInformationModel>> login(
+  Future<Either<DioError, LoginInformationModel>> login(
           LoginRequestModel loginRequestModel) =>
       Task(
         () => AuthAPI.login(LoginRequestDto.fromModel(loginRequestModel))
@@ -24,27 +25,26 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       )
           .attempt()
           .map(
-            (either) => either.leftMap<Exception>(
+            (either) => either.leftMap<DioError>(
               (l) {
-                return l as Exception;
+                return l as DioError;
               },
             ).map(
               (response) => LoginInformationModel.fromDto(
                 LoginInformationDto.fromJson(response),
               ),
             ),
-          )
-          .run();
+          ).run();
 
   @override
-  Future<Either<Exception, RefreshNewTokenModel>> refreshNewToken() => Task(
+  Future<Either<DioError, RefreshNewTokenModel>> refreshNewToken() => Task(
         () => AuthAPI.refreshToken().request(),
       )
           .attempt()
           .map(
-            (either) => either.leftMap<Exception>(
+            (either) => either.leftMap<DioError>(
               (l) {
-                return l as Exception;
+                return l as DioError;
               },
             ).map(
               (response) => RefreshNewTokenModel.fromDto(
@@ -55,14 +55,14 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
           .run();
 
   @override
-  Future<Either<Exception, LogoutInformationModel>> logout() => Task(
+  Future<Either<DioError, LogoutInformationModel>> logout() => Task(
         () => AuthAPI.logout().request(),
       )
           .attempt()
           .map(
-            (either) => either.leftMap<Exception>(
+            (either) => either.leftMap<DioError>(
               (l) {
-                return l as Exception;
+                return l as DioError;
               },
             ).map(
               (response) => LogoutInformationModel.fromDto(
@@ -73,7 +73,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
           .run();
 
   @override
-  Future<Either<Exception, SignUpInformationModel>> signUp(
+  Future<Either<DioError, SignUpInformationModel>> signUp(
           SignUpRequestModel signUpRequestModel) =>
       Task(
         () => AuthAPI.signUp(SignUpRequestDto.fromModel(signUpRequestModel))
@@ -81,9 +81,9 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       )
           .attempt()
           .map(
-            (either) => either.leftMap<Exception>(
+            (either) => either.leftMap<DioError>(
               (l) {
-                return l as Exception;
+                return l as DioError;
               },
             ).map(
               (response) => SignUpInformationModel.fromDto(

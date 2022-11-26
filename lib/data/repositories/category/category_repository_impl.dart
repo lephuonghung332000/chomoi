@@ -3,17 +3,18 @@ import 'package:chomoi/data/providers/network/apis/category_api.dart';
 import 'package:chomoi/domain/models/response/category/category_model.dart';
 import 'package:chomoi/domain/repositories/category/category_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class CategoryRepositoryImpl extends CategoryRepository {
   @override
-  Future<Either<Exception, List<CategoryModel>>> fetchCategory() => Task(
+  Future<Either<DioError, List<CategoryModel>>> fetchCategory() => Task(
         () => CategoryAPI.fetchCategory().request(),
       )
           .attempt()
           .map(
-            (either) => either.leftMap<Exception>(
+            (either) => either.leftMap<DioError>(
               (l) {
-                return l as Exception;
+                return l as DioError;
               },
             ).map(
               (response) => CategoryModel.fromDto(

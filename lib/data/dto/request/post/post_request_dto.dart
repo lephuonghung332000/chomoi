@@ -1,7 +1,6 @@
-import 'dart:io';
-import 'package:chomoi/app/util/file_list_converter.dart';
+import 'package:chomoi/app/util/file_converter_serialize.dart';
 import 'package:chomoi/domain/models/request/post/post_request_model.dart';
-import 'package:get/get.dart';
+import 'package:dio/dio.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'post_request_dto.g.dart';
@@ -13,12 +12,13 @@ class PostRequestDto {
   final String? brandId;
   final String? address;
   final int? price;
+  @JsonKey(name: 'category_id')
   final String? categoryId;
   final String? description;
   @JsonKey(name: 'user_id')
   final String? userId;
-  @FileListConverter()
-  final List<File?> file;
+  @FileConverterSerialize()
+  final List<MultipartFile> files;
 
   PostRequestDto({
     required this.title,
@@ -28,7 +28,7 @@ class PostRequestDto {
     required this.categoryId,
     required this.userId,
     required this.description,
-    required this.file,
+    required this.files,
   });
 
   factory PostRequestDto.fromJson(Map<String, dynamic> json) =>
@@ -43,7 +43,7 @@ class PostRequestDto {
       price: model.price,
       categoryId: model.categoryId,
       description: model.description,
-      file: model.file,
+      files: model.files,
     );
   }
 

@@ -4,9 +4,10 @@ import 'package:chomoi/domain/models/request/auth/login_request_model.dart';
 import 'package:chomoi/domain/models/response/auth/login_information_model.dart';
 import 'package:chomoi/domain/repositories/auth/auth_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 class LoginUseCase extends ParamUseCase<
-    Either<Exception, LoginInformationModel>, LoginRequestModel> {
+    Either<DioError, LoginInformationModel>, LoginRequestModel> {
   late final AuthenticationRepository _repo;
 
   LoginUseCase({AuthenticationRepository? authRepository}) {
@@ -14,7 +15,7 @@ class LoginUseCase extends ParamUseCase<
   }
 
   @override
-  Future<Either<Exception, LoginInformationModel>> call(params) {
+  Future<Either<DioError, LoginInformationModel>> call(params) {
     return _repo.login(params);
   }
 }

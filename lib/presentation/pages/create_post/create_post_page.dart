@@ -43,6 +43,7 @@ class CreatePostPage extends GetView<CreatePostController> {
       body: SafeArea(
         child: Form(
           key: controller.createPostFormKey,
+          onChanged: controller.onValidForm,
           child: Column(
             children: [
               Expanded(
@@ -81,7 +82,7 @@ class CreatePostPage extends GetView<CreatePostController> {
             child: GetX<CreatePostController>(
               builder: (controller) {
                 return controller.imageFiles.isNotEmpty
-                    ? _buildImagesView
+                    ? _buildImagesView(context)
                     : _buildAddImage(context);
               },
             )),
@@ -127,7 +128,7 @@ class CreatePostPage extends GetView<CreatePostController> {
         ),
       );
 
-  Widget get _buildImagesView => Container(
+  Widget _buildImagesView(BuildContext context) => Container(
         height: AppConstant.itemImageBox,
         alignment: Alignment.centerLeft,
         child: GetX<CreatePostController>(
@@ -138,7 +139,7 @@ class CreatePostPage extends GetView<CreatePostController> {
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
               children: [
-                buildAddImageSmall,
+                buildAddImageSmall(context),
                 ..._buildSelectedImages,
               ],
             );
@@ -234,39 +235,45 @@ class CreatePostPage extends GetView<CreatePostController> {
         ),
       );
 
-  Widget get buildAddImageSmall => AspectRatio(
-        aspectRatio: 1,
-        child: Container(
-          color: AppColors.greyFog,
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: SvgIcon(
-                      size: AppConstant.iconSize,
-                      icon: AppAssets.iconCamera,
+  Widget buildAddImageSmall(BuildContext context) => GestureDetector(
+        onTap: () => showCupertinoModalPopup<void>(
+          context: context,
+          builder: (context) => _buildOptionSelectImage,
+        ),
+        child: AspectRatio(
+          aspectRatio: 1,
+          child: Container(
+            color: AppColors.greyFog,
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Padding(
+                      padding: EdgeInsets.only(left: 10),
+                      child: SvgIcon(
+                        size: AppConstant.iconSize,
+                        icon: AppAssets.iconCamera,
+                      ),
                     ),
-                  ),
-                  HBox(5),
-                  SvgIcon(
-                    size: AppConstant.iconCameraAddSize,
-                    icon: AppAssets.iconCameraAdd,
-                  ),
-                ],
-              ),
-              Text(
-                AppStrings.add_photo_text,
-                style: AppTextStyles.commandBold9w700.copyWith(
-                  color: AppColors.greyStorm,
+                    HBox(5),
+                    SvgIcon(
+                      size: AppConstant.iconCameraAddSize,
+                      icon: AppAssets.iconCameraAdd,
+                    ),
+                  ],
                 ),
-              ),
-            ],
+                Text(
+                  AppStrings.add_photo_text,
+                  style: AppTextStyles.commandBold9w700.copyWith(
+                    color: AppColors.greyStorm,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -483,7 +490,7 @@ class CreatePostPage extends GetView<CreatePostController> {
               SelectAddressView(
                 address: controller.addressController.text,
                 height: heightBottomSheet(context),
-                onSubmit: (address) =>controller.setAddressSelection(address),
+                onSubmit: (address) => controller.setAddressSelection(address),
               ),
               context,
             ),
@@ -526,12 +533,17 @@ class CreatePostPage extends GetView<CreatePostController> {
             const Spacer(),
             Expanded(
               flex: 10,
-              child: CustomButton(
-                title: AppStrings.create_post_text,
-                fontWeight: FontWeight.w700,
-                fontSize: 13,
-                height: 35,
-                onPressed: () =>controller.addPost(),
+              child: GetX<CreatePostController>(
+                builder: (controller) {
+                  return CustomButton(
+                    title: AppStrings.create_post_text,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 13,
+                    height: 35,
+                    onPressed:
+                        controller.isValidForm ? controller.addPost : null,
+                  );
+                },
               ),
             ),
             const Spacer(),

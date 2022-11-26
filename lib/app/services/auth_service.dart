@@ -1,5 +1,6 @@
 import 'package:chomoi/app/config/constant/app_strings.dart';
 import 'package:chomoi/domain/usecases/auth/logout_use_case.dart';
+import 'package:chomoi/domain/usecases/auth/refresh_new_token_use_case.dart';
 import 'package:chomoi/presentation/routes/app_pages.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -16,16 +17,22 @@ abstract class AuthService {
   bool isLoggedIn();
 
   Future<void> logout();
+
+  Future<bool> refreshToken();
 }
 
 class AuthServiceImpl extends GetxService implements AuthService {
   AuthServiceImpl({
     LogoutUseCase? logoutUseCase,
+    RefreshNewTokenUseCase? refreshNewTokenUseCase,
   }) {
     this.logoutUseCase = logoutUseCase ?? LogoutUseCase();
+    this.refreshNewTokenUseCase =
+        refreshNewTokenUseCase ?? RefreshNewTokenUseCase();
   }
 
   late final LogoutUseCase logoutUseCase;
+  late final RefreshNewTokenUseCase refreshNewTokenUseCase;
 
   final _storage = const FlutterSecureStorage();
   String? _accessToken;
@@ -66,7 +73,6 @@ class AuthServiceImpl extends GetxService implements AuthService {
 
   @override
   Future<void> logout() async {
-    await clearToken();
     final result = await logoutUseCase.call();
     result.fold(
       (e) {},
@@ -76,5 +82,23 @@ class AuthServiceImpl extends GetxService implements AuthService {
         });
       },
     );
+  }
+
+  @override
+  Future<bool> refreshToken() async {
+    final result = await refreshNewTokenUseCase.call();
+    bool isSuccess = false;
+    result.fold(
+      (e) {
+        Future<void>.delayed(const Duration(milliseconds: 1500), () {
+          Get.offAllNamed(AppPages.loginPage.name);
+        });
+      },
+      (value) {
+        isSuccess = true;
+        _accessToken = value.idToken;
+      },
+    );
+    return isSuccess;
   }
 }

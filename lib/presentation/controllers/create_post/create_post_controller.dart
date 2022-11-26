@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:chomoi/app/config/constant/app_strings.dart';
+import 'package:chomoi/app/util/file_converter.dart';
 import 'package:chomoi/app/util/get_cupertino_dialog.dart';
 import 'package:chomoi/domain/models/request/post/post_request_model.dart';
 import 'package:chomoi/domain/models/response/brand/brand_model.dart';
@@ -17,8 +18,11 @@ import 'package:chomoi/domain/usecases/country/fetch_provinces_use_case.dart';
 import 'package:chomoi/domain/usecases/country/fetch_wards_use_case.dart';
 import 'package:chomoi/domain/usecases/post/add_post_usecase.dart';
 import 'package:chomoi/domain/usecases/user/fetch_user_use_case.dart';
+import 'package:chomoi/presentation/routes/app_pages.dart';
+import 'package:chomoi/presentation/widgets/loading_dialog.dart';
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -43,8 +47,6 @@ class CreatePostController extends GetxController {
   });
 
   String _categoryName = '';
-
-  final createPostFormKey = GlobalKey<FormState>();
 
   final _categoryState = const States<List<CategoryModel>>.init(
     entity: [],
@@ -105,6 +107,8 @@ class CreatePostController extends GetxController {
     entity: [],
   ).obs;
 
+  final createPostFormKey = GlobalKey<FormState>();
+
   States<List<ProvinceModel>> get provincesState => _provincesState.value;
 
   States<List<DistrictModel>> get districtsState => _districtsState.value;
@@ -117,6 +121,23 @@ class CreatePostController extends GetxController {
 
   States<Unit> get addPostState => _addPostState.value;
 
+  final _isValidForm = false.obs;
+
+  bool get isValidForm => _isValidForm.value;
+
+  String _userId = '';
+
+  void onValidForm() {
+    _isValidForm.value = createPostFormKey.currentState!.validate() &&
+        categoryController.text.isNotEmpty &&
+        brandController.text.isNotEmpty &&
+        priceController.text.isNotEmpty &&
+        titleController.text.isNotEmpty &&
+        descriptionController.text.isNotEmpty &&
+        addressController.text.isNotEmpty &&
+        imageFiles.isNotEmpty;
+  }
+
   Future<void> selectImagesFromGallery() async {
     final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
     if (selectedImages != null && selectedImages.isNotEmpty) {
@@ -126,6 +147,7 @@ class CreatePostController extends GetxController {
           )
           .toList();
       _imageFiles.addAll(images);
+      onValidForm();
     }
     Get.back();
   }
@@ -135,6 +157,7 @@ class CreatePostController extends GetxController {
     if (pickedImage != null) {
       final pickedImageFile = File(pickedImage.path);
       _imageFiles.add(pickedImageFile);
+      onValidForm();
     }
     Get.back();
   }
@@ -178,6 +201,12 @@ class CreatePostController extends GetxController {
     });
   }
 
+  void routeCreatePostSuccess(
+      {required PostRequestModel postRequestModel, required File firstImage}) {
+    Get.toNamed(AppPages.createPostSuccessPage.name,
+        arguments: {'post': postRequestModel, 'image': firstImage});
+  }
+
   @override
   void onInit() {
     if (Get.arguments != null) {
@@ -207,6 +236,7 @@ class CreatePostController extends GetxController {
       _userState.value = States.failure(failure);
     }, (value) {
       _userState.value = States.success(entity: value);
+      _userId = value.id;
       addressController.text = value.address;
     });
   }
@@ -234,20 +264,27 @@ class CreatePostController extends GetxController {
   Future<void> addPost() async {
     FocusManager.instance.primaryFocus?.unfocus();
     _addPostState.value = const States.loading();
-    final result = await addPostUseCase.call(
-      PostRequestModel(
-        title: '1',
-        brandId: '1',
-        address: '1',
-        price: 2,
-        categoryId: '1',
-        userId: '1',
-        description: '1',
-        file: imageFiles,
-      ),
+    LoadingDialog.show();
+    final List<dio.MultipartFile> multipartFiles = [];
+    for (int i = 0; i < imageFiles.length; i++) {
+      final multipart = await imageFiles[i].toMultipart;
+      multipartFiles.add(multipart);
+    }
+    final postRequestModel = PostRequestModel(
+      title: titleController.text,
+      brandId: brandController.text,
+      address: addressController.text,
+      price: _price,
+      categoryId: categoryController.text,
+      userId: _userId,
+      description: descriptionController.text,
+      files: multipartFiles,
     );
-    result.fold((failure) {
+
+    final result = await addPostUseCase.call(postRequestModel);
+    result.fold((failure) async {
       _addPostState.value = States.failure(failure);
+      await LoadingDialog.hide();
       Get.cupertinoDialog(
         title: AppStrings.error_title,
         middleText: failure.toString(),
@@ -256,6 +293,10 @@ class CreatePostController extends GetxController {
       );
     }, (value) async {
       _addPostState.value = States.success(entity: value);
+      await LoadingDialog.hide();
+      Get.back();
+      routeCreatePostSuccess(
+          postRequestModel: postRequestModel, firstImage: imageFiles.first);
     });
   }
 

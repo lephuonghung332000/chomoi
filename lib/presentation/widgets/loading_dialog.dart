@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 abstract class LoadingDialog {
   static Future<void> show() {
     return EasyLoading.show(
+      maskType:EasyLoadingMaskType.clear ,
       indicator: const CupertinoActivityIndicator(
         radius: 15,
         color: AppColors.white,

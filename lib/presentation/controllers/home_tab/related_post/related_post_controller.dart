@@ -57,7 +57,7 @@ class RelatedPostController extends GetxController {
       _postState.value = const States.loading();
     }
     final result = await fetchPostUseCase.call(
-      Tuple6(null, null, categoryId, null, null, page),
+      Tuple5(null, categoryId, null, null, page),
     );
     result.fold((failure) {
       if (page == 1) {

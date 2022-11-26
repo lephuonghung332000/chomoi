@@ -1,10 +1,12 @@
 import 'package:chomoi/app/util/get_extensions.dart';
 import 'package:chomoi/domain/models/response/post/post_model.dart';
 import 'package:chomoi/domain/models/response/post/post_paging_model.dart';
+import 'package:chomoi/domain/models/response/user/user_model.dart';
 import 'package:chomoi/domain/models/state/states.dart';
 import 'package:chomoi/domain/usecases/post/fetch_my_accept_post_usecase.dart';
 import 'package:chomoi/domain/usecases/post/fetch_my_pending_post_usecase.dart';
 import 'package:chomoi/domain/usecases/post/fetch_my_reject_post_usecase.dart';
+import 'package:chomoi/domain/usecases/user/fetch_user_use_case.dart';
 import 'package:chomoi/presentation/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +17,7 @@ class MyPostController extends GetxController
   final FetchMyAcceptPostUseCase fetchMyAcceptPostUseCase;
   final FetchMyPendingPostUseCase fetchMyPendingPostUseCase;
   final FetchMyRejectPostUseCase fetchMyRejectPostUseCase;
+  final FetchUserUseCase fetchUserUseCase;
 
   final _postAcceptState = States<PostPagingModel>.init(
     entity: PostPagingModel.empty(),
@@ -34,10 +37,17 @@ class MyPostController extends GetxController
 
   States<PostPagingModel> get postRejectState => _postRejectState.value;
 
+  final _userState = States<UserModel>.init(
+    entity: UserModel.empty(),
+  ).obs;
+
+  States<UserModel> get userState => _userState.value;
+
   MyPostController({
     required this.fetchMyAcceptPostUseCase,
     required this.fetchMyPendingPostUseCase,
     required this.fetchMyRejectPostUseCase,
+    required this.fetchUserUseCase,
   });
 
   @override
@@ -47,6 +57,18 @@ class MyPostController extends GetxController
     _fetchRejectPost();
     _fetchAcceptPost();
     _fetchPendingPost();
+    _fetchUser();
+  }
+
+  Future<void> _fetchUser() async {
+    _userState.value = const States.loading();
+    // call info myself
+    final result = await fetchUserUseCase.call(null);
+    result.fold((failure) {
+      _userState.value = States.failure(failure);
+    }, (value) {
+      _userState.value = States.success(entity: value);
+    });
   }
 
   Future<void> _fetchAcceptPost() async {
