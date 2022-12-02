@@ -1,7 +1,6 @@
 import 'package:chomoi/app/config/constant/app_strings.dart';
 import 'package:chomoi/app/config/resources/app_colors.dart';
 import 'package:chomoi/app/config/resources/app_textstyles.dart';
-import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,6 +22,7 @@ class InputField extends StatefulWidget {
   final ValueChanged<String>? onChanged;
   final EdgeInsets contentPadding;
   final List<TextInputFormatter> inputFormatters;
+  final InputDecoration? decoration;
 
   const InputField({
     required this.controller,
@@ -42,6 +42,7 @@ class InputField extends StatefulWidget {
         const EdgeInsets.symmetric(vertical: 10, horizontal: 7),
     this.onTap,
     this.inputFormatters = const [],
+    this.decoration,
   });
 
   @override
@@ -81,40 +82,41 @@ class _InputFieldState extends State<InputField> {
       maxLength: widget.maxLength,
       maxLines: widget.maxLine ?? 1,
       inputFormatters: widget.inputFormatters,
-      decoration: InputDecoration(
-        contentPadding: widget.contentPadding,
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: widget.color,
-          ),
-        ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: widget.color,
-          ),
-        ),
-        labelText: widget.label,
-        labelStyle: AppTextStyles.contentRegular15w400.copyWith(
-          color: AppColors.grayPhilippine,
-        ),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        hintText: widget.placeholder,
-        hintStyle: AppTextStyles.contentRegular15w400.copyWith(
-          color: AppColors.grayLight,
-        ),
-        errorMaxLines: 2,
-        errorStyle: AppTextStyles.infoRegular13w400.copyWith(
-          color: AppColors.errorColor,
-        ),
-        isDense: true,
-        suffixIconConstraints: const BoxConstraints(minWidth: 10),
-        suffixIcon: widget.password && passwordIsNotEmpty
-            ? _buildShowAndHidePassword()
-            : Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: widget.suffixIcon,
+      decoration: widget.decoration ??
+          InputDecoration(
+            contentPadding: widget.contentPadding,
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: widget.color,
               ),
-      ),
+            ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: widget.color,
+              ),
+            ),
+            labelText: widget.label,
+            labelStyle: AppTextStyles.contentRegular15w400.copyWith(
+              color: AppColors.grayPhilippine,
+            ),
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            hintText: widget.placeholder,
+            hintStyle: AppTextStyles.contentRegular15w400.copyWith(
+              color: AppColors.grayLight,
+            ),
+            errorMaxLines: 2,
+            errorStyle: AppTextStyles.infoRegular13w400.copyWith(
+              color: AppColors.errorColor,
+            ),
+            isDense: true,
+            suffixIconConstraints: const BoxConstraints(minWidth: 10),
+            suffixIcon: widget.password && passwordIsNotEmpty
+                ? _buildShowAndHidePassword()
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: widget.suffixIcon,
+                  ),
+          ),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: widget.controller,
       style: widget.style,

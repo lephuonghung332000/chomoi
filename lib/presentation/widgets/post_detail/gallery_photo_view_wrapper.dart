@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chomoi/app/config/resources/app_assets.dart';
 import 'package:chomoi/app/config/resources/app_colors.dart';
 import 'package:chomoi/presentation/widgets/app_back_button.dart';
@@ -85,7 +86,7 @@ class _GalleryPhotoViewWrapperState extends State<GalleryPhotoViewWrapper> {
     final GalleryExampleItem item = widget.galleryItems[index];
 
     return PhotoViewGalleryPageOptions(
-      imageProvider: NetworkImage(item.resource),
+      imageProvider: CachedNetworkImageProvider(item.resource),
       initialScale: PhotoViewComputedScale.contained,
       minScale: PhotoViewComputedScale.contained * (0.5 + index / 10),
       maxScale: PhotoViewComputedScale.covered * 4.1,

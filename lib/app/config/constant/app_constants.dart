@@ -12,12 +12,15 @@ class AppConstant {
   static const double heightContactFooter = 120;
   static const double iconSize = 24;
   static const double iconCameraSize = 36;
+  static const double iconLogoutSize = 36;
   static const double iconCameraAddSize = 8;
   static const double iconAvatarPostSize = 10;
+  static const double iconAvatarSettingSize = 36;
   static const double iconAvatarBoxSize = 20;
   static const double iconAvatarPostDetailSize = 20;
   static const double boxItemSize = 64;
   static const double itemSpacing = 16;
   static const double itemImageBox = 100;
+  static const double iconMoreSetting = 16;
   static const int descriptionMaxLength = 1500;
 }

@@ -5,11 +5,11 @@ part 'comment_request_dto.g.dart';
 
 @JsonSerializable()
 class CommentRequestDto {
-  final String? content;
+  final String content;
   @JsonKey(name: 'post_id')
-  final String? postId;
+  final String postId;
   @JsonKey(name: 'user_id')
-  final String? userId;
+  final String userId;
 
   CommentRequestDto({
     required this.content,

@@ -23,8 +23,8 @@ class _$SignUpRequestModelTearOff {
       required String phone,
       required bool gender,
       required String address,
-      required String fullName,
-      required String birthDay,
+      required String fullname,
+      required String birthday,
       required String email,
       required String password}) {
     return _SignUpRequestModel(
@@ -32,8 +32,8 @@ class _$SignUpRequestModelTearOff {
       phone: phone,
       gender: gender,
       address: address,
-      fullName: fullName,
-      birthDay: birthDay,
+      fullname: fullname,
+      birthday: birthday,
       email: email,
       password: password,
     );
@@ -49,8 +49,8 @@ mixin _$SignUpRequestModel {
   String get phone => throw _privateConstructorUsedError;
   bool get gender => throw _privateConstructorUsedError;
   String get address => throw _privateConstructorUsedError;
-  String get fullName => throw _privateConstructorUsedError;
-  String get birthDay => throw _privateConstructorUsedError;
+  String get fullname => throw _privateConstructorUsedError;
+  String get birthday => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
 
@@ -69,8 +69,8 @@ abstract class $SignUpRequestModelCopyWith<$Res> {
       String phone,
       bool gender,
       String address,
-      String fullName,
-      String birthDay,
+      String fullname,
+      String birthday,
       String email,
       String password});
 }
@@ -90,8 +90,8 @@ class _$SignUpRequestModelCopyWithImpl<$Res>
     Object? phone = freezed,
     Object? gender = freezed,
     Object? address = freezed,
-    Object? fullName = freezed,
-    Object? birthDay = freezed,
+    Object? fullname = freezed,
+    Object? birthday = freezed,
     Object? email = freezed,
     Object? password = freezed,
   }) {
@@ -112,13 +112,13 @@ class _$SignUpRequestModelCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      fullName: fullName == freezed
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
+      fullname: fullname == freezed
+          ? _value.fullname
+          : fullname // ignore: cast_nullable_to_non_nullable
               as String,
-      birthDay: birthDay == freezed
-          ? _value.birthDay
-          : birthDay // ignore: cast_nullable_to_non_nullable
+      birthday: birthday == freezed
+          ? _value.birthday
+          : birthday // ignore: cast_nullable_to_non_nullable
               as String,
       email: email == freezed
           ? _value.email
@@ -144,8 +144,8 @@ abstract class _$SignUpRequestModelCopyWith<$Res>
       String phone,
       bool gender,
       String address,
-      String fullName,
-      String birthDay,
+      String fullname,
+      String birthday,
       String email,
       String password});
 }
@@ -167,8 +167,8 @@ class __$SignUpRequestModelCopyWithImpl<$Res>
     Object? phone = freezed,
     Object? gender = freezed,
     Object? address = freezed,
-    Object? fullName = freezed,
-    Object? birthDay = freezed,
+    Object? fullname = freezed,
+    Object? birthday = freezed,
     Object? email = freezed,
     Object? password = freezed,
   }) {
@@ -189,13 +189,13 @@ class __$SignUpRequestModelCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      fullName: fullName == freezed
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
+      fullname: fullname == freezed
+          ? _value.fullname
+          : fullname // ignore: cast_nullable_to_non_nullable
               as String,
-      birthDay: birthDay == freezed
-          ? _value.birthDay
-          : birthDay // ignore: cast_nullable_to_non_nullable
+      birthday: birthday == freezed
+          ? _value.birthday
+          : birthday // ignore: cast_nullable_to_non_nullable
               as String,
       email: email == freezed
           ? _value.email
@@ -217,8 +217,8 @@ class _$_SignUpRequestModel implements _SignUpRequestModel {
       required this.phone,
       required this.gender,
       required this.address,
-      required this.fullName,
-      required this.birthDay,
+      required this.fullname,
+      required this.birthday,
       required this.email,
       required this.password});
 
@@ -231,9 +231,9 @@ class _$_SignUpRequestModel implements _SignUpRequestModel {
   @override
   final String address;
   @override
-  final String fullName;
+  final String fullname;
   @override
-  final String birthDay;
+  final String birthday;
   @override
   final String email;
   @override
@@ -241,7 +241,7 @@ class _$_SignUpRequestModel implements _SignUpRequestModel {
 
   @override
   String toString() {
-    return 'SignUpRequestModel(name: $name, phone: $phone, gender: $gender, address: $address, fullName: $fullName, birthDay: $birthDay, email: $email, password: $password)';
+    return 'SignUpRequestModel(name: $name, phone: $phone, gender: $gender, address: $address, fullname: $fullname, birthday: $birthday, email: $email, password: $password)';
   }
 
   @override
@@ -253,8 +253,8 @@ class _$_SignUpRequestModel implements _SignUpRequestModel {
             const DeepCollectionEquality().equals(other.phone, phone) &&
             const DeepCollectionEquality().equals(other.gender, gender) &&
             const DeepCollectionEquality().equals(other.address, address) &&
-            const DeepCollectionEquality().equals(other.fullName, fullName) &&
-            const DeepCollectionEquality().equals(other.birthDay, birthDay) &&
+            const DeepCollectionEquality().equals(other.fullname, fullname) &&
+            const DeepCollectionEquality().equals(other.birthday, birthday) &&
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.password, password));
   }
@@ -266,8 +266,8 @@ class _$_SignUpRequestModel implements _SignUpRequestModel {
       const DeepCollectionEquality().hash(phone),
       const DeepCollectionEquality().hash(gender),
       const DeepCollectionEquality().hash(address),
-      const DeepCollectionEquality().hash(fullName),
-      const DeepCollectionEquality().hash(birthDay),
+      const DeepCollectionEquality().hash(fullname),
+      const DeepCollectionEquality().hash(birthday),
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(password));
 
@@ -283,8 +283,8 @@ abstract class _SignUpRequestModel implements SignUpRequestModel {
       required String phone,
       required bool gender,
       required String address,
-      required String fullName,
-      required String birthDay,
+      required String fullname,
+      required String birthday,
       required String email,
       required String password}) = _$_SignUpRequestModel;
 
@@ -297,9 +297,9 @@ abstract class _SignUpRequestModel implements SignUpRequestModel {
   @override
   String get address;
   @override
-  String get fullName;
+  String get fullname;
   @override
-  String get birthDay;
+  String get birthday;
   @override
   String get email;
   @override

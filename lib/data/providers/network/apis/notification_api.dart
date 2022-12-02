@@ -1,48 +1,86 @@
-import 'package:chomoi/app/services/auth_service.dart';
-import 'package:chomoi/data/dto/request/comment/comment_request_dto.dart';
-import 'package:chomoi/data/providers/network/api_provider.dart';
-import 'package:chomoi/data/providers/network/api_request_representable.dart';
 import 'dart:convert';
 
-enum CommentType { fetchComment, addComment }
+import 'package:chomoi/data/dto/request/notification/fcm_token_request_dto.dart';
+import 'package:chomoi/data/providers/network/api_provider.dart';
+import 'package:chomoi/data/providers/network/api_request_representable.dart';
 
-class CommentAPI implements APIRequestRepresentable {
-  final CommentType type;
-  final String? postId;
+enum NotificationType {
+  fetchNotification,
+  updateRead,
+  updateFcmToken,
+  deleteFcmToken,
+  updateAllNewNotifications,
+  getUnReadNotification,
+}
+
+class NotificationApi implements APIRequestRepresentable {
+  final NotificationType type;
   final int? page;
-  final CommentRequestDto? commentRequestDto;
+  final String? notificationId;
+  final String? fcmToken;
+  final FcmTokenRequestDto? fcmTokenRequestDto;
 
-  CommentAPI._({
+  NotificationApi._({
     required this.type,
-    this.postId,
     this.page,
-    this.commentRequestDto,
+    this.notificationId,
+    this.fcmToken,
+    this.fcmTokenRequestDto,
   });
 
-  CommentAPI.fetchComment({String? postId, int? page})
+  NotificationApi.fetchNotification({int? page})
       : this._(
-          type: CommentType.fetchComment,
-          postId: postId,
+          type: NotificationType.fetchNotification,
           page: page,
         );
 
-  CommentAPI.addComment({
-    required CommentRequestDto commentRequestDto,
-  }) : this._(
-          type: CommentType.addComment,
-          commentRequestDto: commentRequestDto,
+  NotificationApi.updateRead({required String notificationId})
+      : this._(
+          type: NotificationType.updateRead,
+          notificationId: notificationId,
+        );
+
+  NotificationApi.updateFcmToken(
+      {required FcmTokenRequestDto fcmTokenRequestDto})
+      : this._(
+          type: NotificationType.updateFcmToken,
+          fcmTokenRequestDto: fcmTokenRequestDto,
+        );
+
+  NotificationApi.deleteFcmToken({required String fcmToken})
+      : this._(
+          type: NotificationType.deleteFcmToken,
+          fcmToken: fcmToken,
+        );
+
+  NotificationApi.updateAllNewNotifications()
+      : this._(
+          type: NotificationType.updateAllNewNotifications,
+        );
+
+  NotificationApi.getUnReadNotification()
+      : this._(
+          type: NotificationType.getUnReadNotification,
         );
 
   @override
-  String get endpoint => 'comment';
+  String get endpoint => 'notification';
 
   @override
   String get path {
     switch (type) {
-      case CommentType.fetchComment:
-        return '/$postId';
-      case CommentType.addComment:
-        return '/addComment';
+      case NotificationType.fetchNotification:
+        return '/';
+      case NotificationType.updateRead:
+        return '/read/$notificationId';
+      case NotificationType.updateFcmToken:
+        return '/updateFCMTokens';
+      case NotificationType.deleteFcmToken:
+        return '/removeFcmToken/$fcmToken';
+      case NotificationType.updateAllNewNotifications:
+        return '/unread/update';
+      case NotificationType.getUnReadNotification:
+        return '/unread';
     }
   }
 
@@ -54,11 +92,12 @@ class CommentAPI implements APIRequestRepresentable {
   @override
   Map<String, String>? get query {
     switch (type) {
-      case CommentType.fetchComment:
-        return {
+      case NotificationType.fetchNotification:
+        final Map<String, String> queryPost = {
           'page': '$page',
         };
-      case CommentType.addComment:
+        return queryPost;
+      default:
         return null;
     }
   }
@@ -66,9 +105,9 @@ class CommentAPI implements APIRequestRepresentable {
   @override
   String? get body {
     switch (type) {
-      case CommentType.addComment:
-        return jsonEncode(commentRequestDto?.toJson());
-      case CommentType.fetchComment:
+      case NotificationType.updateFcmToken:
+        return jsonEncode(fcmTokenRequestDto!.toString());
+      default:
         return null;
     }
   }

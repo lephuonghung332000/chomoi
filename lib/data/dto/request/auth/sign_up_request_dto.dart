@@ -11,16 +11,16 @@ class SignUpRequestDto {
   final String phone;
   final bool gender;
   final String address;
-  final String fullName;
-  final String birthDay;
+  final String fullname;
+  final String birthday;
 
   SignUpRequestDto({
     required this.name,
     required this.phone,
     required this.gender,
     required this.address,
-    required this.fullName,
-    required this.birthDay,
+    required this.fullname,
+    required this.birthday,
     required this.email,
     required this.password,
   });
@@ -36,8 +36,8 @@ class SignUpRequestDto {
       phone: model.phone,
       gender: model.gender,
       address: model.address,
-      fullName: model.fullName,
-      birthDay: model.birthDay,
+      fullname: model.fullname,
+      birthday: model.birthday,
     );
   }
 

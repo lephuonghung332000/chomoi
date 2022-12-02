@@ -57,10 +57,10 @@ class MyPostController extends GetxController
     _fetchRejectPost();
     _fetchAcceptPost();
     _fetchPendingPost();
-    _fetchUser();
+    fetchUser();
   }
 
-  Future<void> _fetchUser() async {
+  Future<void> fetchUser() async {
     _userState.value = const States.loading();
     // call info myself
     final result = await fetchUserUseCase.call(null);

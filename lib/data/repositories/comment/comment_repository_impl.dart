@@ -35,9 +35,8 @@ class CommentRepositoryImpl extends CommentRepository {
           CommentRequestModel commentRequestModel) =>
       Task(
         () => CommentAPI.addComment(
-                commentRequestDto:
-                    CommentRequestDto.fromModel(commentRequestModel))
-            .request(),
+          commentRequestDto: CommentRequestDto.fromModel(commentRequestModel),
+        ).request(),
       )
           .attempt()
           .map(

@@ -58,7 +58,7 @@ extension DateTimeExt on DateTime {
       return '${(minutes / 60 / 24).round()} ${AppStrings.days_ago_text}';
     } else if (minutes >= 10080 && minutes < 50400) {
       // Request sent between 10080 minutes and 302400 minutes --> display Il y a %{count} semaines =total minutes / (60*24*7)
-      return '${(minutes / 60 / 24 / 7).round()} ${AppStrings.days_ago_text}';
+      return '${(minutes / 60 / 24 / 7).round()} ${AppStrings.weeks_ago_text}';
     } else {
       // Request sent more than 302400 minutes  --> display Il y a %{count} mois = total minutes / (60*24*30)
       return '${(minutes / 60 / 24 / 30).round()} ${AppStrings.months_ago_text}';

@@ -54,6 +54,20 @@ class APIProvider {
     }
   }
 
+  Future patch(APIRequestRepresentable request) async {
+    try {
+      final response = await _client.patch(
+        request.url,
+        data: request.body,
+        queryParameters: request.query,
+        options: Options(headers: request.headers),
+      );
+      return response.data;
+    } on DioError catch (ex) {
+      sendError(ex);
+    }
+  }
+
   Future get(APIRequestRepresentable request) async {
     try {
       final response = await _client.get(
@@ -83,6 +97,7 @@ void sendError(DioError ex) {
         case 409:
           throw ConflictException(ex.requestOptions);
         case 500:
+        case 502:
           throw InternalServerErrorException(ex.requestOptions);
       }
       break;

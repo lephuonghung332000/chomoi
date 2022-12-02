@@ -20,15 +20,16 @@ class SearchPage extends GetView<SearchController> {
     return Scaffold(
       backgroundColor: AppColors.secondaryBackgroundColor,
       body: SafeArea(
-          child: CustomScrollView(
-        physics: const BouncingScrollPhysics(
-          parent: AlwaysScrollableScrollPhysics(),
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
+          slivers: [
+            _buildHeader,
+            _buildSearchList(context),
+          ],
         ),
-        slivers: [
-          _buildHeader,
-          _buildSearchList(context),
-        ],
-      )),
+      ),
     );
   }
 

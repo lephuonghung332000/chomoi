@@ -12,8 +12,8 @@ SignUpRequestDto _$SignUpRequestDtoFromJson(Map<String, dynamic> json) =>
       phone: json['phone'] as String,
       gender: json['gender'] as bool,
       address: json['address'] as String,
-      fullName: json['fullName'] as String,
-      birthDay: json['birthDay'] as String,
+      fullname: json['fullname'] as String,
+      birthday: json['birthday'] as String,
       email: json['email'] as String,
       password: json['password'] as String,
     );
@@ -26,6 +26,6 @@ Map<String, dynamic> _$SignUpRequestDtoToJson(SignUpRequestDto instance) =>
       'phone': instance.phone,
       'gender': instance.gender,
       'address': instance.address,
-      'fullName': instance.fullName,
-      'birthDay': instance.birthDay,
+      'fullname': instance.fullname,
+      'birthday': instance.birthday,
     };

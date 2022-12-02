@@ -12,16 +12,23 @@ import 'package:chomoi/presentation/widgets/vbox.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'image_post.dart';
+import 'my_post_list_view.dart';
+
 class MyPostRow extends StatelessWidget {
   final PostViewModel viewModel;
   final VoidCallback? onTap;
-  final bool isReject;
+  final PostType postType;
+  final bool isShowFooter;
+  final bool isShowOption;
 
   const MyPostRow({
     Key? key,
     this.onTap,
     required this.viewModel,
-    this.isReject = false,
+    required this.postType,
+    required this.isShowFooter,
+    this.isShowOption = true,
   }) : super(key: key);
 
   @override
@@ -48,15 +55,7 @@ class MyPostRow extends StatelessWidget {
                         borderRadius: const BorderRadius.all(
                           Radius.circular(8),
                         ),
-                        child: isReject
-                            ? ColorFiltered(
-                                colorFilter: ColorFilter.mode(
-                                  AppColors.black.withOpacity(0.8),
-                                  BlendMode.color,
-                                ),
-                                child: _buildImagePost,
-                              )
-                            : _buildImagePost,
+                        child: _buildImagePost,
                       ),
                     ),
                     const HBox(10),
@@ -103,17 +102,18 @@ class MyPostRow extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SvgIcon(
-                      size: 16,
-                      icon: AppAssets.iconMore,
-                    ),
+                    if (isShowOption)
+                      const SvgIcon(
+                        size: 16,
+                        icon: AppAssets.iconMore,
+                      ),
                   ],
                 ),
               ),
             ),
           ),
           const VBox(10),
-          if (isReject)
+          if (postType == PostType.reject)
             Container(
               decoration: BoxDecoration(
                 border: Border(
@@ -140,7 +140,7 @@ class MyPostRow extends StatelessWidget {
                 ],
               ),
             )
-          else
+          else if (postType == PostType.accept && isShowFooter)
             Row(
               children: [
                 Expanded(
@@ -159,6 +159,18 @@ class MyPostRow extends StatelessWidget {
                   ),
                 )
               ],
+            )
+          else
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Theme.of(context).dividerColor,
+                    width: 0.5,
+                  ),
+                ),
+              ),
+              height: 10,
             )
         ],
       ),
@@ -205,12 +217,51 @@ class MyPostRow extends StatelessWidget {
         ),
       );
 
-  Widget get _buildImagePost => CachedNetworkImage(
-        imageUrl: viewModel.firstImage,
-        height: double.infinity,
-        fit: BoxFit.cover,
-        errorWidget: (context, url, error) =>
-            const CupertinoActivityIndicator(),
-        placeholder: (context, url) => const CupertinoActivityIndicator(),
+  Widget get _buildImagePost {
+    switch (postType) {
+      case PostType.pending:
+        return _buildPendingImagePost;
+      case PostType.accept:
+        return ImagePost(
+          image: viewModel.firstImage,
+        );
+      case PostType.reject:
+        return _buildRejectImagePost;
+    }
+  }
+
+  Widget get _buildRejectImagePost => ColorFiltered(
+        colorFilter: ColorFilter.mode(
+          AppColors.black.withOpacity(0.8),
+          BlendMode.color,
+        ),
+        child: ImagePost(
+          image: viewModel.firstImage,
+        ),
+      );
+
+  Widget get _buildPendingImagePost => Stack(
+        alignment: AlignmentDirectional.bottomEnd,
+        children: [
+          ImagePost(
+            image: viewModel.firstImage,
+          ),
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: AppColors.black.withOpacity(0.5),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4),
+              child: Text(
+                AppStrings.wait_for_process_post_text,
+                style: AppTextStyles.smallBold11w700.copyWith(
+                  color: AppColors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          )
+        ],
       );
 }

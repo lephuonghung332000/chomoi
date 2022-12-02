@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chomoi/app/config/constant/app_constants.dart';
 import 'package:chomoi/app/config/constant/app_strings.dart';
 import 'package:chomoi/app/config/constant/app_url_constant.dart';
@@ -434,7 +435,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                   builder: (BuildContext context, int index) {
                     return PhotoViewGalleryPageOptions(
                       disableGestures: true,
-                      imageProvider: NetworkImage(
+                      imageProvider: CachedNetworkImageProvider(
                         controller.postDetail.images[index],
                       ),
                       heroAttributes: PhotoViewHeroAttributes(
@@ -572,7 +573,7 @@ class _PostDetailPageState extends State<PostDetailPage> {
                         if (viewModel.avatar.isNotEmpty)
                           CircleAvatar(
                             radius: AppConstant.iconAvatarPostDetailSize,
-                            backgroundImage: NetworkImage(viewModel.avatar),
+                            backgroundImage: CachedNetworkImageProvider(viewModel.avatar),
                             backgroundColor: Colors.transparent,
                           )
                         else

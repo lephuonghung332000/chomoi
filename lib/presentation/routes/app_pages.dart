@@ -10,9 +10,11 @@ import 'package:chomoi/presentation/controllers/home_tab/search/search_binding.d
 import 'package:chomoi/presentation/controllers/login/login_binding.dart';
 import 'package:chomoi/presentation/controllers/main/main_binding.dart';
 import 'package:chomoi/presentation/controllers/my_post_tab/my_post/my_post_binding.dart';
-import 'package:chomoi/presentation/controllers/notification_tab/notification_binding.dart';
+import 'package:chomoi/presentation/controllers/notification_tab/notification/notification_binding.dart';
 import 'package:chomoi/presentation/controllers/post_detail/post_detail_binding.dart';
-import 'package:chomoi/presentation/controllers/setting_tab/setting_binding.dart';
+import 'package:chomoi/presentation/controllers/setting_tab/edit_user/edit_user_binding.dart';
+import 'package:chomoi/presentation/controllers/setting_tab/setting/setting_binding.dart';
+import 'package:chomoi/presentation/controllers/setting_tab/showing_post/showing_post_binding.dart';
 import 'package:chomoi/presentation/controllers/sign_up/sign_up_binding.dart';
 import 'package:chomoi/presentation/controllers/splash/splash_binding.dart';
 import 'package:chomoi/presentation/pages/create_post/create_post_page.dart';
@@ -27,9 +29,11 @@ import 'package:chomoi/presentation/pages/home_tab/search/search_page.dart';
 import 'package:chomoi/presentation/pages/login/login_page.dart';
 import 'package:chomoi/presentation/pages/main/main_page.dart';
 import 'package:chomoi/presentation/pages/my_post_tab/my_post_page.dart';
-import 'package:chomoi/presentation/pages/notification_tab/notification_page.dart';
+import 'package:chomoi/presentation/pages/notification_tab/notification/notification_page.dart';
 import 'package:chomoi/presentation/pages/post_detail/post_detail_page.dart';
-import 'package:chomoi/presentation/pages/setting_tab/setting_page.dart';
+import 'package:chomoi/presentation/pages/setting_tab/edit_user/edit_user_page.dart';
+import 'package:chomoi/presentation/pages/setting_tab/setting/setting_page.dart';
+import 'package:chomoi/presentation/pages/setting_tab/showing_post/showing_post_page.dart';
 import 'package:chomoi/presentation/pages/sign_up/sign_up_page.dart';
 import 'package:chomoi/presentation/pages/splash/splash_page.dart';
 import 'package:get/get.dart';
@@ -38,6 +42,7 @@ class AppPages {
   static final pages = [
     createPostPage,
     createPostSuccessPage,
+    editUserPage,
     commentPage,
     categorySelectionPage,
     homePage,
@@ -53,6 +58,7 @@ class AppPages {
     splashPage,
     searchPage,
     settingPage,
+    showingPostPage,
   ].map((e) => e.page).toList();
 
   final GetPage page;
@@ -67,6 +73,17 @@ class AppPages {
       page: () => SplashPage(),
       binding: SplashBinding(),
       transition: Transition.noTransition,
+    ),
+  );
+
+  static final showingPostPage = AppPages(
+    name: _AppRoutes.showingPost,
+    page: GetPage(
+      name: _AppRoutes.showingPost,
+      page: () => ShowingPostPage(),
+      binding: ShowingPostBinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 350),
     ),
   );
   static final myPostPage = AppPages(
@@ -89,9 +106,9 @@ class AppPages {
     ),
   );
   static final createPostSuccessPage = AppPages(
-    name: _AppRoutes.createPostSucces,
+    name: _AppRoutes.createPostSuccess,
     page: GetPage(
-      name: _AppRoutes.createPostSucces,
+      name: _AppRoutes.createPostSuccess,
       page: () => CreatePostSuccessPage(),
       binding: CreatePostSuccessBinding(),
       transition: Transition.rightToLeft,
@@ -214,6 +231,17 @@ class AppPages {
     ),
   );
 
+  static final editUserPage = AppPages(
+    name: _AppRoutes.editUser,
+    page: GetPage(
+      name: _AppRoutes.editUser,
+      page: () => EditUserPage(),
+      binding: EditUserBinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 350),
+    ),
+  );
+
   static final createPostPage = AppPages(
     name: _AppRoutes.createPost,
     page: GetPage(
@@ -228,7 +256,7 @@ class AppPages {
 
 abstract class _AppRoutes {
   static const createPost = '/createPost';
-  static const createPostSucces = '/createPostSucces';
+  static const createPostSuccess = '/createPostSucces';
   static const home = '/home_tab';
   static const comment = '/comment';
   static const login = '/login';
@@ -242,6 +270,8 @@ abstract class _AppRoutes {
   static const splash = '/splash';
   static const search = '/search';
   static const setting = '/setting';
+  static const showingPost = '/showingPost';
   static const categorySelection = '/categorySelection';
   static const provinceSelection = '/provinceSelection';
+  static const editUser = '/editUser';
 }

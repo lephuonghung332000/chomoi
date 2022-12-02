@@ -73,11 +73,4 @@ class LoginController extends GetxController {
       (value) => Get.offAllNamed(AppPages.mainPage.name),
     );
   }
-
-  @override
-  void onClose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.onClose();
-  }
 }

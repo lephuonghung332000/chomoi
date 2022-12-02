@@ -7,16 +7,16 @@ part 'post_request_dto.g.dart';
 
 @JsonSerializable()
 class PostRequestDto {
-  final String? title;
+  final String title;
   @JsonKey(name: 'brand_id')
-  final String? brandId;
-  final String? address;
-  final int? price;
+  final String brandId;
+  final String address;
+  final int price;
   @JsonKey(name: 'category_id')
-  final String? categoryId;
-  final String? description;
+  final String categoryId;
+  final String description;
   @JsonKey(name: 'user_id')
-  final String? userId;
+  final String userId;
   @FileConverterSerialize()
   final List<MultipartFile> files;
 

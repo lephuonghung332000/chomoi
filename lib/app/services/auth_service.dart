@@ -2,6 +2,7 @@ import 'package:chomoi/app/config/constant/app_strings.dart';
 import 'package:chomoi/domain/usecases/auth/logout_use_case.dart';
 import 'package:chomoi/domain/usecases/auth/refresh_new_token_use_case.dart';
 import 'package:chomoi/presentation/routes/app_pages.dart';
+import 'package:chomoi/presentation/widgets/loading_dialog.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
@@ -86,15 +87,20 @@ class AuthServiceImpl extends GetxService implements AuthService {
 
   @override
   Future<bool> refreshToken() async {
+    LoadingDialog.show();
     final result = await refreshNewTokenUseCase.call();
     bool isSuccess = false;
     result.fold(
-      (e) {
+      (e) async {
+        await LoadingDialog.hide();
+
         Future<void>.delayed(const Duration(milliseconds: 1500), () {
           Get.offAllNamed(AppPages.loginPage.name);
         });
       },
-      (value) {
+      (value) async {
+        await LoadingDialog.hide();
+
         isSuccess = true;
         _accessToken = value.idToken;
       },

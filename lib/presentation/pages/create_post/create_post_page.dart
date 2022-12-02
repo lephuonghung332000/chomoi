@@ -484,7 +484,7 @@ class CreatePostPage extends GetView<CreatePostController> {
           child: InputField(
             controller: controller.addressController,
             readOnly: true,
-            label: AppStrings.address_label_create_post_title,
+            label: AppStrings.address_label_create_title,
             contentPadding: const EdgeInsets.all(12),
             onTap: () => _showBottomSheet(
               SelectAddressView(

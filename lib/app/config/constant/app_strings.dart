@@ -11,6 +11,7 @@ class AppStrings {
   static const login_success_message = 'Đăng nhập thành công';
   static const dialog_error_generic = 'Có lỗi xảy ra, vui lòng thử lại';
   static const login_title = 'Đăng nhập';
+  static const update_title = 'Cập nhật';
   static const login_subtitle = 'Chào bạn quay lại';
   static const forgot_password_text = 'Bạn quên mật khẩu?';
   static const login_another_login = 'hoặc sử dụng';
@@ -35,7 +36,8 @@ class AppStrings {
   static const sign_up_title = 'Đăng ký';
   static const sign_up_subtitle = 'Tạo tài khoản Chợ Mới ngay';
   static const input_name_hint_text = 'Tên';
-  static const input_birthday_hint_text = 'Chon ngày/tháng/năm sinh';
+  static const input_birthday_hint_text = 'Chọn ngày/tháng/năm sinh';
+  static const input_edit_birthday_hint_text = 'Ngày/tháng/năm sinh';
   static const input_phone_hint_text = 'Số điện thoại';
   static const error_title = 'Lỗi';
   static const menu_home = 'Trang chủ';
@@ -58,6 +60,7 @@ class AppStrings {
   static const seconds_ago_text = 'giây trước';
   static const minutes_ago_text = 'phút trước';
   static const hours_ago_text = 'giờ trước';
+  static const hours_text = 'giờ';
   static const days_ago_text = 'ngày trước';
   static const weeks_ago_text = 'tuần trước';
   static const months_ago_text = 'tháng trước';
@@ -100,6 +103,8 @@ class AppStrings {
   static const write_comment_hint_text = 'Viết bình luận';
   static const see_all_text = 'Xem tất cả';
   static const manage_post_title = 'Quản lý tin đăng';
+  static const manage_user_title = 'Quản lý tài khoản';
+  static const notification_title = 'Thông báo';
   static const associate_e_wallet_title = 'Liên kết ví bán hàng';
   static const see_statistic_title = 'Xem thống kê';
   static const see_hide_show_post_title = 'Đã bán/Ẩn tin';
@@ -111,7 +116,7 @@ class AppStrings {
   static const pick_image_camera = 'Chụp ảnh';
   static const see_previous_create_post_title = 'XEM TRƯỚC';
   static const category_label_create_post_title = 'Danh mục';
-  static const address_label_create_post_title = 'Địa chỉ';
+  static const address_label_create_title = 'Địa chỉ';
   static const brand_create_post_title = 'Hãng';
   static const price_create_post_title = 'Giá';
   static const title_field_create_post_title = 'Tiêu đề';
@@ -128,6 +133,16 @@ class AppStrings {
   static const process_pending_post_text = 'Chợ Mới đang tiến hành duyệt tin đăng của bạn';
   static const wait_for_process_post_text = 'Đợi duyệt';
   static const back_to_home_text = 'Trở về trang chủ';
+  static const in_text = 'Trong';
+  static const follower_text = 'Người theo dõi';
+  static const is_following_text = 'Đang theo dõi';
+  static const edit_user_text = 'Chỉnh sửa trang cá nhân';
+  static const rating_user_text = 'Đánh giá';
+  static String count_post_text(int count) => ' - $count tin';
+  static const percent_reply_user_text = 'Phản hồi chat';
+  static const is_being_showed_text = 'Đang hiển thị';
+  static const is_being_selling_text = 'Đang bán';
+  static const setup_user_title = 'Cài đặt tài khoản';
   static String accept_post_title(int total) => 'ĐANG HIỂN THỊ ($total)';
   static String pending_post_title(int total) => 'CHỜ DUYỆT ($total)';
   static String reject_post_title(int total) => 'BỊ TỪ CHỐI ($total)';

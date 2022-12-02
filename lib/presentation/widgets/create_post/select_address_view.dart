@@ -96,7 +96,7 @@ class _SelectAddressViewState extends State<SelectAddressView>
     return Scaffold(
       backgroundColor: AppColors.primaryContrastColor,
       appBar: CustomAppBar(
-        title: AppStrings.address_label_create_post_title,
+        title: AppStrings.address_label_create_title,
         background: AppColors.primaryBackgroundColor,
         leading: AppBackButton(
           icon: const SvgIcon(

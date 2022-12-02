@@ -192,6 +192,7 @@ class MyPostPage extends GetView<MyPostController> {
               onTap: (post) {
                 controller.routePostDetail(postModel: post);
               },
+              postType: PostType.pending,
             ),
         failure: (exception) => const SizedBox.shrink(),
         init: (_) => const LoadingScreen(),
@@ -206,7 +207,7 @@ class MyPostPage extends GetView<MyPostController> {
               onTap: (post) {
                 controller.routePostDetail(postModel: post);
               },
-              isReject: true,
+              postType: PostType.reject,
             ),
         failure: (exception) => const SizedBox.shrink(),
         init: (_) => const LoadingScreen(),

@@ -1,17 +1,29 @@
-import 'package:chomoi/app/services/auth_service.dart';
+import 'package:chomoi/data/dto/request/user/user_request_dto.dart';
 import 'package:chomoi/data/providers/network/api_provider.dart';
 import 'package:chomoi/data/providers/network/api_request_representable.dart';
+import 'package:dio/dio.dart';
 
-enum UserType { fetchUser }
+enum UserType { fetchUser, updateUser }
 
 class UserAPI implements APIRequestRepresentable {
   final UserType type;
   final String? userId;
+  final UserRequestDto? userRequestDto;
 
-  UserAPI._({required this.type, this.userId});
+  UserAPI._({
+    required this.type,
+    this.userId,
+    this.userRequestDto,
+  });
 
   UserAPI.fetchUser({String? userId})
       : this._(type: UserType.fetchUser, userId: userId);
+
+  UserAPI.updateUser({required UserRequestDto userRequestDto})
+      : this._(
+          type: UserType.updateUser,
+          userRequestDto: userRequestDto,
+        );
 
   @override
   String get endpoint => 'user';
@@ -21,6 +33,8 @@ class UserAPI implements APIRequestRepresentable {
     switch (type) {
       case UserType.fetchUser:
         return userId != null ? '/$userId' : '/';
+      case UserType.updateUser:
+        return '/update';
     }
   }
 
@@ -33,11 +47,23 @@ class UserAPI implements APIRequestRepresentable {
   Map<String, String>? get query => null;
 
   @override
-  Null get body => null;
+  dynamic get body {
+    switch (type) {
+      case UserType.updateUser:
+        return FormData.fromMap(userRequestDto!.toJson());
+      default:
+        return null;
+    }
+  }
 
   @override
   Future request() {
-    return APIProvider.instance.get(this);
+    switch (type) {
+      case UserType.updateUser:
+        return APIProvider.instance.patch(this);
+      default:
+        return APIProvider.instance.get(this);
+    }
   }
 
   @override

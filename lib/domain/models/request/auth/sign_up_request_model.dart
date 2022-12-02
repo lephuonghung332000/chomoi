@@ -9,8 +9,8 @@ class SignUpRequestModel with _$SignUpRequestModel {
     required String phone,
     required bool gender,
     required String address,
-    required String fullName,
-    required String birthDay,
+    required String fullname,
+    required String birthday,
     required String email,
     required String password,
   }) = _SignUpRequestModel;
@@ -20,8 +20,8 @@ class SignUpRequestModel with _$SignUpRequestModel {
         phone: '',
         gender: false,
         address: '',
-        fullName: '',
-        birthDay: '',
+        fullname: '',
+        birthday: '',
         email: '',
         password: '',
       );

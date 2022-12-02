@@ -186,9 +186,9 @@ class SignUpController extends GetxController {
       SignUpRequestModel(
         name: nameController.text,
         gender: genderController.text.gender,
-        birthDay: birthdayController.text,
+        birthday: birthdayController.text,
         password: passwordController.text,
-        fullName: '${familyNameController.text} ${nameController.text}',
+        fullname: '${familyNameController.text} ${nameController.text}',
         email: emailController.text,
         address:
             '${wardController.text}, ${districtController.text}, ${provinceController.text}',
@@ -217,20 +217,5 @@ class SignUpController extends GetxController {
     ).then(
       (value) => Get.offAllNamed(AppPages.mainPage.name),
     );
-  }
-
-  @override
-  void onClose() {
-    emailController.dispose();
-    passwordController.dispose();
-    nameController.dispose();
-    phoneController.dispose();
-    familyNameController.dispose();
-    genderController.dispose();
-    districtController.dispose();
-    provinceController.dispose();
-    birthdayController.dispose();
-    wardController.dispose();
-    super.onClose();
   }
 }

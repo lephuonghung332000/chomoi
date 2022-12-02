@@ -8,9 +8,9 @@ part of 'comment_request_dto.dart';
 
 CommentRequestDto _$CommentRequestDtoFromJson(Map<String, dynamic> json) =>
     CommentRequestDto(
-      content: json['content'] as String?,
-      postId: json['post_id'] as String?,
-      userId: json['user_id'] as String?,
+      content: json['content'] as String,
+      postId: json['post_id'] as String,
+      userId: json['user_id'] as String,
     );
 
 Map<String, dynamic> _$CommentRequestDtoToJson(CommentRequestDto instance) =>

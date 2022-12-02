@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chomoi/app/config/constant/app_constants.dart';
 import 'package:chomoi/app/config/resources/app_colors.dart';
 import 'package:chomoi/app/config/resources/app_textstyles.dart';
@@ -27,7 +28,7 @@ class CommentRow extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: AppConstant.iconAvatarBoxSize,
-              backgroundImage: NetworkImage(viewModel.avatar),
+              backgroundImage: CachedNetworkImageProvider(viewModel.avatar),
               backgroundColor: Colors.transparent,
             ),
             const HBox(15),

@@ -51,6 +51,17 @@ extension DateFormatEnumExt on DateFormatEnum {
   }
 }
 
+extension DateTimeConvert on String {
+  DateTime toDateTime(DateFormatEnum format) {
+    final dateFormat = DateFormat(format.string, Get.locale?.languageCode);
+    return dateFormat.parse(this);
+  }
+}
+
+extension TimeStamp on DateTime {
+  int toTimeStamp() => millisecondsSinceEpoch;
+}
+
 extension DateTimeToStringExt on DateTime {
   String localTimeZoneString(DateFormatEnum format) {
     final dateFormat = DateFormat(format.string, Get.locale?.languageCode);

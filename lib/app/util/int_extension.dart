@@ -8,4 +8,5 @@ extension IntExt on int {
   String get formatNumber {
     return NumberFormat.decimalPattern('vi').format(this);
   }
+
 }

@@ -104,7 +104,7 @@ class PostVerticalBox extends StatelessWidget {
                 if (viewModel.avatar.isNotEmpty)
                   CircleAvatar(
                     radius: AppConstant.iconAvatarPostSize,
-                    backgroundImage: NetworkImage(viewModel.avatar),
+                    backgroundImage: CachedNetworkImageProvider(viewModel.avatar),
                     backgroundColor: Colors.transparent,
                   )
                 else

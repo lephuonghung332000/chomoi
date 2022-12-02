@@ -1,14 +1,12 @@
 import 'package:chomoi/data/dto/request/auth/login_request_dto.dart';
 import 'package:chomoi/data/dto/request/auth/sign_up_request_dto.dart';
 import 'package:chomoi/data/dto/response/auth/login_information_dto.dart';
-import 'package:chomoi/data/dto/response/auth/logout_information_dto.dart';
 import 'package:chomoi/data/dto/response/auth/refresh_new_token_dto.dart';
 import 'package:chomoi/data/dto/response/auth/sign_up_information_dto.dart';
 import 'package:chomoi/data/providers/network/apis/auth_api.dart';
 import 'package:chomoi/domain/models/request/auth/login_request_model.dart';
 import 'package:chomoi/domain/models/request/auth/sign_up_request_model.dart';
 import 'package:chomoi/domain/models/response/auth/login_information_model.dart';
-import 'package:chomoi/domain/models/response/auth/logout_information_model.dart';
 import 'package:chomoi/domain/models/response/auth/refresh_new_token_model.dart';
 import 'package:chomoi/domain/models/response/auth/sign_up_information_model.dart';
 import 'package:chomoi/domain/repositories/auth/auth_repository.dart';
@@ -34,7 +32,8 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
                 LoginInformationDto.fromJson(response),
               ),
             ),
-          ).run();
+          )
+          .run();
 
   @override
   Future<Either<DioError, RefreshNewTokenModel>> refreshNewToken() => Task(
@@ -55,7 +54,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
           .run();
 
   @override
-  Future<Either<DioError, LogoutInformationModel>> logout() => Task(
+  Future<Either<DioError, Unit>> logout() => Task(
         () => AuthAPI.logout().request(),
       )
           .attempt()
@@ -65,9 +64,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
                 return l as DioError;
               },
             ).map(
-              (response) => LogoutInformationModel.fromDto(
-                LogoutInformationDto.fromJson(response),
-              ),
+              (_) => unit,
             ),
           )
           .run();

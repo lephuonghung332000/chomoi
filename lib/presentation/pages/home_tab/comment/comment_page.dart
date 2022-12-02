@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chomoi/app/config/constant/app_constants.dart';
 import 'package:chomoi/app/config/constant/app_strings.dart';
 import 'package:chomoi/app/config/resources/app_colors.dart';
@@ -101,7 +102,7 @@ class CommentPage extends GetView<CommentController> {
                   children: [
                     CircleAvatar(
                       radius: AppConstant.iconAvatarBoxSize,
-                      backgroundImage: NetworkImage(viewModel.myAvatar),
+                      backgroundImage: CachedNetworkImageProvider(viewModel.myAvatar),
                       backgroundColor: Colors.transparent,
                     ),
                     const HBox(10),

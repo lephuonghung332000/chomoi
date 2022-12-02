@@ -8,13 +8,13 @@ part of 'post_request_dto.dart';
 
 PostRequestDto _$PostRequestDtoFromJson(Map<String, dynamic> json) =>
     PostRequestDto(
-      title: json['title'] as String?,
-      brandId: json['brand_id'] as String?,
-      address: json['address'] as String?,
-      price: json['price'] as int?,
-      categoryId: json['category_id'] as String?,
-      userId: json['user_id'] as String?,
-      description: json['description'] as String?,
+      title: json['title'] as String,
+      brandId: json['brand_id'] as String,
+      address: json['address'] as String,
+      price: json['price'] as int,
+      categoryId: json['category_id'] as String,
+      userId: json['user_id'] as String,
+      description: json['description'] as String,
       files: (json['files'] as List<dynamic>)
           .map((e) =>
               const FileConverterSerialize().fromJson(e as MultipartFile))

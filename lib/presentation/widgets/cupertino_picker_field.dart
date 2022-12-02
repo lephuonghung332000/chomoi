@@ -1,5 +1,6 @@
 import 'package:chomoi/presentation/widgets/custom_cupertino_picker.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'input_field.dart';
 
@@ -11,6 +12,7 @@ class CupertinoPickerField<T> extends StatelessWidget {
   final TextEditingController controller;
   final bool canSelected;
   final Widget? suffixIcon;
+  final InputDecoration? decoration;
 
   const CupertinoPickerField({
     Key? key,
@@ -21,6 +23,7 @@ class CupertinoPickerField<T> extends StatelessWidget {
     required this.controller,
     this.canSelected = true,
     this.suffixIcon,
+    this.decoration,
   }) : super(key: key);
 
   @override
@@ -31,6 +34,7 @@ class CupertinoPickerField<T> extends StatelessWidget {
       readOnly: true,
       onTap: canSelected ? () => _showCupertinoPicker(context) : null,
       suffixIcon: suffixIcon,
+      decoration: decoration,
     );
   }
 
