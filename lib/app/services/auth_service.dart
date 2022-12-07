@@ -1,4 +1,5 @@
 import 'package:chomoi/app/config/constant/app_strings.dart';
+import 'package:chomoi/app/services/firebase_message_service.dart';
 import 'package:chomoi/domain/usecases/auth/logout_use_case.dart';
 import 'package:chomoi/domain/usecases/auth/refresh_new_token_use_case.dart';
 import 'package:chomoi/presentation/routes/app_pages.dart';
@@ -78,6 +79,7 @@ class AuthServiceImpl extends GetxService implements AuthService {
     result.fold(
       (e) {},
       (_) {
+        FirebaseMessageService.get.removeFCMTokenFromServer();
         Future<void>.delayed(const Duration(milliseconds: 1500), () {
           Get.offAllNamed(AppPages.loginPage.name);
         });
@@ -93,7 +95,7 @@ class AuthServiceImpl extends GetxService implements AuthService {
     result.fold(
       (e) async {
         await LoadingDialog.hide();
-
+        FirebaseMessageService.get.removeFCMTokenFromServer();
         Future<void>.delayed(const Duration(milliseconds: 1500), () {
           Get.offAllNamed(AppPages.loginPage.name);
         });
@@ -102,7 +104,7 @@ class AuthServiceImpl extends GetxService implements AuthService {
         await LoadingDialog.hide();
 
         isSuccess = true;
-        _accessToken = value.idToken;
+        storeToken(value.idToken);
       },
     );
     return isSuccess;

@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'package:chomoi/app/services/auth_service.dart';
+import 'package:chomoi/app/services/firebase_message_service.dart';
 import 'package:chomoi/domain/models/response/notification/notification_model.dart';
 import 'package:chomoi/domain/models/state/states.dart';
+import 'package:chomoi/domain/usecases/notification/fetch_notification_use_case.dart';
+import 'package:chomoi/domain/usecases/notification/get_unread_notification_use_case.dart';
+import 'package:chomoi/domain/usecases/notification/update_all_new_notification_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -21,9 +25,18 @@ abstract class NotificationsService {
 
   void setInNotificationTab(bool value);
 
+  RxBool get isLoadingNotification;
+
   RxInt get notificationsBadge;
 
-  Future<void> getNotifications({bool isLoadScreen = false});
+  RxInt get notificationPage;
+
+  Future<void> getNotifications({
+    bool isLoadScreen = false,
+    int page = 1,
+  });
+
+  Future<void> updateAllReadNotification();
 
   States<List<NotificationModel>> get notificationState;
 
@@ -31,32 +44,70 @@ abstract class NotificationsService {
 
   Worker addNotificationsBadgeListener(void Function(int value) listener);
 
-  Worker addNotificationsListener(
+  Worker addNotificationsStateListener(
       void Function(States<List<NotificationModel>> value) listener);
+
+  Worker addLoadingNotificationListener(void Function(bool value) listener);
+
+  Worker addNotificationsListener(
+      void Function(List<NotificationModel> value) listener);
+
+  Worker addNotificationsPageListener(void Function(int value) listener);
+
+  late RxList<NotificationModel> notifications;
 
   void clear();
 }
 
 class NotificationsServiceImpl extends GetxService
     implements NotificationsService {
-  late GetUserNotificationsUseCase getUserNotificationsUseCase;
+  late final FetchNotificationUseCase fetchNotificationUseCase;
+  late final GetUnreadNotificationUseCase getUnreadNotificationUseCase;
+  late final UpdateAllNewNotificationUseCase updateAllNewNotificationUseCase;
+  int _total = 0;
 
   @override
-  States<List<NotificationModel>> get notificationState => _notificationState.value;
+  RxInt notificationPage = 1.obs;
+
+  @override
+  final RxBool isLoadingNotification = false.obs;
+
+  @override
+  Worker addNotificationsPageListener(void Function(int value) listener) {
+    return ever<int>(notificationPage, listener);
+  }
+
+  @override
+  Worker addNotificationsListener(
+      ValueChanged<List<NotificationModel>> listener) {
+    return ever<List<NotificationModel>>(notifications, listener);
+  }
+
+  @override
+  States<List<NotificationModel>> get notificationState =>
+      _notificationState.value;
 
   final _notificationState = const States<List<NotificationModel>>.init(
     entity: [],
   ).obs;
 
   NotificationsServiceImpl({
-    GetUserNotificationsUseCase? getUserNotificationsUseCase,
+    FetchNotificationUseCase? fetchNotificationUseCase,
+    GetUnreadNotificationUseCase? getUnreadNotificationUseCase,
+    UpdateAllNewNotificationUseCase? updateAllNewNotificationUseCase,
   }) {
-    this.getUserNotificationsUseCase =
-        getUserNotificationsUseCase ?? GetUserNotificationsUseCaseImpl();
+    this.fetchNotificationUseCase =
+        fetchNotificationUseCase ?? FetchNotificationUseCase();
+    this.getUnreadNotificationUseCase =
+        getUnreadNotificationUseCase ?? GetUnreadNotificationUseCase();
+    this.updateAllNewNotificationUseCase =
+        updateAllNewNotificationUseCase ?? UpdateAllNewNotificationUseCase();
   }
 
-  Worker? _demoModeListener;
   Worker? _notificationBadgeListener;
+
+  @override
+  RxList<NotificationModel> notifications = RxList();
 
   @override
   void onReady() {
@@ -69,53 +120,83 @@ class NotificationsServiceImpl extends GetxService
   }
 
   @override
+  Worker addLoadingNotificationListener(void Function(bool value) listener) {
+    return ever<bool>(isLoadingNotification, listener);
+  }
+
+  @override
   void onClose() {
-    _demoModeListener?.dispose();
     _notificationBadgeListener?.dispose();
 
     super.onClose();
   }
 
+  void clearNotifications(){
+    _total = 0;
+    notificationPage.value = 1;
+    _notificationState.value = States.success(entity: notifications);
+    notifications.clear();
+  }
+
   @override
-  Future<void> getNotifications({bool isLoadScreen = false}) async {
+  Future<void> getNotifications({
+    bool isLoadScreen = false,
+    int page = 1,
+  }) async {
     if (!AuthService.get.isLoggedIn()) {
       return;
+    }
+
+    // clear when reload notifications screen
+    if (page == 1) {
+      clearNotifications();
+    }
+
+    if (_total > 0 && notifications.length >= _total) {
+      return;
+    }
+
+    if (isLoadingNotification.value) {
+      return;
+    }
+
+    if (isLoadScreen) {
+      isLoadingNotification.value = true;
     }
 
     // After fetching, check if user is in notification tab then set badge to 0.
     // If user is in another screen then count unread notifications and set to badge
     // If in notification tab, we must change screen's state
-    if (isLoadScreen) {
-      setNotificationsScreenState(NotificationsScreenState.loading);
+    if (isLoadScreen && page == 1) {
+      _notificationState.value = const States.loading();
     }
-    final result = await getUserNotificationsUseCase.getUserNotifications();
-    result.when(success: (success) async {
-      if (success == null || success.isEmpty) {
-        notifications.value = [];
-        if (isLoadScreen) {
-          setNotificationsScreenState(NotificationsScreenState.empty);
-        }
-      } else {
-        notifications.value = success;
-        if (isLoadScreen) {
-          setNotificationsScreenState(NotificationsScreenState.success);
-        }
+    final result = await fetchNotificationUseCase.call(page);
+    result.fold((failure) {
+      if (page == 1) {
+        _notificationState.value = States.failure(failure);
       }
+    }, (value) async {
+      notificationPage.value = page;
+      _total = value.total;
+      notifications.addAll(value.notifications);
+      _notificationState.value = States.success(entity: notifications);
+      _notificationState.refresh();
 
-      // count badge notification if we are not in notification tab
       if (!inNotificationTab.value) {
-        final count = getUserNotificationsUseCase
-            .getUnreadNotificationsCount(notifications.toList());
-        _setNotificationsBadge(count);
-      }
-    }, failure: (error) {
-      if (error.dioError?.isDebouncerCancel ?? false) {
-        return;
-      }
-      if (isLoadScreen) {
-        setNotificationsScreenState(NotificationsScreenState.error);
+        final resultCount = await getUnreadNotificationUseCase.call();
+        resultCount.fold((failure) {
+          if (page == 1) {
+            _notificationState.value = States.failure(failure);
+          }
+        }, (value) async {
+          _setNotificationsBadge(value.total);
+          _updateBadgeCount(value.total);
+        });
       }
     });
+    if (isLoadScreen) {
+      isLoadingNotification.value = false;
+    }
   }
 
   @override
@@ -128,9 +209,6 @@ class NotificationsServiceImpl extends GetxService
   final RxInt notificationsBadge = 0.obs;
 
   @override
-  RxList<UserNotificationResponseModel> notifications = RxList();
-
-  @override
   Worker addOpenedNotificationsTabListener(void Function(bool value) listener) {
     return ever<bool>(isOpenedNotificationsTab, listener);
   }
@@ -141,22 +219,16 @@ class NotificationsServiceImpl extends GetxService
   }
 
   @override
-  Worker addNotificationsListener(
-      ValueChanged<List<UserNotificationResponseModel>> listener) {
-    return ever<List<UserNotificationResponseModel>>(notifications, listener);
-  }
-
-  @override
-  Worker addNotificationsScreenStateListener(
-      void Function(NotificationsScreenState value) listener) {
-    return ever<NotificationsScreenState>(state, listener);
+  Worker addNotificationsStateListener(
+      ValueChanged<States<List<NotificationModel>>> listener) {
+    return ever<States<List<NotificationModel>>>(_notificationState, listener);
   }
 
   @override
   void refreshNotificationsTabIfPossible() {
-    if (!NotificationsService.get.inNotificationTab.value) {
-      NotificationsService.get.setIsOpenedNotification(false);
-      NotificationsService.get.getNotifications(isLoadScreen: false);
+    if (!inNotificationTab.value) {
+      setIsOpenedNotification(false);
+      getNotifications(isLoadScreen: false);
     }
   }
 
@@ -177,6 +249,9 @@ class NotificationsServiceImpl extends GetxService
   void clear() {
     setIsOpenedNotification(false);
     notifications.clear();
+    _notificationState.value = const States<List<NotificationModel>>.init(
+      entity: [],
+    );
     _setNotificationsBadge(0);
   }
 
@@ -204,5 +279,10 @@ class NotificationsServiceImpl extends GetxService
     if (await FlutterAppBadger.isAppBadgeSupported()) {
       FlutterAppBadger.removeBadge();
     }
+  }
+
+  @override
+  Future<void> updateAllReadNotification() async {
+    await updateAllNewNotificationUseCase.call();
   }
 }

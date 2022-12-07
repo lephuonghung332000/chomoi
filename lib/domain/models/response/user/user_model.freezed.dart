@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_model.dart';
 
@@ -12,44 +12,7 @@ part of 'user_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$UserModelTearOff {
-  const _$UserModelTearOff();
-
-  _UserModel call(
-      {required String id,
-      required String address,
-      required String avatar,
-      required int birthday,
-      required String email,
-      required List<String> fcmTokens,
-      required String fullName,
-      required bool gender,
-      required String name,
-      required String phone,
-      required String role,
-      required double createAt}) {
-    return _UserModel(
-      id: id,
-      address: address,
-      avatar: avatar,
-      birthday: birthday,
-      email: email,
-      fcmTokens: fcmTokens,
-      fullName: fullName,
-      gender: gender,
-      name: name,
-      phone: phone,
-      role: role,
-      createAt: createAt,
-    );
-  }
-}
-
-/// @nodoc
-const $UserModel = _$UserModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$UserModel {
@@ -74,7 +37,8 @@ mixin _$UserModel {
 /// @nodoc
 abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
-      _$UserModelCopyWithImpl<$Res>;
+      _$UserModelCopyWithImpl<$Res, UserModel>;
+  @useResult
   $Res call(
       {String id,
       String address,
@@ -91,87 +55,91 @@ abstract class $UserModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserModelCopyWithImpl<$Res> implements $UserModelCopyWith<$Res> {
+class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
+    implements $UserModelCopyWith<$Res> {
   _$UserModelCopyWithImpl(this._value, this._then);
 
-  final UserModel _value;
   // ignore: unused_field
-  final $Res Function(UserModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? address = freezed,
-    Object? avatar = freezed,
-    Object? birthday = freezed,
-    Object? email = freezed,
-    Object? fcmTokens = freezed,
-    Object? fullName = freezed,
-    Object? gender = freezed,
-    Object? name = freezed,
-    Object? phone = freezed,
-    Object? role = freezed,
-    Object? createAt = freezed,
+    Object? id = null,
+    Object? address = null,
+    Object? avatar = null,
+    Object? birthday = null,
+    Object? email = null,
+    Object? fcmTokens = null,
+    Object? fullName = null,
+    Object? gender = null,
+    Object? name = null,
+    Object? phone = null,
+    Object? role = null,
+    Object? createAt = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      avatar: avatar == freezed
+      avatar: null == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String,
-      birthday: birthday == freezed
+      birthday: null == birthday
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
               as int,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      fcmTokens: fcmTokens == freezed
+      fcmTokens: null == fcmTokens
           ? _value.fcmTokens
           : fcmTokens // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      fullName: fullName == freezed
+      fullName: null == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String,
-      gender: gender == freezed
+      gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as bool,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      phone: phone == freezed
+      phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      role: role == freezed
+      role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String,
-      createAt: createAt == freezed
+      createAt: null == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
               as double,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
-  factory _$UserModelCopyWith(
-          _UserModel value, $Res Function(_UserModel) then) =
-      __$UserModelCopyWithImpl<$Res>;
+abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
+  factory _$$_UserModelCopyWith(
+          _$_UserModel value, $Res Function(_$_UserModel) then) =
+      __$$_UserModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String address,
@@ -188,75 +156,75 @@ abstract class _$UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$UserModelCopyWithImpl<$Res> extends _$UserModelCopyWithImpl<$Res>
-    implements _$UserModelCopyWith<$Res> {
-  __$UserModelCopyWithImpl(_UserModel _value, $Res Function(_UserModel) _then)
-      : super(_value, (v) => _then(v as _UserModel));
+class __$$_UserModelCopyWithImpl<$Res>
+    extends _$UserModelCopyWithImpl<$Res, _$_UserModel>
+    implements _$$_UserModelCopyWith<$Res> {
+  __$$_UserModelCopyWithImpl(
+      _$_UserModel _value, $Res Function(_$_UserModel) _then)
+      : super(_value, _then);
 
-  @override
-  _UserModel get _value => super._value as _UserModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? address = freezed,
-    Object? avatar = freezed,
-    Object? birthday = freezed,
-    Object? email = freezed,
-    Object? fcmTokens = freezed,
-    Object? fullName = freezed,
-    Object? gender = freezed,
-    Object? name = freezed,
-    Object? phone = freezed,
-    Object? role = freezed,
-    Object? createAt = freezed,
+    Object? id = null,
+    Object? address = null,
+    Object? avatar = null,
+    Object? birthday = null,
+    Object? email = null,
+    Object? fcmTokens = null,
+    Object? fullName = null,
+    Object? gender = null,
+    Object? name = null,
+    Object? phone = null,
+    Object? role = null,
+    Object? createAt = null,
   }) {
-    return _then(_UserModel(
-      id: id == freezed
+    return _then(_$_UserModel(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      avatar: avatar == freezed
+      avatar: null == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String,
-      birthday: birthday == freezed
+      birthday: null == birthday
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
               as int,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      fcmTokens: fcmTokens == freezed
-          ? _value.fcmTokens
+      fcmTokens: null == fcmTokens
+          ? _value._fcmTokens
           : fcmTokens // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      fullName: fullName == freezed
+      fullName: null == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String,
-      gender: gender == freezed
+      gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as bool,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      phone: phone == freezed
+      phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      role: role == freezed
+      role: null == role
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as String,
-      createAt: createAt == freezed
+      createAt: null == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
               as double,
@@ -273,13 +241,14 @@ class _$_UserModel implements _UserModel {
       required this.avatar,
       required this.birthday,
       required this.email,
-      required this.fcmTokens,
+      required final List<String> fcmTokens,
       required this.fullName,
       required this.gender,
       required this.name,
       required this.phone,
       required this.role,
-      required this.createAt});
+      required this.createAt})
+      : _fcmTokens = fcmTokens;
 
   @override
   final String id;
@@ -291,8 +260,14 @@ class _$_UserModel implements _UserModel {
   final int birthday;
   @override
   final String email;
+  final List<String> _fcmTokens;
   @override
-  final List<String> fcmTokens;
+  List<String> get fcmTokens {
+    if (_fcmTokens is EqualUnmodifiableListView) return _fcmTokens;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_fcmTokens);
+  }
+
   @override
   final String fullName;
   @override
@@ -315,57 +290,62 @@ class _$_UserModel implements _UserModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UserModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.address, address) &&
-            const DeepCollectionEquality().equals(other.avatar, avatar) &&
-            const DeepCollectionEquality().equals(other.birthday, birthday) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.fcmTokens, fcmTokens) &&
-            const DeepCollectionEquality().equals(other.fullName, fullName) &&
-            const DeepCollectionEquality().equals(other.gender, gender) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.phone, phone) &&
-            const DeepCollectionEquality().equals(other.role, role) &&
-            const DeepCollectionEquality().equals(other.createAt, createAt));
+            other is _$_UserModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.avatar, avatar) || other.avatar == avatar) &&
+            (identical(other.birthday, birthday) ||
+                other.birthday == birthday) &&
+            (identical(other.email, email) || other.email == email) &&
+            const DeepCollectionEquality()
+                .equals(other._fcmTokens, _fcmTokens) &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.createAt, createAt) ||
+                other.createAt == createAt));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(address),
-      const DeepCollectionEquality().hash(avatar),
-      const DeepCollectionEquality().hash(birthday),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(fcmTokens),
-      const DeepCollectionEquality().hash(fullName),
-      const DeepCollectionEquality().hash(gender),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(phone),
-      const DeepCollectionEquality().hash(role),
-      const DeepCollectionEquality().hash(createAt));
+      id,
+      address,
+      avatar,
+      birthday,
+      email,
+      const DeepCollectionEquality().hash(_fcmTokens),
+      fullName,
+      gender,
+      name,
+      phone,
+      role,
+      createAt);
 
   @JsonKey(ignore: true)
   @override
-  _$UserModelCopyWith<_UserModel> get copyWith =>
-      __$UserModelCopyWithImpl<_UserModel>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_UserModelCopyWith<_$_UserModel> get copyWith =>
+      __$$_UserModelCopyWithImpl<_$_UserModel>(this, _$identity);
 }
 
 abstract class _UserModel implements UserModel {
   factory _UserModel(
-      {required String id,
-      required String address,
-      required String avatar,
-      required int birthday,
-      required String email,
-      required List<String> fcmTokens,
-      required String fullName,
-      required bool gender,
-      required String name,
-      required String phone,
-      required String role,
-      required double createAt}) = _$_UserModel;
+      {required final String id,
+      required final String address,
+      required final String avatar,
+      required final int birthday,
+      required final String email,
+      required final List<String> fcmTokens,
+      required final String fullName,
+      required final bool gender,
+      required final String name,
+      required final String phone,
+      required final String role,
+      required final double createAt}) = _$_UserModel;
 
   @override
   String get id;
@@ -393,6 +373,6 @@ abstract class _UserModel implements UserModel {
   double get createAt;
   @override
   @JsonKey(ignore: true)
-  _$UserModelCopyWith<_UserModel> get copyWith =>
+  _$$_UserModelCopyWith<_$_UserModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

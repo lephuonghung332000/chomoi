@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'sign_up_request_model.dart';
 
@@ -12,36 +12,7 @@ part of 'sign_up_request_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$SignUpRequestModelTearOff {
-  const _$SignUpRequestModelTearOff();
-
-  _SignUpRequestModel call(
-      {required String name,
-      required String phone,
-      required bool gender,
-      required String address,
-      required String fullname,
-      required String birthday,
-      required String email,
-      required String password}) {
-    return _SignUpRequestModel(
-      name: name,
-      phone: phone,
-      gender: gender,
-      address: address,
-      fullname: fullname,
-      birthday: birthday,
-      email: email,
-      password: password,
-    );
-  }
-}
-
-/// @nodoc
-const $SignUpRequestModel = _$SignUpRequestModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$SignUpRequestModel {
@@ -63,7 +34,8 @@ mixin _$SignUpRequestModel {
 abstract class $SignUpRequestModelCopyWith<$Res> {
   factory $SignUpRequestModelCopyWith(
           SignUpRequestModel value, $Res Function(SignUpRequestModel) then) =
-      _$SignUpRequestModelCopyWithImpl<$Res>;
+      _$SignUpRequestModelCopyWithImpl<$Res, SignUpRequestModel>;
+  @useResult
   $Res call(
       {String name,
       String phone,
@@ -76,69 +48,72 @@ abstract class $SignUpRequestModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SignUpRequestModelCopyWithImpl<$Res>
+class _$SignUpRequestModelCopyWithImpl<$Res, $Val extends SignUpRequestModel>
     implements $SignUpRequestModelCopyWith<$Res> {
   _$SignUpRequestModelCopyWithImpl(this._value, this._then);
 
-  final SignUpRequestModel _value;
   // ignore: unused_field
-  final $Res Function(SignUpRequestModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? phone = freezed,
-    Object? gender = freezed,
-    Object? address = freezed,
-    Object? fullname = freezed,
-    Object? birthday = freezed,
-    Object? email = freezed,
-    Object? password = freezed,
+    Object? name = null,
+    Object? phone = null,
+    Object? gender = null,
+    Object? address = null,
+    Object? fullname = null,
+    Object? birthday = null,
+    Object? email = null,
+    Object? password = null,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      phone: phone == freezed
+      phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      gender: gender == freezed
+      gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as bool,
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      fullname: fullname == freezed
+      fullname: null == fullname
           ? _value.fullname
           : fullname // ignore: cast_nullable_to_non_nullable
               as String,
-      birthday: birthday == freezed
+      birthday: null == birthday
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      password: password == freezed
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$SignUpRequestModelCopyWith<$Res>
+abstract class _$$_SignUpRequestModelCopyWith<$Res>
     implements $SignUpRequestModelCopyWith<$Res> {
-  factory _$SignUpRequestModelCopyWith(
-          _SignUpRequestModel value, $Res Function(_SignUpRequestModel) then) =
-      __$SignUpRequestModelCopyWithImpl<$Res>;
+  factory _$$_SignUpRequestModelCopyWith(_$_SignUpRequestModel value,
+          $Res Function(_$_SignUpRequestModel) then) =
+      __$$_SignUpRequestModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String name,
       String phone,
@@ -151,57 +126,55 @@ abstract class _$SignUpRequestModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$SignUpRequestModelCopyWithImpl<$Res>
-    extends _$SignUpRequestModelCopyWithImpl<$Res>
-    implements _$SignUpRequestModelCopyWith<$Res> {
-  __$SignUpRequestModelCopyWithImpl(
-      _SignUpRequestModel _value, $Res Function(_SignUpRequestModel) _then)
-      : super(_value, (v) => _then(v as _SignUpRequestModel));
+class __$$_SignUpRequestModelCopyWithImpl<$Res>
+    extends _$SignUpRequestModelCopyWithImpl<$Res, _$_SignUpRequestModel>
+    implements _$$_SignUpRequestModelCopyWith<$Res> {
+  __$$_SignUpRequestModelCopyWithImpl(
+      _$_SignUpRequestModel _value, $Res Function(_$_SignUpRequestModel) _then)
+      : super(_value, _then);
 
-  @override
-  _SignUpRequestModel get _value => super._value as _SignUpRequestModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? phone = freezed,
-    Object? gender = freezed,
-    Object? address = freezed,
-    Object? fullname = freezed,
-    Object? birthday = freezed,
-    Object? email = freezed,
-    Object? password = freezed,
+    Object? name = null,
+    Object? phone = null,
+    Object? gender = null,
+    Object? address = null,
+    Object? fullname = null,
+    Object? birthday = null,
+    Object? email = null,
+    Object? password = null,
   }) {
-    return _then(_SignUpRequestModel(
-      name: name == freezed
+    return _then(_$_SignUpRequestModel(
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      phone: phone == freezed
+      phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      gender: gender == freezed
+      gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as bool,
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      fullname: fullname == freezed
+      fullname: null == fullname
           ? _value.fullname
           : fullname // ignore: cast_nullable_to_non_nullable
               as String,
-      birthday: birthday == freezed
+      birthday: null == birthday
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
               as String,
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      password: password == freezed
+      password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
@@ -248,45 +221,42 @@ class _$_SignUpRequestModel implements _SignUpRequestModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _SignUpRequestModel &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.phone, phone) &&
-            const DeepCollectionEquality().equals(other.gender, gender) &&
-            const DeepCollectionEquality().equals(other.address, address) &&
-            const DeepCollectionEquality().equals(other.fullname, fullname) &&
-            const DeepCollectionEquality().equals(other.birthday, birthday) &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.password, password));
+            other is _$_SignUpRequestModel &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.fullname, fullname) ||
+                other.fullname == fullname) &&
+            (identical(other.birthday, birthday) ||
+                other.birthday == birthday) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(phone),
-      const DeepCollectionEquality().hash(gender),
-      const DeepCollectionEquality().hash(address),
-      const DeepCollectionEquality().hash(fullname),
-      const DeepCollectionEquality().hash(birthday),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(password));
+  int get hashCode => Object.hash(runtimeType, name, phone, gender, address,
+      fullname, birthday, email, password);
 
   @JsonKey(ignore: true)
   @override
-  _$SignUpRequestModelCopyWith<_SignUpRequestModel> get copyWith =>
-      __$SignUpRequestModelCopyWithImpl<_SignUpRequestModel>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_SignUpRequestModelCopyWith<_$_SignUpRequestModel> get copyWith =>
+      __$$_SignUpRequestModelCopyWithImpl<_$_SignUpRequestModel>(
+          this, _$identity);
 }
 
 abstract class _SignUpRequestModel implements SignUpRequestModel {
   factory _SignUpRequestModel(
-      {required String name,
-      required String phone,
-      required bool gender,
-      required String address,
-      required String fullname,
-      required String birthday,
-      required String email,
-      required String password}) = _$_SignUpRequestModel;
+      {required final String name,
+      required final String phone,
+      required final bool gender,
+      required final String address,
+      required final String fullname,
+      required final String birthday,
+      required final String email,
+      required final String password}) = _$_SignUpRequestModel;
 
   @override
   String get name;
@@ -306,6 +276,6 @@ abstract class _SignUpRequestModel implements SignUpRequestModel {
   String get password;
   @override
   @JsonKey(ignore: true)
-  _$SignUpRequestModelCopyWith<_SignUpRequestModel> get copyWith =>
+  _$$_SignUpRequestModelCopyWith<_$_SignUpRequestModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,4 +1,5 @@
 import 'package:chomoi/app/services/auth_service.dart';
+import 'package:chomoi/app/services/firebase_message_service.dart';
 import 'package:chomoi/domain/usecases/auth/refresh_new_token_use_case.dart';
 import 'package:chomoi/presentation/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,6 +34,7 @@ class SplashController extends GetxController {
     final result = await refreshNewTokenUseCase.call();
     result.fold(
       (e) {
+        FirebaseMessageService.get.removeFCMTokenFromServer();
         _routeToLogin(isRemovedToken: true);
       },
       (value) {

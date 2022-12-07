@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "257214432280",
+    "firebase_url": "https://advertising-classified-default-rtdb.firebaseio.com",
+    "project_id": "advertising-classified",
+    "storage_bucket": "advertising-classified.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257214432280:android:ee9c43f60afe9751e7af6d",
+        "android_client_info": {
+          "package_name": "com.example.chomoi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "257214432280-52tikc2tjbrfq9h28b0g9m7vgq6t5rlq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbGdjPUDTWkcUqS_Pn7K2rUA8-eUXAPB8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "257214432280-52tikc2tjbrfq9h28b0g9m7vgq6t5rlq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

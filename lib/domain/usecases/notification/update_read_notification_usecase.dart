@@ -5,16 +5,17 @@ import 'package:chomoi/domain/repositories/notification/notification_repository.
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-class UpdateFcmTokenUseCase
-    extends ParamUseCase<Either<DioError, Unit>, FcmTokenRequestModel> {
+class UpdateReadNotificationUseCase
+    extends ParamUseCase<Either<DioError, Unit>, String> {
   late final NotificationRepository _repo;
 
-  UpdateFcmTokenUseCase({NotificationRepository? notificationRepository}) {
+  UpdateReadNotificationUseCase(
+      {NotificationRepository? notificationRepository}) {
     _repo = notificationRepository ?? NotificationRepositoryImpl();
   }
 
   @override
   Future<Either<DioError, Unit>> call(params) {
-    return _repo.updateFcmToken(params);
+    return _repo.updateRead(notificationId: params);
   }
 }

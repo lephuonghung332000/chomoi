@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'brand_model.dart';
 
@@ -12,24 +12,7 @@ part of 'brand_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$BrandModelTearOff {
-  const _$BrandModelTearOff();
-
-  _BrandModel call(
-      {required String id, required String name, required String image}) {
-    return _BrandModel(
-      id: id,
-      name: name,
-      image: image,
-    );
-  }
-}
-
-/// @nodoc
-const $BrandModel = _$BrandModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$BrandModel {
@@ -46,76 +29,81 @@ mixin _$BrandModel {
 abstract class $BrandModelCopyWith<$Res> {
   factory $BrandModelCopyWith(
           BrandModel value, $Res Function(BrandModel) then) =
-      _$BrandModelCopyWithImpl<$Res>;
+      _$BrandModelCopyWithImpl<$Res, BrandModel>;
+  @useResult
   $Res call({String id, String name, String image});
 }
 
 /// @nodoc
-class _$BrandModelCopyWithImpl<$Res> implements $BrandModelCopyWith<$Res> {
+class _$BrandModelCopyWithImpl<$Res, $Val extends BrandModel>
+    implements $BrandModelCopyWith<$Res> {
   _$BrandModelCopyWithImpl(this._value, this._then);
 
-  final BrandModel _value;
   // ignore: unused_field
-  final $Res Function(BrandModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? image = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? image = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      image: image == freezed
+      image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$BrandModelCopyWith<$Res> implements $BrandModelCopyWith<$Res> {
-  factory _$BrandModelCopyWith(
-          _BrandModel value, $Res Function(_BrandModel) then) =
-      __$BrandModelCopyWithImpl<$Res>;
+abstract class _$$_BrandModelCopyWith<$Res>
+    implements $BrandModelCopyWith<$Res> {
+  factory _$$_BrandModelCopyWith(
+          _$_BrandModel value, $Res Function(_$_BrandModel) then) =
+      __$$_BrandModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String id, String name, String image});
 }
 
 /// @nodoc
-class __$BrandModelCopyWithImpl<$Res> extends _$BrandModelCopyWithImpl<$Res>
-    implements _$BrandModelCopyWith<$Res> {
-  __$BrandModelCopyWithImpl(
-      _BrandModel _value, $Res Function(_BrandModel) _then)
-      : super(_value, (v) => _then(v as _BrandModel));
+class __$$_BrandModelCopyWithImpl<$Res>
+    extends _$BrandModelCopyWithImpl<$Res, _$_BrandModel>
+    implements _$$_BrandModelCopyWith<$Res> {
+  __$$_BrandModelCopyWithImpl(
+      _$_BrandModel _value, $Res Function(_$_BrandModel) _then)
+      : super(_value, _then);
 
-  @override
-  _BrandModel get _value => super._value as _BrandModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? image = freezed,
+    Object? id = null,
+    Object? name = null,
+    Object? image = null,
   }) {
-    return _then(_BrandModel(
-      id: id == freezed
+    return _then(_$_BrandModel(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      image: image == freezed
+      image: null == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
               as String,
@@ -144,30 +132,27 @@ class _$_BrandModel implements _BrandModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _BrandModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.image, image));
+            other is _$_BrandModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.image, image) || other.image == image));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(image));
+  int get hashCode => Object.hash(runtimeType, id, name, image);
 
   @JsonKey(ignore: true)
   @override
-  _$BrandModelCopyWith<_BrandModel> get copyWith =>
-      __$BrandModelCopyWithImpl<_BrandModel>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_BrandModelCopyWith<_$_BrandModel> get copyWith =>
+      __$$_BrandModelCopyWithImpl<_$_BrandModel>(this, _$identity);
 }
 
 abstract class _BrandModel implements BrandModel {
   factory _BrandModel(
-      {required String id,
-      required String name,
-      required String image}) = _$_BrandModel;
+      {required final String id,
+      required final String name,
+      required final String image}) = _$_BrandModel;
 
   @override
   String get id;
@@ -177,6 +162,6 @@ abstract class _BrandModel implements BrandModel {
   String get image;
   @override
   @JsonKey(ignore: true)
-  _$BrandModelCopyWith<_BrandModel> get copyWith =>
+  _$$_BrandModelCopyWith<_$_BrandModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

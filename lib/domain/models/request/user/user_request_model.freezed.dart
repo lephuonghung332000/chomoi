@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_request_model.dart';
 
@@ -12,36 +12,7 @@ part of 'user_request_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$UserRequestModelTearOff {
-  const _$UserRequestModelTearOff();
-
-  _UserRequestModel call(
-      {required String email,
-      required String name,
-      required String phone,
-      required String birthday,
-      required String fullname,
-      required String address,
-      required bool gender,
-      MultipartFile? file}) {
-    return _UserRequestModel(
-      email: email,
-      name: name,
-      phone: phone,
-      birthday: birthday,
-      fullname: fullname,
-      address: address,
-      gender: gender,
-      file: file,
-    );
-  }
-}
-
-/// @nodoc
-const $UserRequestModel = _$UserRequestModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$UserRequestModel {
@@ -63,7 +34,8 @@ mixin _$UserRequestModel {
 abstract class $UserRequestModelCopyWith<$Res> {
   factory $UserRequestModelCopyWith(
           UserRequestModel value, $Res Function(UserRequestModel) then) =
-      _$UserRequestModelCopyWithImpl<$Res>;
+      _$UserRequestModelCopyWithImpl<$Res, UserRequestModel>;
+  @useResult
   $Res call(
       {String email,
       String name,
@@ -76,69 +48,72 @@ abstract class $UserRequestModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UserRequestModelCopyWithImpl<$Res>
+class _$UserRequestModelCopyWithImpl<$Res, $Val extends UserRequestModel>
     implements $UserRequestModelCopyWith<$Res> {
   _$UserRequestModelCopyWithImpl(this._value, this._then);
 
-  final UserRequestModel _value;
   // ignore: unused_field
-  final $Res Function(UserRequestModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = freezed,
-    Object? name = freezed,
-    Object? phone = freezed,
-    Object? birthday = freezed,
-    Object? fullname = freezed,
-    Object? address = freezed,
-    Object? gender = freezed,
+    Object? email = null,
+    Object? name = null,
+    Object? phone = null,
+    Object? birthday = null,
+    Object? fullname = null,
+    Object? address = null,
+    Object? gender = null,
     Object? file = freezed,
   }) {
     return _then(_value.copyWith(
-      email: email == freezed
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      phone: phone == freezed
+      phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      birthday: birthday == freezed
+      birthday: null == birthday
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
               as String,
-      fullname: fullname == freezed
+      fullname: null == fullname
           ? _value.fullname
           : fullname // ignore: cast_nullable_to_non_nullable
               as String,
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      gender: gender == freezed
+      gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as bool,
-      file: file == freezed
+      file: freezed == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MultipartFile?,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$UserRequestModelCopyWith<$Res>
+abstract class _$$_UserRequestModelCopyWith<$Res>
     implements $UserRequestModelCopyWith<$Res> {
-  factory _$UserRequestModelCopyWith(
-          _UserRequestModel value, $Res Function(_UserRequestModel) then) =
-      __$UserRequestModelCopyWithImpl<$Res>;
+  factory _$$_UserRequestModelCopyWith(
+          _$_UserRequestModel value, $Res Function(_$_UserRequestModel) then) =
+      __$$_UserRequestModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String email,
       String name,
@@ -151,57 +126,55 @@ abstract class _$UserRequestModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$UserRequestModelCopyWithImpl<$Res>
-    extends _$UserRequestModelCopyWithImpl<$Res>
-    implements _$UserRequestModelCopyWith<$Res> {
-  __$UserRequestModelCopyWithImpl(
-      _UserRequestModel _value, $Res Function(_UserRequestModel) _then)
-      : super(_value, (v) => _then(v as _UserRequestModel));
+class __$$_UserRequestModelCopyWithImpl<$Res>
+    extends _$UserRequestModelCopyWithImpl<$Res, _$_UserRequestModel>
+    implements _$$_UserRequestModelCopyWith<$Res> {
+  __$$_UserRequestModelCopyWithImpl(
+      _$_UserRequestModel _value, $Res Function(_$_UserRequestModel) _then)
+      : super(_value, _then);
 
-  @override
-  _UserRequestModel get _value => super._value as _UserRequestModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = freezed,
-    Object? name = freezed,
-    Object? phone = freezed,
-    Object? birthday = freezed,
-    Object? fullname = freezed,
-    Object? address = freezed,
-    Object? gender = freezed,
+    Object? email = null,
+    Object? name = null,
+    Object? phone = null,
+    Object? birthday = null,
+    Object? fullname = null,
+    Object? address = null,
+    Object? gender = null,
     Object? file = freezed,
   }) {
-    return _then(_UserRequestModel(
-      email: email == freezed
+    return _then(_$_UserRequestModel(
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      phone: phone == freezed
+      phone: null == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
               as String,
-      birthday: birthday == freezed
+      birthday: null == birthday
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
               as String,
-      fullname: fullname == freezed
+      fullname: null == fullname
           ? _value.fullname
           : fullname // ignore: cast_nullable_to_non_nullable
               as String,
-      address: address == freezed
+      address: null == address
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String,
-      gender: gender == freezed
+      gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as bool,
-      file: file == freezed
+      file: freezed == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
               as MultipartFile?,
@@ -248,45 +221,40 @@ class _$_UserRequestModel implements _UserRequestModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UserRequestModel &&
-            const DeepCollectionEquality().equals(other.email, email) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.phone, phone) &&
-            const DeepCollectionEquality().equals(other.birthday, birthday) &&
-            const DeepCollectionEquality().equals(other.fullname, fullname) &&
-            const DeepCollectionEquality().equals(other.address, address) &&
-            const DeepCollectionEquality().equals(other.gender, gender) &&
-            const DeepCollectionEquality().equals(other.file, file));
+            other is _$_UserRequestModel &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.phone, phone) || other.phone == phone) &&
+            (identical(other.birthday, birthday) ||
+                other.birthday == birthday) &&
+            (identical(other.fullname, fullname) ||
+                other.fullname == fullname) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.file, file) || other.file == file));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(phone),
-      const DeepCollectionEquality().hash(birthday),
-      const DeepCollectionEquality().hash(fullname),
-      const DeepCollectionEquality().hash(address),
-      const DeepCollectionEquality().hash(gender),
-      const DeepCollectionEquality().hash(file));
+  int get hashCode => Object.hash(runtimeType, email, name, phone, birthday,
+      fullname, address, gender, file);
 
   @JsonKey(ignore: true)
   @override
-  _$UserRequestModelCopyWith<_UserRequestModel> get copyWith =>
-      __$UserRequestModelCopyWithImpl<_UserRequestModel>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_UserRequestModelCopyWith<_$_UserRequestModel> get copyWith =>
+      __$$_UserRequestModelCopyWithImpl<_$_UserRequestModel>(this, _$identity);
 }
 
 abstract class _UserRequestModel implements UserRequestModel {
   factory _UserRequestModel(
-      {required String email,
-      required String name,
-      required String phone,
-      required String birthday,
-      required String fullname,
-      required String address,
-      required bool gender,
-      MultipartFile? file}) = _$_UserRequestModel;
+      {required final String email,
+      required final String name,
+      required final String phone,
+      required final String birthday,
+      required final String fullname,
+      required final String address,
+      required final bool gender,
+      final MultipartFile? file}) = _$_UserRequestModel;
 
   @override
   String get email;
@@ -306,6 +274,6 @@ abstract class _UserRequestModel implements UserRequestModel {
   MultipartFile? get file;
   @override
   @JsonKey(ignore: true)
-  _$UserRequestModelCopyWith<_UserRequestModel> get copyWith =>
+  _$$_UserRequestModelCopyWith<_$_UserRequestModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

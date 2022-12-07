@@ -55,17 +55,21 @@ class AppAssets {
   static const String iconStatistic = './assets/icons/icon_statistic.svg';
   static const String iconShutDownEye = './assets/icons/icon_shut_down_eye.svg';
   static const String iconCamera = './assets/icons/icon_camera.svg';
-  static const String iconCameraOutline = './assets/icons/icon_camera_outline.svg';
+  static const String iconCameraOutline =
+      './assets/icons/icon_camera_outline.svg';
   static const String iconCameraAdd = './assets/icons/icon_camera_add.svg';
-  static const String iconCancelCircle = './assets/icons/icon_cancel_circle.svg';
+  static const String iconCancelCircle =
+      './assets/icons/icon_cancel_circle.svg';
   static const String iconChecked = './assets/icons/icon_check.svg';
-  static const String iconCheckedCircle = './assets/icons/icon_check_circle.svg';
+  static const String iconCheckedCircle =
+      './assets/icons/icon_check_circle.svg';
   static const String iconLogout = './assets/icons/icon_logout.svg';
   static const String iconStar = './assets/icons/icon_star.svg';
   static const String iconCalendar = './assets/icons/icon_calendar.svg';
   static const String iconPostAccept = './assets/icons/icon_post_accept.svg';
   static const String iconPostPending = './assets/icons/icon_post_pending.svg';
   static const String iconPostReject = './assets/icons/icon_post_reject.svg';
+  static const String iconAnnouncement = './assets/icons/icon_announcement.svg';
 
   /// Flags
   static String flag(String code) => './assets/flags/$code.png';

@@ -1,4 +1,4 @@
-package com.example.getx_clean_architecture
+package com.example.chomoi
 
 import io.flutter.embedding.android.FlutterActivity
 

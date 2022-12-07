@@ -1,3 +1,4 @@
+import 'package:chomoi/app/config/constant/broadcast_message.dart';
 import 'package:chomoi/app/util/get_extensions.dart';
 import 'package:chomoi/domain/models/response/post/post_model.dart';
 import 'package:chomoi/domain/models/response/post/post_paging_model.dart';
@@ -8,6 +9,7 @@ import 'package:chomoi/domain/usecases/post/fetch_my_pending_post_usecase.dart';
 import 'package:chomoi/domain/usecases/post/fetch_my_reject_post_usecase.dart';
 import 'package:chomoi/domain/usecases/user/fetch_user_use_case.dart';
 import 'package:chomoi/presentation/routes/app_pages.dart';
+import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -50,6 +52,18 @@ class MyPostController extends GetxController
     required this.fetchUserUseCase,
   });
 
+  void _registerBroadcast() {
+    FBroadcast.instance().register(BroadcastMessages.reloadMyPost,
+        (value, callback) {
+      if (value) {
+        _fetchRejectPost();
+        _fetchAcceptPost();
+        _fetchPendingPost();
+        fetchUser();
+      }
+    }, context: this);
+  }
+
   @override
   void onInit() async {
     super.onInit();
@@ -58,6 +72,7 @@ class MyPostController extends GetxController
     _fetchAcceptPost();
     _fetchPendingPost();
     fetchUser();
+    _registerBroadcast();
   }
 
   Future<void> fetchUser() async {
@@ -110,5 +125,11 @@ class MyPostController extends GetxController
       'post': postModel,
       'tag': tag,
     });
+  }
+
+  @override
+  void onClose() {
+    FBroadcast.instance().unregister(this);
+    super.onClose();
   }
 }

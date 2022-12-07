@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'comment_request_model.dart';
 
@@ -12,26 +12,7 @@ part of 'comment_request_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$CommentRequestModelTearOff {
-  const _$CommentRequestModelTearOff();
-
-  _CommentRequestModel call(
-      {required String postId,
-      required String userId,
-      required String content}) {
-    return _CommentRequestModel(
-      postId: postId,
-      userId: userId,
-      content: content,
-    );
-  }
-}
-
-/// @nodoc
-const $CommentRequestModel = _$CommentRequestModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$CommentRequestModel {
@@ -48,79 +29,81 @@ mixin _$CommentRequestModel {
 abstract class $CommentRequestModelCopyWith<$Res> {
   factory $CommentRequestModelCopyWith(
           CommentRequestModel value, $Res Function(CommentRequestModel) then) =
-      _$CommentRequestModelCopyWithImpl<$Res>;
+      _$CommentRequestModelCopyWithImpl<$Res, CommentRequestModel>;
+  @useResult
   $Res call({String postId, String userId, String content});
 }
 
 /// @nodoc
-class _$CommentRequestModelCopyWithImpl<$Res>
+class _$CommentRequestModelCopyWithImpl<$Res, $Val extends CommentRequestModel>
     implements $CommentRequestModelCopyWith<$Res> {
   _$CommentRequestModelCopyWithImpl(this._value, this._then);
 
-  final CommentRequestModel _value;
   // ignore: unused_field
-  final $Res Function(CommentRequestModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? postId = freezed,
-    Object? userId = freezed,
-    Object? content = freezed,
+    Object? postId = null,
+    Object? userId = null,
+    Object? content = null,
   }) {
     return _then(_value.copyWith(
-      postId: postId == freezed
+      postId: null == postId
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: userId == freezed
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      content: content == freezed
+      content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$CommentRequestModelCopyWith<$Res>
+abstract class _$$_CommentRequestModelCopyWith<$Res>
     implements $CommentRequestModelCopyWith<$Res> {
-  factory _$CommentRequestModelCopyWith(_CommentRequestModel value,
-          $Res Function(_CommentRequestModel) then) =
-      __$CommentRequestModelCopyWithImpl<$Res>;
+  factory _$$_CommentRequestModelCopyWith(_$_CommentRequestModel value,
+          $Res Function(_$_CommentRequestModel) then) =
+      __$$_CommentRequestModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String postId, String userId, String content});
 }
 
 /// @nodoc
-class __$CommentRequestModelCopyWithImpl<$Res>
-    extends _$CommentRequestModelCopyWithImpl<$Res>
-    implements _$CommentRequestModelCopyWith<$Res> {
-  __$CommentRequestModelCopyWithImpl(
-      _CommentRequestModel _value, $Res Function(_CommentRequestModel) _then)
-      : super(_value, (v) => _then(v as _CommentRequestModel));
+class __$$_CommentRequestModelCopyWithImpl<$Res>
+    extends _$CommentRequestModelCopyWithImpl<$Res, _$_CommentRequestModel>
+    implements _$$_CommentRequestModelCopyWith<$Res> {
+  __$$_CommentRequestModelCopyWithImpl(_$_CommentRequestModel _value,
+      $Res Function(_$_CommentRequestModel) _then)
+      : super(_value, _then);
 
-  @override
-  _CommentRequestModel get _value => super._value as _CommentRequestModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? postId = freezed,
-    Object? userId = freezed,
-    Object? content = freezed,
+    Object? postId = null,
+    Object? userId = null,
+    Object? content = null,
   }) {
-    return _then(_CommentRequestModel(
-      postId: postId == freezed
+    return _then(_$_CommentRequestModel(
+      postId: null == postId
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: userId == freezed
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      content: content == freezed
+      content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
@@ -150,31 +133,28 @@ class _$_CommentRequestModel implements _CommentRequestModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _CommentRequestModel &&
-            const DeepCollectionEquality().equals(other.postId, postId) &&
-            const DeepCollectionEquality().equals(other.userId, userId) &&
-            const DeepCollectionEquality().equals(other.content, content));
+            other is _$_CommentRequestModel &&
+            (identical(other.postId, postId) || other.postId == postId) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.content, content) || other.content == content));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(postId),
-      const DeepCollectionEquality().hash(userId),
-      const DeepCollectionEquality().hash(content));
+  int get hashCode => Object.hash(runtimeType, postId, userId, content);
 
   @JsonKey(ignore: true)
   @override
-  _$CommentRequestModelCopyWith<_CommentRequestModel> get copyWith =>
-      __$CommentRequestModelCopyWithImpl<_CommentRequestModel>(
+  @pragma('vm:prefer-inline')
+  _$$_CommentRequestModelCopyWith<_$_CommentRequestModel> get copyWith =>
+      __$$_CommentRequestModelCopyWithImpl<_$_CommentRequestModel>(
           this, _$identity);
 }
 
 abstract class _CommentRequestModel implements CommentRequestModel {
   factory _CommentRequestModel(
-      {required String postId,
-      required String userId,
-      required String content}) = _$_CommentRequestModel;
+      {required final String postId,
+      required final String userId,
+      required final String content}) = _$_CommentRequestModel;
 
   @override
   String get postId;
@@ -184,6 +164,6 @@ abstract class _CommentRequestModel implements CommentRequestModel {
   String get content;
   @override
   @JsonKey(ignore: true)
-  _$CommentRequestModelCopyWith<_CommentRequestModel> get copyWith =>
+  _$$_CommentRequestModelCopyWith<_$_CommentRequestModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -1,5 +1,7 @@
 import 'package:chomoi/app/config/constant/app_strings.dart';
 import 'package:chomoi/app/config/constant/app_url_constant.dart';
+import 'package:chomoi/app/config/constant/broadcast_message.dart';
+import 'package:chomoi/app/services/firebase_message_service.dart';
 import 'package:chomoi/app/util/get_extensions.dart';
 import 'package:chomoi/domain/models/response/ads/ads_model.dart';
 import 'package:chomoi/domain/models/response/category/category_model.dart';
@@ -12,6 +14,7 @@ import 'package:chomoi/presentation/controllers/home_tab/home_tab_navigator.dart
 import 'package:chomoi/presentation/controllers/main/main_controller.dart';
 import 'package:chomoi/presentation/routes/app_pages.dart';
 import 'package:dartz/dartz.dart';
+import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -57,10 +60,15 @@ class HomeController extends GetxController {
   final List<PostModel> _posts = [];
 
   @override
-  void onReady() {
+  Future<void> onReady() async {
+    // Check remote notification permission and update FCM token to server again if possible
+    await FirebaseMessageService.get.enableRemoteNotifications();
+    // Handle user open app via clicking on notification banner
+    FirebaseMessageService.get.routeToCachingRemoteNotificationIfNeeded();
     _fetchAds();
     _fetchCategory();
     _fetchPost();
+    _registerBroadcast();
     super.onReady();
   }
 
@@ -70,6 +78,15 @@ class HomeController extends GetxController {
     }
 
     return false;
+  }
+
+  void _registerBroadcast() {
+    FBroadcast.instance().register(BroadcastMessages.reloadAds,
+        (value, callback) {
+      if (value) {
+       _fetchAds();
+      }
+    }, context: this);
   }
 
   Future<void> _fetchAds() async {
@@ -158,6 +175,12 @@ class HomeController extends GetxController {
       'post': postModel,
       'tag': tag,
     });
+  }
+
+  @override
+  void onClose() {
+    FBroadcast.instance().unregister(this);
+    super.onClose();
   }
 }
 

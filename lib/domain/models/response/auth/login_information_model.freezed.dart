@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'login_information_model.dart';
 
@@ -12,21 +12,7 @@ part of 'login_information_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$LoginInformationModelTearOff {
-  const _$LoginInformationModelTearOff();
-
-  _LoginInformationModel call({required String idToken}) {
-    return _LoginInformationModel(
-      idToken: idToken,
-    );
-  }
-}
-
-/// @nodoc
-const $LoginInformationModel = _$LoginInformationModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$LoginInformationModel {
@@ -41,59 +27,62 @@ mixin _$LoginInformationModel {
 abstract class $LoginInformationModelCopyWith<$Res> {
   factory $LoginInformationModelCopyWith(LoginInformationModel value,
           $Res Function(LoginInformationModel) then) =
-      _$LoginInformationModelCopyWithImpl<$Res>;
+      _$LoginInformationModelCopyWithImpl<$Res, LoginInformationModel>;
+  @useResult
   $Res call({String idToken});
 }
 
 /// @nodoc
-class _$LoginInformationModelCopyWithImpl<$Res>
+class _$LoginInformationModelCopyWithImpl<$Res,
+        $Val extends LoginInformationModel>
     implements $LoginInformationModelCopyWith<$Res> {
   _$LoginInformationModelCopyWithImpl(this._value, this._then);
 
-  final LoginInformationModel _value;
   // ignore: unused_field
-  final $Res Function(LoginInformationModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? idToken = freezed,
+    Object? idToken = null,
   }) {
     return _then(_value.copyWith(
-      idToken: idToken == freezed
+      idToken: null == idToken
           ? _value.idToken
           : idToken // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$LoginInformationModelCopyWith<$Res>
+abstract class _$$_LoginInformationModelCopyWith<$Res>
     implements $LoginInformationModelCopyWith<$Res> {
-  factory _$LoginInformationModelCopyWith(_LoginInformationModel value,
-          $Res Function(_LoginInformationModel) then) =
-      __$LoginInformationModelCopyWithImpl<$Res>;
+  factory _$$_LoginInformationModelCopyWith(_$_LoginInformationModel value,
+          $Res Function(_$_LoginInformationModel) then) =
+      __$$_LoginInformationModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String idToken});
 }
 
 /// @nodoc
-class __$LoginInformationModelCopyWithImpl<$Res>
-    extends _$LoginInformationModelCopyWithImpl<$Res>
-    implements _$LoginInformationModelCopyWith<$Res> {
-  __$LoginInformationModelCopyWithImpl(_LoginInformationModel _value,
-      $Res Function(_LoginInformationModel) _then)
-      : super(_value, (v) => _then(v as _LoginInformationModel));
+class __$$_LoginInformationModelCopyWithImpl<$Res>
+    extends _$LoginInformationModelCopyWithImpl<$Res, _$_LoginInformationModel>
+    implements _$$_LoginInformationModelCopyWith<$Res> {
+  __$$_LoginInformationModelCopyWithImpl(_$_LoginInformationModel _value,
+      $Res Function(_$_LoginInformationModel) _then)
+      : super(_value, _then);
 
-  @override
-  _LoginInformationModel get _value => super._value as _LoginInformationModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? idToken = freezed,
+    Object? idToken = null,
   }) {
-    return _then(_LoginInformationModel(
-      idToken: idToken == freezed
+    return _then(_$_LoginInformationModel(
+      idToken: null == idToken
           ? _value.idToken
           : idToken // ignore: cast_nullable_to_non_nullable
               as String,
@@ -118,29 +107,29 @@ class _$_LoginInformationModel implements _LoginInformationModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _LoginInformationModel &&
-            const DeepCollectionEquality().equals(other.idToken, idToken));
+            other is _$_LoginInformationModel &&
+            (identical(other.idToken, idToken) || other.idToken == idToken));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(idToken));
+  int get hashCode => Object.hash(runtimeType, idToken);
 
   @JsonKey(ignore: true)
   @override
-  _$LoginInformationModelCopyWith<_LoginInformationModel> get copyWith =>
-      __$LoginInformationModelCopyWithImpl<_LoginInformationModel>(
+  @pragma('vm:prefer-inline')
+  _$$_LoginInformationModelCopyWith<_$_LoginInformationModel> get copyWith =>
+      __$$_LoginInformationModelCopyWithImpl<_$_LoginInformationModel>(
           this, _$identity);
 }
 
 abstract class _LoginInformationModel implements LoginInformationModel {
-  factory _LoginInformationModel({required String idToken}) =
+  factory _LoginInformationModel({required final String idToken}) =
       _$_LoginInformationModel;
 
   @override
   String get idToken;
   @override
   @JsonKey(ignore: true)
-  _$LoginInformationModelCopyWith<_LoginInformationModel> get copyWith =>
+  _$$_LoginInformationModelCopyWith<_$_LoginInformationModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

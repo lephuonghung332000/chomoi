@@ -70,7 +70,7 @@ class NotificationApi implements APIRequestRepresentable {
   String get path {
     switch (type) {
       case NotificationType.fetchNotification:
-        return '/';
+        return '';
       case NotificationType.updateRead:
         return '/read/$notificationId';
       case NotificationType.updateFcmToken:
@@ -106,7 +106,7 @@ class NotificationApi implements APIRequestRepresentable {
   String? get body {
     switch (type) {
       case NotificationType.updateFcmToken:
-        return jsonEncode(fcmTokenRequestDto!.toString());
+        return jsonEncode(fcmTokenRequestDto!.toJson());
       default:
         return null;
     }
@@ -114,7 +114,18 @@ class NotificationApi implements APIRequestRepresentable {
 
   @override
   Future request() {
-    return APIProvider.instance.get(this);
+    switch (type) {
+      case NotificationType.fetchNotification:
+      case NotificationType.getUnReadNotification:
+        return APIProvider.instance.get(this);
+      case NotificationType.updateRead:
+      case NotificationType.updateAllNewNotifications:
+        return APIProvider.instance.patch(this);
+      case NotificationType.updateFcmToken:
+        return APIProvider.instance.post(this);
+      case NotificationType.deleteFcmToken:
+        return APIProvider.instance.delete(this);
+    }
   }
 
   @override

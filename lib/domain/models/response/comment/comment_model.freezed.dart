@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'comment_model.dart';
 
@@ -12,34 +12,7 @@ part of 'comment_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$CommentModelTearOff {
-  const _$CommentModelTearOff();
-
-  _CommentModel call(
-      {required String id,
-      required String postId,
-      required String userId,
-      required String content,
-      required double createAt,
-      required String avatar,
-      required String fullname}) {
-    return _CommentModel(
-      id: id,
-      postId: postId,
-      userId: userId,
-      content: content,
-      createAt: createAt,
-      avatar: avatar,
-      fullname: fullname,
-    );
-  }
-}
-
-/// @nodoc
-const $CommentModel = _$CommentModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$CommentModel {
@@ -60,7 +33,8 @@ mixin _$CommentModel {
 abstract class $CommentModelCopyWith<$Res> {
   factory $CommentModelCopyWith(
           CommentModel value, $Res Function(CommentModel) then) =
-      _$CommentModelCopyWithImpl<$Res>;
+      _$CommentModelCopyWithImpl<$Res, CommentModel>;
+  @useResult
   $Res call(
       {String id,
       String postId,
@@ -72,63 +46,67 @@ abstract class $CommentModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$CommentModelCopyWithImpl<$Res> implements $CommentModelCopyWith<$Res> {
+class _$CommentModelCopyWithImpl<$Res, $Val extends CommentModel>
+    implements $CommentModelCopyWith<$Res> {
   _$CommentModelCopyWithImpl(this._value, this._then);
 
-  final CommentModel _value;
   // ignore: unused_field
-  final $Res Function(CommentModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? postId = freezed,
-    Object? userId = freezed,
-    Object? content = freezed,
-    Object? createAt = freezed,
-    Object? avatar = freezed,
-    Object? fullname = freezed,
+    Object? id = null,
+    Object? postId = null,
+    Object? userId = null,
+    Object? content = null,
+    Object? createAt = null,
+    Object? avatar = null,
+    Object? fullname = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      postId: postId == freezed
+      postId: null == postId
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: userId == freezed
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      content: content == freezed
+      content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      createAt: createAt == freezed
+      createAt: null == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
               as double,
-      avatar: avatar == freezed
+      avatar: null == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String,
-      fullname: fullname == freezed
+      fullname: null == fullname
           ? _value.fullname
           : fullname // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$CommentModelCopyWith<$Res>
+abstract class _$$_CommentModelCopyWith<$Res>
     implements $CommentModelCopyWith<$Res> {
-  factory _$CommentModelCopyWith(
-          _CommentModel value, $Res Function(_CommentModel) then) =
-      __$CommentModelCopyWithImpl<$Res>;
+  factory _$$_CommentModelCopyWith(
+          _$_CommentModel value, $Res Function(_$_CommentModel) then) =
+      __$$_CommentModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String postId,
@@ -140,51 +118,50 @@ abstract class _$CommentModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$CommentModelCopyWithImpl<$Res> extends _$CommentModelCopyWithImpl<$Res>
-    implements _$CommentModelCopyWith<$Res> {
-  __$CommentModelCopyWithImpl(
-      _CommentModel _value, $Res Function(_CommentModel) _then)
-      : super(_value, (v) => _then(v as _CommentModel));
+class __$$_CommentModelCopyWithImpl<$Res>
+    extends _$CommentModelCopyWithImpl<$Res, _$_CommentModel>
+    implements _$$_CommentModelCopyWith<$Res> {
+  __$$_CommentModelCopyWithImpl(
+      _$_CommentModel _value, $Res Function(_$_CommentModel) _then)
+      : super(_value, _then);
 
-  @override
-  _CommentModel get _value => super._value as _CommentModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? postId = freezed,
-    Object? userId = freezed,
-    Object? content = freezed,
-    Object? createAt = freezed,
-    Object? avatar = freezed,
-    Object? fullname = freezed,
+    Object? id = null,
+    Object? postId = null,
+    Object? userId = null,
+    Object? content = null,
+    Object? createAt = null,
+    Object? avatar = null,
+    Object? fullname = null,
   }) {
-    return _then(_CommentModel(
-      id: id == freezed
+    return _then(_$_CommentModel(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      postId: postId == freezed
+      postId: null == postId
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: userId == freezed
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      content: content == freezed
+      content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      createAt: createAt == freezed
+      createAt: null == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
               as double,
-      avatar: avatar == freezed
+      avatar: null == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String,
-      fullname: fullname == freezed
+      fullname: null == fullname
           ? _value.fullname
           : fullname // ignore: cast_nullable_to_non_nullable
               as String,
@@ -228,42 +205,38 @@ class _$_CommentModel implements _CommentModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _CommentModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.postId, postId) &&
-            const DeepCollectionEquality().equals(other.userId, userId) &&
-            const DeepCollectionEquality().equals(other.content, content) &&
-            const DeepCollectionEquality().equals(other.createAt, createAt) &&
-            const DeepCollectionEquality().equals(other.avatar, avatar) &&
-            const DeepCollectionEquality().equals(other.fullname, fullname));
+            other is _$_CommentModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.postId, postId) || other.postId == postId) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.content, content) || other.content == content) &&
+            (identical(other.createAt, createAt) ||
+                other.createAt == createAt) &&
+            (identical(other.avatar, avatar) || other.avatar == avatar) &&
+            (identical(other.fullname, fullname) ||
+                other.fullname == fullname));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(postId),
-      const DeepCollectionEquality().hash(userId),
-      const DeepCollectionEquality().hash(content),
-      const DeepCollectionEquality().hash(createAt),
-      const DeepCollectionEquality().hash(avatar),
-      const DeepCollectionEquality().hash(fullname));
+      runtimeType, id, postId, userId, content, createAt, avatar, fullname);
 
   @JsonKey(ignore: true)
   @override
-  _$CommentModelCopyWith<_CommentModel> get copyWith =>
-      __$CommentModelCopyWithImpl<_CommentModel>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_CommentModelCopyWith<_$_CommentModel> get copyWith =>
+      __$$_CommentModelCopyWithImpl<_$_CommentModel>(this, _$identity);
 }
 
 abstract class _CommentModel implements CommentModel {
   factory _CommentModel(
-      {required String id,
-      required String postId,
-      required String userId,
-      required String content,
-      required double createAt,
-      required String avatar,
-      required String fullname}) = _$_CommentModel;
+      {required final String id,
+      required final String postId,
+      required final String userId,
+      required final String content,
+      required final double createAt,
+      required final String avatar,
+      required final String fullname}) = _$_CommentModel;
 
   @override
   String get id;
@@ -281,6 +254,6 @@ abstract class _CommentModel implements CommentModel {
   String get fullname;
   @override
   @JsonKey(ignore: true)
-  _$CommentModelCopyWith<_CommentModel> get copyWith =>
+  _$$_CommentModelCopyWith<_$_CommentModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

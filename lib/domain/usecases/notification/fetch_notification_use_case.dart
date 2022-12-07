@@ -5,11 +5,11 @@ import 'package:chomoi/domain/repositories/notification/notification_repository.
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-class FetchCommentUseCase
+class FetchNotificationUseCase
     extends ParamUseCase<Either<DioError, NotificationPagingModel>, int?> {
   late final NotificationRepository _repo;
 
-  FetchCommentUseCase({NotificationRepository? notificationRepository}) {
+  FetchNotificationUseCase({NotificationRepository? notificationRepository}) {
     _repo = notificationRepository ?? NotificationRepositoryImpl();
   }
 

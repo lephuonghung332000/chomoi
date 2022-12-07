@@ -17,6 +17,8 @@ class AppStrings {
   static const login_another_login = 'hoặc sử dụng';
   static const show_title = 'Hiện';
   static const hide_title = 'Ẩn';
+  static const settings_notification_push ='Đẩy thông báo';
+  static const  content_notification_push ='Vui lòng mở cài đặt để bật thông báo';
   static const input_email_hint_text = 'Email của bạn';
   static const input_email_invalid_error_text = 'Email không hợp lệ';
   static const input_phone_invalid_error_text = 'Số điện thoại không hợp lệ';

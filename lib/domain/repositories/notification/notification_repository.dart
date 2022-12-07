@@ -1,4 +1,3 @@
-import 'package:chomoi/data/dto/request/notification/fcm_token_request_dto.dart';
 import 'package:chomoi/domain/models/request/notification/fcm_token_request_model.dart';
 import 'package:chomoi/domain/models/response/notification/notification_paging_model.dart';
 import 'package:chomoi/domain/models/response/notification/unread_notification_model.dart';

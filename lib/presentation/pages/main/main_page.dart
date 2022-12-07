@@ -11,6 +11,7 @@ import 'package:chomoi/presentation/controllers/main/main_controller.dart';
 import 'package:chomoi/presentation/controllers/my_post_tab/my_post_tab_navigator.dart';
 import 'package:chomoi/presentation/controllers/notification_tab/notification_tab_navigator.dart';
 import 'package:chomoi/presentation/controllers/setting_tab/setting_tab_navigator.dart';
+import 'package:chomoi/presentation/widgets/badge_notifications.dart';
 import 'package:chomoi/presentation/widgets/category_list_view.dart';
 import 'package:chomoi/presentation/widgets/hanlde_popover.dart';
 import 'package:chomoi/presentation/widgets/loading_screen.dart';
@@ -220,7 +221,18 @@ class MainPage extends GetWidget<MainController> {
               items: controller.allTabs
                   .map(
                     (e) => TabItem(
-                      icon: e.icon,
+                      icon: e == TabType.notification
+                          ? GetX<MainController>(
+                              builder: (controller) {
+                                return BadgeNotifications(
+                                  count: controller.isOpenNotification
+                                      ? 0
+                                      : controller.notificationsBadge,
+                                  child: e.icon,
+                                );
+                              },
+                            )
+                          : e.icon,
                       title: e.name,
                       activeIcon: e.activeIcon,
                     ),

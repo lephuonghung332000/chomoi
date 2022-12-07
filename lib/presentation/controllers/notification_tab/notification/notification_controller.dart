@@ -1,25 +1,38 @@
+import 'package:chomoi/app/services/notification_service.dart';
+import 'package:chomoi/app/types/notification/notification_enum.dart';
+import 'package:chomoi/app/util/url_launcher.dart';
+import 'package:chomoi/domain/models/response/notification/notification_model.dart';
+import 'package:chomoi/domain/models/state/states.dart';
+import 'package:chomoi/domain/usecases/notification/update_read_notification_usecase.dart';
+import 'package:chomoi/presentation/controllers/main/main_controller.dart';
+import 'package:chomoi/presentation/pages/main/main_page.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class NotificationController extends GetxController {
   final _notifications = NotificationsService.get.notifications;
 
-  List<UserNotificationResponseModel> get notifications =>
-      _notifications.toList();
+  List<NotificationModel> get notifications => _notifications.toList();
 
-  final _state = NotificationsService.get.state.value.obs;
+  final _isLoadingNotification = NotificationsService.get.isLoadingNotification;
 
-  NotificationsScreenState get state => _state.value;
+  bool get isLoadingNotification => _isLoadingNotification.value;
 
-  final ParseNotificationUseCase parseNotificationUseCase;
-  final MarkNotificationAsReadUseCase markNotificationAsReadUseCase;
+  final _state = NotificationsService.get.notificationState.obs;
 
-  NotificationsController({
-    required this.parseNotificationUseCase,
-    required this.markNotificationAsReadUseCase,
+  States<List<NotificationModel>> get state => _state.value;
+
+  final UpdateReadNotificationUseCase updateReadNotificationUseCase;
+
+  NotificationController({
+    required this.updateReadNotificationUseCase,
   });
 
   Worker? _stateTracker;
   Worker? _notificationsTracker;
+  Worker? _pageTracker;
+
+  final _notificationPage = NotificationsService.get.notificationPage;
 
   @override
   void onInit() {
@@ -32,80 +45,60 @@ class NotificationController extends GetxController {
   }
 
   void _initWorker() {
-    _stateTracker = NotificationsService.get.addNotificationsListener((value) {
-      _notifications.value = value;
+    _stateTracker =
+        NotificationsService.get.addNotificationsStateListener((value) {
+      _state.value = value;
+    });
+    _pageTracker =
+        NotificationsService.get.addNotificationsPageListener((value) {
+      _notificationPage.value = value;
     });
     _notificationsTracker =
-        NotificationsService.get.addNotificationsScreenStateListener((value) {
-          _state.value = value;
-        });
+        NotificationsService.get.addNotificationsListener((value) {
+      _notifications.value = value;
+    });
+  }
+
+  bool onNotification(ScrollNotification notification) {
+    if (notification.metrics.pixels == notification.metrics.maxScrollExtent) {
+      NotificationsService.get.getNotifications(
+        isLoadScreen: true,
+        page: _notificationPage.value + 1,
+      );
+    }
+
+    return false;
   }
 
   @override
   void onClose() {
     _stateTracker?.dispose();
     _notificationsTracker?.dispose();
+    _pageTracker?.dispose();
     super.onClose();
   }
 
-  void routeToNotificationDetail(UserNotificationResponseModel notification) {
-    final id = notification.id;
-    final uri = Uri.tryParse(notification.data?.url ?? '');
-    final isRead = notification.isRead;
-    if (id == null || uri == null) {
-      return;
+  void routeToNotificationDetail(NotificationModel notification) {
+    final url =
+        notification.type == NotificationType.ads ? notification.content : '';
+    if(!notification.isRead){
+      updateReadNotificationUseCase.call(notification.id);
     }
-    final type = parseNotificationUseCase.parse(id, uri);
-    if (type is Invoice) {
-      final invoiceId = type.invoiceId;
-
-      if (isRead != null && !isRead) {
-        _markNotificationAsRead(notification);
-        markNotificationAsReadUseCase.markNotificationAsRead([id]);
-      }
-      _routeToInvoiceDetail(invoiceId: invoiceId);
-      return;
-    }
-
-    if (type is Patient) {
-      final patientId = type.patientId;
-      final visitId = type.visitId;
-
-      if (isRead != null && !isRead) {
-        _markNotificationAsRead(notification);
-        markNotificationAsReadUseCase.markNotificationAsRead([id]);
-      }
-      _routeToPatientDetail(patientId: patientId, visitId: visitId);
-      return;
+    // not ads
+    if (url.isEmpty) {
+      _routeMyPost();
+    } else {
+      _routeToUrl(url);
     }
   }
 
-  void _markNotificationAsRead(UserNotificationResponseModel notification) {
-    // Mark local data as read so we don't have to reload from backend
-    notification.isRead = true;
-    NotificationsService.get.notifications.refresh();
+  void _routeToUrl(String url) {
+    UrlLauncher.openUrl(url).then((value) {
+      NotificationsService.get.getNotifications(isLoadScreen: false);
+    });
   }
 
-  void _routeToInvoiceDetail({required int invoiceId}) {
-    final tag = invoiceId.toString();
-    Get.toNamed(
-      AppPages.invoiceDetailPage.name,
-      arguments: {
-        'viewModel': InvoiceRowViewModel.fromInvoiceId(invoiceId),
-        'tag': tag
-      },
-    );
-  }
-
-  void _routeToPatientDetail({required int patientId, required int visitId}) {
-    final tag = Get.globalNavigator.toString() + (patientId.toString());
-    MainController.notificationsNavigator?.pushNamed(
-      NotificationsTabNavigatorRoutes.hospitalizedDetail,
-      arguments: {
-        'viewModel': HospitalizationRowViewModel.fromVisitIdAndPatientId(
-            visitId: visitId, patientId: patientId),
-        'tag': tag,
-      },
-    );
+  void _routeMyPost() {
+    Get.find<MainController>().navigateToPage(TabType.my_post);
   }
 }

@@ -4,9 +4,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'app/util/dependency.dart';
 import 'presentation/app.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await DependencyCreator.init();
   _configAppStyle();
   runApp(App());

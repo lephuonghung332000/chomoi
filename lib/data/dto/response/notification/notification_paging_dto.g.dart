@@ -53,6 +53,6 @@ Map<String, dynamic> _$NotificationDataToJson(NotificationData instance) =>
 const _$NotificationTypeEnumMap = {
   NotificationType.post_pending: 'post pending',
   NotificationType.post_accept: 'post accept',
-  NotificationType.post_reject: 'post pending',
+  NotificationType.post_reject: 'post reject',
   NotificationType.ads: 'ads',
 };

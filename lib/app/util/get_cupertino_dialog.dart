@@ -58,7 +58,7 @@ extension GetCupertinoDialog on GetInterface {
             isDefaultAction: true,
             onPressed: onConfirm,
             child: Text(
-              textConfirm ?? AppStrings.button_ok.tr,
+              textConfirm ?? AppStrings.button_ok,
             ),
           ),
         );

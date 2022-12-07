@@ -80,6 +80,19 @@ class APIProvider {
       sendError(ex);
     }
   }
+
+  Future delete(APIRequestRepresentable request) async {
+    try {
+      final response = await _client.delete(
+        request.url,
+        queryParameters: request.query,
+        options: Options(headers: request.headers),
+      );
+      return response.data;
+    } on DioError catch (ex) {
+      sendError(ex);
+    }
+  }
 }
 
 void sendError(DioError ex) {

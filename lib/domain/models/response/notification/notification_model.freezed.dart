@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'notification_model.dart';
 
@@ -12,36 +12,7 @@ part of 'notification_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$NotificationModelTearOff {
-  const _$NotificationModelTearOff();
-
-  _NotificationModel call(
-      {required String id,
-      required String userId,
-      required String content,
-      required double createAt,
-      required String title,
-      required NotificationType type,
-      required bool isNew,
-      required bool isRead}) {
-    return _NotificationModel(
-      id: id,
-      userId: userId,
-      content: content,
-      createAt: createAt,
-      title: title,
-      type: type,
-      isNew: isNew,
-      isRead: isRead,
-    );
-  }
-}
-
-/// @nodoc
-const $NotificationModel = _$NotificationModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$NotificationModel {
@@ -63,7 +34,8 @@ mixin _$NotificationModel {
 abstract class $NotificationModelCopyWith<$Res> {
   factory $NotificationModelCopyWith(
           NotificationModel value, $Res Function(NotificationModel) then) =
-      _$NotificationModelCopyWithImpl<$Res>;
+      _$NotificationModelCopyWithImpl<$Res, NotificationModel>;
+  @useResult
   $Res call(
       {String id,
       String userId,
@@ -76,69 +48,72 @@ abstract class $NotificationModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$NotificationModelCopyWithImpl<$Res>
+class _$NotificationModelCopyWithImpl<$Res, $Val extends NotificationModel>
     implements $NotificationModelCopyWith<$Res> {
   _$NotificationModelCopyWithImpl(this._value, this._then);
 
-  final NotificationModel _value;
   // ignore: unused_field
-  final $Res Function(NotificationModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? userId = freezed,
-    Object? content = freezed,
-    Object? createAt = freezed,
-    Object? title = freezed,
-    Object? type = freezed,
-    Object? isNew = freezed,
-    Object? isRead = freezed,
+    Object? id = null,
+    Object? userId = null,
+    Object? content = null,
+    Object? createAt = null,
+    Object? title = null,
+    Object? type = null,
+    Object? isNew = null,
+    Object? isRead = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: userId == freezed
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      content: content == freezed
+      content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      createAt: createAt == freezed
+      createAt: null == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
               as double,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as NotificationType,
-      isNew: isNew == freezed
+      isNew: null == isNew
           ? _value.isNew
           : isNew // ignore: cast_nullable_to_non_nullable
               as bool,
-      isRead: isRead == freezed
+      isRead: null == isRead
           ? _value.isRead
           : isRead // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$NotificationModelCopyWith<$Res>
+abstract class _$$_NotificationModelCopyWith<$Res>
     implements $NotificationModelCopyWith<$Res> {
-  factory _$NotificationModelCopyWith(
-          _NotificationModel value, $Res Function(_NotificationModel) then) =
-      __$NotificationModelCopyWithImpl<$Res>;
+  factory _$$_NotificationModelCopyWith(_$_NotificationModel value,
+          $Res Function(_$_NotificationModel) then) =
+      __$$_NotificationModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String id,
       String userId,
@@ -151,57 +126,55 @@ abstract class _$NotificationModelCopyWith<$Res>
 }
 
 /// @nodoc
-class __$NotificationModelCopyWithImpl<$Res>
-    extends _$NotificationModelCopyWithImpl<$Res>
-    implements _$NotificationModelCopyWith<$Res> {
-  __$NotificationModelCopyWithImpl(
-      _NotificationModel _value, $Res Function(_NotificationModel) _then)
-      : super(_value, (v) => _then(v as _NotificationModel));
+class __$$_NotificationModelCopyWithImpl<$Res>
+    extends _$NotificationModelCopyWithImpl<$Res, _$_NotificationModel>
+    implements _$$_NotificationModelCopyWith<$Res> {
+  __$$_NotificationModelCopyWithImpl(
+      _$_NotificationModel _value, $Res Function(_$_NotificationModel) _then)
+      : super(_value, _then);
 
-  @override
-  _NotificationModel get _value => super._value as _NotificationModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? userId = freezed,
-    Object? content = freezed,
-    Object? createAt = freezed,
-    Object? title = freezed,
-    Object? type = freezed,
-    Object? isNew = freezed,
-    Object? isRead = freezed,
+    Object? id = null,
+    Object? userId = null,
+    Object? content = null,
+    Object? createAt = null,
+    Object? title = null,
+    Object? type = null,
+    Object? isNew = null,
+    Object? isRead = null,
   }) {
-    return _then(_NotificationModel(
-      id: id == freezed
+    return _then(_$_NotificationModel(
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: userId == freezed
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      content: content == freezed
+      content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      createAt: createAt == freezed
+      createAt: null == createAt
           ? _value.createAt
           : createAt // ignore: cast_nullable_to_non_nullable
               as double,
-      title: title == freezed
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as NotificationType,
-      isNew: isNew == freezed
+      isNew: null == isNew
           ? _value.isNew
           : isNew // ignore: cast_nullable_to_non_nullable
               as bool,
-      isRead: isRead == freezed
+      isRead: null == isRead
           ? _value.isRead
           : isRead // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -248,45 +221,40 @@ class _$_NotificationModel implements _NotificationModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _NotificationModel &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.userId, userId) &&
-            const DeepCollectionEquality().equals(other.content, content) &&
-            const DeepCollectionEquality().equals(other.createAt, createAt) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.isNew, isNew) &&
-            const DeepCollectionEquality().equals(other.isRead, isRead));
+            other is _$_NotificationModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.content, content) || other.content == content) &&
+            (identical(other.createAt, createAt) ||
+                other.createAt == createAt) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.isNew, isNew) || other.isNew == isNew) &&
+            (identical(other.isRead, isRead) || other.isRead == isRead));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(userId),
-      const DeepCollectionEquality().hash(content),
-      const DeepCollectionEquality().hash(createAt),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(isNew),
-      const DeepCollectionEquality().hash(isRead));
+      runtimeType, id, userId, content, createAt, title, type, isNew, isRead);
 
   @JsonKey(ignore: true)
   @override
-  _$NotificationModelCopyWith<_NotificationModel> get copyWith =>
-      __$NotificationModelCopyWithImpl<_NotificationModel>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_NotificationModelCopyWith<_$_NotificationModel> get copyWith =>
+      __$$_NotificationModelCopyWithImpl<_$_NotificationModel>(
+          this, _$identity);
 }
 
 abstract class _NotificationModel implements NotificationModel {
   factory _NotificationModel(
-      {required String id,
-      required String userId,
-      required String content,
-      required double createAt,
-      required String title,
-      required NotificationType type,
-      required bool isNew,
-      required bool isRead}) = _$_NotificationModel;
+      {required final String id,
+      required final String userId,
+      required final String content,
+      required final double createAt,
+      required final String title,
+      required final NotificationType type,
+      required final bool isNew,
+      required final bool isRead}) = _$_NotificationModel;
 
   @override
   String get id;
@@ -306,6 +274,6 @@ abstract class _NotificationModel implements NotificationModel {
   bool get isRead;
   @override
   @JsonKey(ignore: true)
-  _$NotificationModelCopyWith<_NotificationModel> get copyWith =>
+  _$$_NotificationModelCopyWith<_$_NotificationModel> get copyWith =>
       throw _privateConstructorUsedError;
 }

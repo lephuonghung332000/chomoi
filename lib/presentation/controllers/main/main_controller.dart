@@ -1,4 +1,5 @@
 import 'package:bottom_nav_layout/bottom_nav_layout.dart';
+import 'package:chomoi/app/services/notification_service.dart';
 import 'package:chomoi/domain/models/response/category/category_model.dart';
 import 'package:chomoi/presentation/pages/main/main_page.dart';
 import 'package:chomoi/presentation/routes/app_pages.dart';
@@ -34,12 +35,41 @@ class MainController extends GetxController
     TabType.setting: Get.nestedKey(TabType.setting),
   };
 
+  Worker? _isOpenNotificationTracker;
+  Worker? _notificationsBadgeTracker;
+
+  final _notificationsBadge =
+      NotificationsService.get.notificationsBadge.value.obs;
+
+  int get notificationsBadge => _notificationsBadge.value;
+
+  bool get isOpenNotification => _isOpenNotification.value;
+
+  final _isOpenNotification =
+      NotificationsService.get.isOpenedNotificationsTab.value.obs;
   late TabController tabController;
 
   @override
   void onInit() {
     tabController = TabController(length: navigatorKeys.length, vsync: this);
+
+    _initNotificationsWorkers();
+
+    _refreshNotificationsTab();
     super.onInit();
+  }
+
+  void _refreshNotificationsTab() {
+    NotificationsService.get.setIsOpenedNotification(false);
+  }
+
+  @override
+  void onClose() {
+    _isOpenNotificationTracker?.dispose();
+
+    _notificationsBadgeTracker?.dispose();
+
+    super.onClose();
   }
 
   static NavigatorState? get homeNavigator =>
@@ -61,16 +91,28 @@ class MainController extends GetxController
   void _onTabChange(TabType tab) async {
     switch (tab) {
       case TabType.home:
+        setInNotificationTab(inNotificationTab: false);
         break;
       case TabType.my_post:
+        setInNotificationTab(inNotificationTab: false);
         break;
       case TabType.create_post:
+        setInNotificationTab(inNotificationTab: false);
         break;
       case TabType.notification:
+        await NotificationsService.get.updateAllReadNotification();
+        setInNotificationTab(inNotificationTab: true);
+        NotificationsService.get.getNotifications(isLoadScreen: true);
         break;
       case TabType.setting:
+        setInNotificationTab(inNotificationTab: false);
         break;
     }
+  }
+
+  void setInNotificationTab({bool inNotificationTab = false}) {
+    NotificationsService.get.setInNotificationTab(inNotificationTab);
+    NotificationsService.get.setIsOpenedNotification(inNotificationTab);
   }
 
   void currentTabChanged(int index) async {
@@ -106,6 +148,18 @@ class MainController extends GetxController
 
     // Navigate back to the previous page on the stack.
     //pageStack.pop();
+  }
+
+  void _initNotificationsWorkers() {
+    _isOpenNotificationTracker =
+        NotificationsService.get.addOpenedNotificationsTabListener((value) {
+      _isOpenNotification.value = value;
+    });
+
+    _notificationsBadgeTracker =
+        NotificationsService.get.addNotificationsBadgeListener((value) {
+      _notificationsBadge.value = value;
+    });
   }
 
   void routeToCreatePostPage({required CategoryModel category}) {

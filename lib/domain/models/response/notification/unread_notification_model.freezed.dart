@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'unread_notification_model.dart';
 
@@ -12,21 +12,7 @@ part of 'unread_notification_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$UnreadNotificationModelTearOff {
-  const _$UnreadNotificationModelTearOff();
-
-  _UnreadNotificationModel call({required int total}) {
-    return _UnreadNotificationModel(
-      total: total,
-    );
-  }
-}
-
-/// @nodoc
-const $UnreadNotificationModel = _$UnreadNotificationModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$UnreadNotificationModel {
@@ -41,60 +27,63 @@ mixin _$UnreadNotificationModel {
 abstract class $UnreadNotificationModelCopyWith<$Res> {
   factory $UnreadNotificationModelCopyWith(UnreadNotificationModel value,
           $Res Function(UnreadNotificationModel) then) =
-      _$UnreadNotificationModelCopyWithImpl<$Res>;
+      _$UnreadNotificationModelCopyWithImpl<$Res, UnreadNotificationModel>;
+  @useResult
   $Res call({int total});
 }
 
 /// @nodoc
-class _$UnreadNotificationModelCopyWithImpl<$Res>
+class _$UnreadNotificationModelCopyWithImpl<$Res,
+        $Val extends UnreadNotificationModel>
     implements $UnreadNotificationModelCopyWith<$Res> {
   _$UnreadNotificationModelCopyWithImpl(this._value, this._then);
 
-  final UnreadNotificationModel _value;
   // ignore: unused_field
-  final $Res Function(UnreadNotificationModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? total = freezed,
+    Object? total = null,
   }) {
     return _then(_value.copyWith(
-      total: total == freezed
+      total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$UnreadNotificationModelCopyWith<$Res>
+abstract class _$$_UnreadNotificationModelCopyWith<$Res>
     implements $UnreadNotificationModelCopyWith<$Res> {
-  factory _$UnreadNotificationModelCopyWith(_UnreadNotificationModel value,
-          $Res Function(_UnreadNotificationModel) then) =
-      __$UnreadNotificationModelCopyWithImpl<$Res>;
+  factory _$$_UnreadNotificationModelCopyWith(_$_UnreadNotificationModel value,
+          $Res Function(_$_UnreadNotificationModel) then) =
+      __$$_UnreadNotificationModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int total});
 }
 
 /// @nodoc
-class __$UnreadNotificationModelCopyWithImpl<$Res>
-    extends _$UnreadNotificationModelCopyWithImpl<$Res>
-    implements _$UnreadNotificationModelCopyWith<$Res> {
-  __$UnreadNotificationModelCopyWithImpl(_UnreadNotificationModel _value,
-      $Res Function(_UnreadNotificationModel) _then)
-      : super(_value, (v) => _then(v as _UnreadNotificationModel));
+class __$$_UnreadNotificationModelCopyWithImpl<$Res>
+    extends _$UnreadNotificationModelCopyWithImpl<$Res,
+        _$_UnreadNotificationModel>
+    implements _$$_UnreadNotificationModelCopyWith<$Res> {
+  __$$_UnreadNotificationModelCopyWithImpl(_$_UnreadNotificationModel _value,
+      $Res Function(_$_UnreadNotificationModel) _then)
+      : super(_value, _then);
 
-  @override
-  _UnreadNotificationModel get _value =>
-      super._value as _UnreadNotificationModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? total = freezed,
+    Object? total = null,
   }) {
-    return _then(_UnreadNotificationModel(
-      total: total == freezed
+    return _then(_$_UnreadNotificationModel(
+      total: null == total
           ? _value.total
           : total // ignore: cast_nullable_to_non_nullable
               as int,
@@ -119,29 +108,30 @@ class _$_UnreadNotificationModel implements _UnreadNotificationModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _UnreadNotificationModel &&
-            const DeepCollectionEquality().equals(other.total, total));
+            other is _$_UnreadNotificationModel &&
+            (identical(other.total, total) || other.total == total));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(total));
+  int get hashCode => Object.hash(runtimeType, total);
 
   @JsonKey(ignore: true)
   @override
-  _$UnreadNotificationModelCopyWith<_UnreadNotificationModel> get copyWith =>
-      __$UnreadNotificationModelCopyWithImpl<_UnreadNotificationModel>(
-          this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_UnreadNotificationModelCopyWith<_$_UnreadNotificationModel>
+      get copyWith =>
+          __$$_UnreadNotificationModelCopyWithImpl<_$_UnreadNotificationModel>(
+              this, _$identity);
 }
 
 abstract class _UnreadNotificationModel implements UnreadNotificationModel {
-  factory _UnreadNotificationModel({required int total}) =
+  factory _UnreadNotificationModel({required final int total}) =
       _$_UnreadNotificationModel;
 
   @override
   int get total;
   @override
   @JsonKey(ignore: true)
-  _$UnreadNotificationModelCopyWith<_UnreadNotificationModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$_UnreadNotificationModelCopyWith<_$_UnreadNotificationModel>
+      get copyWith => throw _privateConstructorUsedError;
 }

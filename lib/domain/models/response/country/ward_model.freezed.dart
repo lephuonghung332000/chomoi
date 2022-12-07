@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'ward_model.dart';
 
@@ -12,22 +12,7 @@ part of 'ward_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$WardModelTearOff {
-  const _$WardModelTearOff();
-
-  _WardModel call({required String wardId, required String wardName}) {
-    return _WardModel(
-      wardId: wardId,
-      wardName: wardName,
-    );
-  }
-}
-
-/// @nodoc
-const $WardModel = _$WardModelTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$WardModel {
@@ -42,65 +27,70 @@ mixin _$WardModel {
 /// @nodoc
 abstract class $WardModelCopyWith<$Res> {
   factory $WardModelCopyWith(WardModel value, $Res Function(WardModel) then) =
-      _$WardModelCopyWithImpl<$Res>;
+      _$WardModelCopyWithImpl<$Res, WardModel>;
+  @useResult
   $Res call({String wardId, String wardName});
 }
 
 /// @nodoc
-class _$WardModelCopyWithImpl<$Res> implements $WardModelCopyWith<$Res> {
+class _$WardModelCopyWithImpl<$Res, $Val extends WardModel>
+    implements $WardModelCopyWith<$Res> {
   _$WardModelCopyWithImpl(this._value, this._then);
 
-  final WardModel _value;
   // ignore: unused_field
-  final $Res Function(WardModel) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? wardId = freezed,
-    Object? wardName = freezed,
+    Object? wardId = null,
+    Object? wardName = null,
   }) {
     return _then(_value.copyWith(
-      wardId: wardId == freezed
+      wardId: null == wardId
           ? _value.wardId
           : wardId // ignore: cast_nullable_to_non_nullable
               as String,
-      wardName: wardName == freezed
+      wardName: null == wardName
           ? _value.wardName
           : wardName // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$WardModelCopyWith<$Res> implements $WardModelCopyWith<$Res> {
-  factory _$WardModelCopyWith(
-          _WardModel value, $Res Function(_WardModel) then) =
-      __$WardModelCopyWithImpl<$Res>;
+abstract class _$$_WardModelCopyWith<$Res> implements $WardModelCopyWith<$Res> {
+  factory _$$_WardModelCopyWith(
+          _$_WardModel value, $Res Function(_$_WardModel) then) =
+      __$$_WardModelCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String wardId, String wardName});
 }
 
 /// @nodoc
-class __$WardModelCopyWithImpl<$Res> extends _$WardModelCopyWithImpl<$Res>
-    implements _$WardModelCopyWith<$Res> {
-  __$WardModelCopyWithImpl(_WardModel _value, $Res Function(_WardModel) _then)
-      : super(_value, (v) => _then(v as _WardModel));
+class __$$_WardModelCopyWithImpl<$Res>
+    extends _$WardModelCopyWithImpl<$Res, _$_WardModel>
+    implements _$$_WardModelCopyWith<$Res> {
+  __$$_WardModelCopyWithImpl(
+      _$_WardModel _value, $Res Function(_$_WardModel) _then)
+      : super(_value, _then);
 
-  @override
-  _WardModel get _value => super._value as _WardModel;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? wardId = freezed,
-    Object? wardName = freezed,
+    Object? wardId = null,
+    Object? wardName = null,
   }) {
-    return _then(_WardModel(
-      wardId: wardId == freezed
+    return _then(_$_WardModel(
+      wardId: null == wardId
           ? _value.wardId
           : wardId // ignore: cast_nullable_to_non_nullable
               as String,
-      wardName: wardName == freezed
+      wardName: null == wardName
           ? _value.wardName
           : wardName // ignore: cast_nullable_to_non_nullable
               as String,
@@ -127,26 +117,26 @@ class _$_WardModel implements _WardModel {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _WardModel &&
-            const DeepCollectionEquality().equals(other.wardId, wardId) &&
-            const DeepCollectionEquality().equals(other.wardName, wardName));
+            other is _$_WardModel &&
+            (identical(other.wardId, wardId) || other.wardId == wardId) &&
+            (identical(other.wardName, wardName) ||
+                other.wardName == wardName));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(wardId),
-      const DeepCollectionEquality().hash(wardName));
+  int get hashCode => Object.hash(runtimeType, wardId, wardName);
 
   @JsonKey(ignore: true)
   @override
-  _$WardModelCopyWith<_WardModel> get copyWith =>
-      __$WardModelCopyWithImpl<_WardModel>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_WardModelCopyWith<_$_WardModel> get copyWith =>
+      __$$_WardModelCopyWithImpl<_$_WardModel>(this, _$identity);
 }
 
 abstract class _WardModel implements WardModel {
-  factory _WardModel({required String wardId, required String wardName}) =
-      _$_WardModel;
+  factory _WardModel(
+      {required final String wardId,
+      required final String wardName}) = _$_WardModel;
 
   @override
   String get wardId;
@@ -154,6 +144,6 @@ abstract class _WardModel implements WardModel {
   String get wardName;
   @override
   @JsonKey(ignore: true)
-  _$WardModelCopyWith<_WardModel> get copyWith =>
+  _$$_WardModelCopyWith<_$_WardModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
