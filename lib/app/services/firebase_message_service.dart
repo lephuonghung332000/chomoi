@@ -14,6 +14,7 @@ import 'package:chomoi/domain/usecases/notification/parse_notifications_usecase.
 import 'package:chomoi/domain/usecases/notification/update_fcm_token_usecase.dart';
 import 'package:chomoi/presentation/controllers/main/main_controller.dart';
 import 'package:chomoi/presentation/pages/main/main_page.dart';
+import 'package:dartz/dartz.dart';
 import 'package:fbroadcast/fbroadcast.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -171,7 +172,12 @@ class FirebaseMessageServiceImpl extends GetxService
 
   Future<void> updateFCMTokenToServer(String token) async {
     _fcmToken = token;
-    await updateFCMTokenUseCase.call(FcmTokenRequestModel(token: token));
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
+    await updateFCMTokenUseCase
+        .call(Tuple2(FcmTokenRequestModel(token: token), userId));
   }
 
   @override

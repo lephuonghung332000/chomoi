@@ -19,19 +19,22 @@ class NotificationApi implements APIRequestRepresentable {
   final String? notificationId;
   final String? fcmToken;
   final FcmTokenRequestDto? fcmTokenRequestDto;
+  final String? userId;
 
   NotificationApi._({
     required this.type,
     this.page,
     this.notificationId,
     this.fcmToken,
+    this.userId,
     this.fcmTokenRequestDto,
   });
 
-  NotificationApi.fetchNotification({int? page})
+  NotificationApi.fetchNotification({int? page, required String userId})
       : this._(
           type: NotificationType.fetchNotification,
           page: page,
+          userId: userId,
         );
 
   NotificationApi.updateRead({required String notificationId})
@@ -41,10 +44,11 @@ class NotificationApi implements APIRequestRepresentable {
         );
 
   NotificationApi.updateFcmToken(
-      {required FcmTokenRequestDto fcmTokenRequestDto})
+      {required FcmTokenRequestDto fcmTokenRequestDto, required String userId})
       : this._(
           type: NotificationType.updateFcmToken,
           fcmTokenRequestDto: fcmTokenRequestDto,
+          userId: userId,
         );
 
   NotificationApi.deleteFcmToken({required String fcmToken})
@@ -70,11 +74,11 @@ class NotificationApi implements APIRequestRepresentable {
   String get path {
     switch (type) {
       case NotificationType.fetchNotification:
-        return '';
+        return '/$userId';
       case NotificationType.updateRead:
         return '/read/$notificationId';
       case NotificationType.updateFcmToken:
-        return '/updateFCMTokens';
+        return '/updateFCMTokens/$userId';
       case NotificationType.deleteFcmToken:
         return '/removeFcmToken/$fcmToken';
       case NotificationType.updateAllNewNotifications:

@@ -7,12 +7,14 @@ import 'package:dio/dio.dart';
 abstract class NotificationRepository {
   Future<Either<DioError, NotificationPagingModel>> fetchNotification({
     int? page,
+    required String userId,
   });
 
   Future<Either<DioError, Unit>> updateRead({required String notificationId});
 
   Future<Either<DioError, Unit>> updateFcmToken(
-      FcmTokenRequestModel fcmTokenRequestModel);
+      FcmTokenRequestModel fcmTokenRequestModel,
+      {required String userId});
 
   Future<Either<DioError, Unit>> deleteFcmToken({
     required String fcmToken,

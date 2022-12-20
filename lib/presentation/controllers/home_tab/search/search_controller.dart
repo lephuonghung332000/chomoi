@@ -1,3 +1,4 @@
+import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/app/util/debouncer.dart';
 import 'package:chomoi/domain/models/response/search/search_history_model.dart';
 import 'package:chomoi/domain/models/state/states.dart';
@@ -50,8 +51,12 @@ class SearchController extends GetxController {
   }
 
   Future<void> _fetchSearch() async {
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
     _searchState.value = const States.loading();
-    final result = await fetchSearchUseCase.call();
+    final result = await fetchSearchUseCase.call(userId);
     result.fold((failure) {
       _searchState.value = States.failure(failure);
     }, (value) {

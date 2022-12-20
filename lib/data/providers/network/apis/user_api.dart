@@ -19,10 +19,12 @@ class UserAPI implements APIRequestRepresentable {
   UserAPI.fetchUser({String? userId})
       : this._(type: UserType.fetchUser, userId: userId);
 
-  UserAPI.updateUser({required UserRequestDto userRequestDto})
+  UserAPI.updateUser(
+      {required UserRequestDto userRequestDto, required String userId})
       : this._(
           type: UserType.updateUser,
           userRequestDto: userRequestDto,
+          userId: userId,
         );
 
   @override
@@ -32,9 +34,9 @@ class UserAPI implements APIRequestRepresentable {
   String get path {
     switch (type) {
       case UserType.fetchUser:
-        return userId != null ? '/$userId' : '/';
+        return '/$userId';
       case UserType.updateUser:
-        return '/update';
+        return '/update/$userId';
     }
   }
 

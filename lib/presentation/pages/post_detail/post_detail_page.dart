@@ -23,7 +23,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
-import 'package:sliver_tools/sliver_tools.dart';
 
 class PostDetailPage extends StatefulWidget {
   const PostDetailPage({Key? key}) : super(key: key);
@@ -40,28 +39,30 @@ class _PostDetailPageState extends State<PostDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.secondaryBackgroundColor,
+      appBar: PreferredSize(
+        preferredSize:
+        const Size.fromHeight(50),
+        child: _buildHeader,
+      ),
       body: SafeArea(
         child: Column(
           children: [
             Expanded(
-              child: NotificationListener(
-                child: CustomScrollView(
-                  physics: const BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics(),
-                  ),
-                  slivers: [
-                    _buildHeader,
-                    _buildGalleryView(context),
-                    _buildInfoPost,
-                    _buildDivider,
-                    _buildUserInfo,
-                    _buildContentPost,
-                    _buildCommentPost,
-                    _buildTerm,
-                    _buildRelatedPost(context),
-                    _buildSpace
-                  ],
+              child: CustomScrollView(
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
                 ),
+                slivers: [
+                  _buildGalleryView(context),
+                  _buildInfoPost,
+                  _buildDivider,
+                  _buildUserInfo,
+                  _buildContentPost,
+                  _buildCommentPost,
+                  _buildTerm,
+                  _buildRelatedPost(context),
+                  _buildSpace
+                ],
               ),
             ),
             _buildFooter
@@ -321,7 +322,9 @@ class _PostDetailPageState extends State<PostDetailPage> {
 
   Widget _buildMessageItem(String icon, String text, {String data = ''}) =>
       GestureDetector(
-        onTap: data.isNotEmpty ? () => controller.composeSms(data) : null,
+        onTap: data.isNotEmpty
+            ? () => controller.composeSms(data)
+            : () => controller.routeContentChat(),
         child: Column(
           children: [
             Image.asset(
@@ -397,29 +400,27 @@ class _PostDetailPageState extends State<PostDetailPage> {
         ),
       );
 
-  Widget get _buildHeader => SliverPinnedHeader(
-        child: Container(
-          color: AppColors.primaryColor,
-          alignment: Alignment.bottomCenter,
-          height: AppConstant.heightAppBarWithoutSearchBar,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              AppBackButton(
-                onBack: () => Get.back(),
-              ),
-              CupertinoButton(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                onPressed: () {},
-                child: const SvgIcon(
-                  size: 16,
-                  icon: AppAssets.iconMore,
-                ),
-              )
-            ],
-          ),
+  Widget get _buildHeader => Container(
+    color: AppColors.primaryColor,
+    alignment: Alignment.bottomCenter,
+    padding: const EdgeInsets.only(bottom: 5),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        AppBackButton(
+          onBack: () => Get.back(),
         ),
-      );
+        CupertinoButton(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          onPressed: () {},
+          child: const SvgIcon(
+            size: 16,
+            icon: AppAssets.iconMore,
+          ),
+        )
+      ],
+    ),
+  );
 
   Widget _buildGalleryView(BuildContext context) => GetX<PostDetailController>(
         global: false,
@@ -573,7 +574,8 @@ class _PostDetailPageState extends State<PostDetailPage> {
                         if (viewModel.avatar.isNotEmpty)
                           CircleAvatar(
                             radius: AppConstant.iconAvatarPostDetailSize,
-                            backgroundImage: CachedNetworkImageProvider(viewModel.avatar),
+                            backgroundImage:
+                                CachedNetworkImageProvider(viewModel.avatar),
                             backgroundColor: Colors.transparent,
                           )
                         else

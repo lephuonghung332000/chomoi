@@ -1,10 +1,9 @@
-import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/data/dto/request/post/post_request_dto.dart';
 import 'package:chomoi/data/providers/network/api_provider.dart';
 import 'package:chomoi/data/providers/network/api_request_representable.dart';
 import 'package:dio/dio.dart';
 
-enum PostType { fetchPost, fetchMyPost, addPost }
+enum PostType { fetchPost, addPost }
 
 class PostAPI implements APIRequestRepresentable {
   final PostType type;
@@ -14,18 +13,20 @@ class PostAPI implements APIRequestRepresentable {
   String? categoryId;
   String? province;
   String? search;
-  int? userId;
+  String? userId;
   final PostRequestDto? postRequestDto;
 
-  PostAPI._(
-      {required this.type,
-      this.status,
-      this.timePost,
-      this.categoryId,
-      this.province,
-      this.search,
-      this.page,
-      this.postRequestDto});
+  PostAPI._({
+    required this.type,
+    this.status,
+    this.timePost,
+    this.categoryId,
+    this.province,
+    this.search,
+    this.page,
+    this.postRequestDto,
+    this.userId,
+  });
 
   PostAPI.fetchPost({
     String? status,
@@ -34,6 +35,7 @@ class PostAPI implements APIRequestRepresentable {
     String? categoryId,
     String? province,
     String? search,
+    String? userId,
   }) : this._(
           type: PostType.fetchPost,
           page: page,
@@ -42,13 +44,7 @@ class PostAPI implements APIRequestRepresentable {
           categoryId: categoryId,
           province: province,
           search: search,
-        );
-
-  PostAPI.fetchMyPost({
-    String? status,
-  }) : this._(
-          type: PostType.fetchMyPost,
-          status: status,
+          userId: userId,
         );
 
   PostAPI.addPost({
@@ -66,8 +62,6 @@ class PostAPI implements APIRequestRepresentable {
     switch (type) {
       case PostType.fetchPost:
         return userId != null ? '/$userId' : '';
-      case PostType.fetchMyPost:
-        return '/currentUser';
       case PostType.addPost:
         return '/addPost';
     }
@@ -82,9 +76,10 @@ class PostAPI implements APIRequestRepresentable {
   Map<String, String>? get query {
     switch (type) {
       case PostType.fetchPost:
-        final Map<String, String> queryPost = {
-          'page': '$page',
-        };
+        final Map<String, String> queryPost = {};
+        if (page != null) {
+          queryPost['page'] = '$page';
+        }
         if (status != null) {
           queryPost['status'] = '$status';
         }
@@ -101,12 +96,6 @@ class PostAPI implements APIRequestRepresentable {
           queryPost['search'] = '$search';
         }
         return queryPost;
-      case PostType.fetchMyPost:
-        final Map<String, String> queryMyPost = {};
-        if (status != null) {
-          queryMyPost['status'] = '$status';
-        }
-        return queryMyPost;
       case PostType.addPost:
         return null;
     }

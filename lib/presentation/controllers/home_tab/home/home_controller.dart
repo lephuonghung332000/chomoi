@@ -1,15 +1,19 @@
 import 'package:chomoi/app/config/constant/app_strings.dart';
 import 'package:chomoi/app/config/constant/app_url_constant.dart';
 import 'package:chomoi/app/config/constant/broadcast_message.dart';
+import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/app/services/firebase_message_service.dart';
+import 'package:chomoi/app/services/socket_service.dart';
 import 'package:chomoi/app/util/get_extensions.dart';
 import 'package:chomoi/domain/models/response/ads/ads_model.dart';
 import 'package:chomoi/domain/models/response/category/category_model.dart';
 import 'package:chomoi/domain/models/response/post/post_model.dart';
+import 'package:chomoi/domain/models/response/user/user_model.dart';
 import 'package:chomoi/domain/models/state/states.dart';
 import 'package:chomoi/domain/usecases/ads/fetch_ads_use_case.dart';
 import 'package:chomoi/domain/usecases/category/fetch_category_use_case.dart';
 import 'package:chomoi/domain/usecases/post/fetch_post_use_case.dart';
+import 'package:chomoi/domain/usecases/user/fetch_user_use_case.dart';
 import 'package:chomoi/presentation/controllers/home_tab/home_tab_navigator.dart';
 import 'package:chomoi/presentation/controllers/main/main_controller.dart';
 import 'package:chomoi/presentation/routes/app_pages.dart';
@@ -22,11 +26,13 @@ class HomeController extends GetxController {
   final FetchAdsUseCase fetchAdsUseCase;
   final FetchCategoryUseCase fetchCategoryUseCase;
   final FetchPostUseCase fetchPostUseCase;
+  final FetchUserUseCase fetchUserUseCase;
 
   HomeController({
     required this.fetchAdsUseCase,
     required this.fetchCategoryUseCase,
     required this.fetchPostUseCase,
+    required this.fetchUserUseCase,
   });
 
   final _adsState = const States<List<AdsModel>>.init(
@@ -59,8 +65,15 @@ class HomeController extends GetxController {
 
   final List<PostModel> _posts = [];
 
+  final _userState = States<UserModel>.init(
+    entity: UserModel.empty(),
+  ).obs;
+
+  States<UserModel> get userState => _userState.value;
+
   @override
   Future<void> onReady() async {
+    _initSignInSocket();
     // Check remote notification permission and update FCM token to server again if possible
     await FirebaseMessageService.get.enableRemoteNotifications();
     // Handle user open app via clicking on notification banner
@@ -70,6 +83,15 @@ class HomeController extends GetxController {
     _fetchPost();
     _registerBroadcast();
     super.onReady();
+  }
+
+  void _initSignInSocket(){
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
+    // register socketId
+    SocketService.get.emitSignIn(userId: userId);
   }
 
   bool onNotification(ScrollNotification notification) {
@@ -84,7 +106,15 @@ class HomeController extends GetxController {
     FBroadcast.instance().register(BroadcastMessages.reloadAds,
         (value, callback) {
       if (value) {
-       _fetchAds();
+        _fetchAds();
+      }
+    }, context: this);
+    FBroadcast.instance().register(BroadcastMessages.reloadMyPost,
+        (value, callback) {
+      if (value) {
+        _page = 1;
+        _posts.clear();
+        _fetchPost();
       }
     }, context: this);
   }
@@ -181,6 +211,10 @@ class HomeController extends GetxController {
   void onClose() {
     FBroadcast.instance().unregister(this);
     super.onClose();
+  }
+
+  void routeChat() {
+    Get.toNamed(AppPages.chatPage.name);
   }
 }
 

@@ -1,3 +1,4 @@
+import 'package:chomoi/domain/usecases/chat/add_chat_use_case.dart';
 import 'package:chomoi/domain/usecases/comment/fetch_comment_use_case.dart';
 import 'package:chomoi/domain/usecases/contact/contact_phone_use_case.dart';
 import 'package:chomoi/domain/usecases/contact/contact_sms_use_case.dart';
@@ -17,6 +18,7 @@ class PostDetailBinging extends Bindings {
         contactPhoneUseCase: ContactPhoneUseCase(),
         fetchPostUseCase: FetchPostUseCase(),
         fetchCommentUseCase: FetchCommentUseCase(),
+        addChatUseCase: AddChatUseCase(),
       ),
       tag: tag,
     );

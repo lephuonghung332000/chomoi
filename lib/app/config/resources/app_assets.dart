@@ -70,6 +70,7 @@ class AppAssets {
   static const String iconPostPending = './assets/icons/icon_post_pending.svg';
   static const String iconPostReject = './assets/icons/icon_post_reject.svg';
   static const String iconAnnouncement = './assets/icons/icon_announcement.svg';
+  static const String iconAttachment = './assets/icons/icon_attachment.svg';
 
   /// Flags
   static String flag(String code) => './assets/flags/$code.png';

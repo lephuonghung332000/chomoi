@@ -15,7 +15,10 @@ abstract class AuthenticationRepository {
     LoginRequestModel loginRequestModel,
   );
 
-  Future<Either<DioError, RefreshNewTokenModel>> refreshNewToken();
+  Future<Either<DioError, RefreshNewTokenModel>> refreshNewToken(
+      {required String userId});
 
-  Future<Either<DioError, Unit>> logout();
+  Future<Either<DioError, Unit>> logout({
+    required String userId,
+  });
 }

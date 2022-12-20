@@ -22,6 +22,7 @@ class IOSSearchBar extends StatefulWidget {
     this.onActiveSearch,
     this.onCancel,
     this.onSubmit,
+    this.onTapChat,
     this.color = AppColors.white,
     this.colorSearchBar = AppColors.white,
     this.onUpdate,
@@ -66,6 +67,8 @@ class IOSSearchBar extends StatefulWidget {
   final BorderRadius? borderRadius;
 
   final Widget prefixIcon;
+
+  final VoidCallback? onTapChat;
 
   @override
   State<IOSSearchBar> createState() => _IOSSearchBarState();
@@ -179,9 +182,12 @@ class _IOSSearchBarState extends State<IOSSearchBar>
           Expanded(child: _buildSearchTextField()),
           if (widget.isShowChat) ...[
             const HBox(16),
-            const SvgIcon(
-              icon: AppAssets.iconChat,
-              size: AppConstant.iconSize,
+            GestureDetector(
+              onTap: widget.onTapChat,
+              child: const SvgIcon(
+                icon: AppAssets.iconChat,
+                size: AppConstant.iconSize,
+              ),
             )
           ]
         ],

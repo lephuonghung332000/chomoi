@@ -1,6 +1,4 @@
-import 'package:chomoi/domain/usecases/search/add_search_use_case.dart';
 import 'package:chomoi/domain/usecases/search/fetch_search_use_case.dart';
-import 'package:chomoi/domain/usecases/user/fetch_user_use_case.dart';
 import 'package:chomoi/presentation/controllers/home_tab/search/search_controller.dart';
 import 'package:get/get.dart';
 

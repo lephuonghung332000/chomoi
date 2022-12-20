@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:chomoi/app/config/constant/app_strings.dart';
+import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/app/util/file_converter.dart';
 import 'package:chomoi/app/util/gender.dart';
 import 'package:chomoi/app/util/get_cupertino_dialog.dart';
@@ -83,6 +84,7 @@ class EditUserController extends GetxController {
   States<List<WardModel>> get wardState => _wardState.value;
 
   final _isValidForm = true.obs;
+
   bool get isValidForm => _isValidForm.value;
 
   void onValidForm() {
@@ -189,10 +191,12 @@ class EditUserController extends GetxController {
       address: addressController.text,
       file: multipartFile,
     );
-
-    final result = await updateUserUseCase.call(
-        updateUserModel,
-    );
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
+    final result =
+        await updateUserUseCase.call(Tuple2(updateUserModel, userId));
     result.fold((failure) async {
       _updateUserState.value = States.failure(failure);
       await LoadingDialog.hide();

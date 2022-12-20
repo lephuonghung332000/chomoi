@@ -5,8 +5,8 @@ import 'package:chomoi/domain/repositories/notification/notification_repository.
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-class FetchNotificationUseCase
-    extends ParamUseCase<Either<DioError, NotificationPagingModel>, int?> {
+class FetchNotificationUseCase extends ParamUseCase<
+    Either<DioError, NotificationPagingModel>, Tuple2<int?, String>> {
   late final NotificationRepository _repo;
 
   FetchNotificationUseCase({NotificationRepository? notificationRepository}) {
@@ -16,7 +16,8 @@ class FetchNotificationUseCase
   @override
   Future<Either<DioError, NotificationPagingModel>> call(params) {
     return _repo.fetchNotification(
-      page: params,
+      page: params.value1,
+      userId: params.value2,
     );
   }
 }

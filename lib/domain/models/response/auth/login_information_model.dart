@@ -7,15 +7,19 @@ part 'login_information_model.freezed.dart';
 class LoginInformationModel with _$LoginInformationModel {
   factory LoginInformationModel({
     required String idToken,
+    required String userId,
   }) = _LoginInformationModel;
 
-  factory LoginInformationModel.empty() => LoginInformationModel(
-    idToken: '',
-  );
+  factory LoginInformationModel.empty() =>
+      LoginInformationModel(
+          idToken: '',
+          userId: ''
+      );
 
   factory LoginInformationModel.fromDto(LoginInformationDto dto) {
     return LoginInformationModel(
-      idToken: dto.data
+      idToken: dto.data.token,
+      userId: dto.data.id,
     );
   }
 }

@@ -23,6 +23,11 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.secondaryBackgroundColor,
+      appBar: PreferredSize(
+        preferredSize:
+            const Size.fromHeight(AppConstant.heightAppBarWithoutSearchBar),
+        child: _buildHeader,
+      ),
       body: SafeArea(
           child: Column(
         children: [
@@ -34,7 +39,6 @@ class HomePage extends GetView<HomeController> {
                   parent: AlwaysScrollableScrollPhysics(),
                 ),
                 slivers: [
-                  _buildHeader,
                   _buildCarousel,
                   _buildUtility,
                   _buildSpace,
@@ -61,23 +65,21 @@ class HomePage extends GetView<HomeController> {
         child: VBox(15),
       );
 
-  Widget get _buildHeader => SliverPinnedHeader(
-        child: Container(
-          color: AppColors.primaryColor,
-          alignment: Alignment.bottomCenter,
-          height: AppConstant.heightAppBarSearch,
-          padding: const EdgeInsets.only(left: 6, right: 12, bottom: 2),
-          child: InkWell(
-            onTap: () => controller.routeToSearchPage(),
-            child: const IOSSearchBar(
-              height: AppConstant.heightAppBarSearch,
-              placeholder: AppStrings.search_hint_text,
-              enable: false,
-              isShowChat: true,
-            ),
-          ),
-        ),
-      );
+  Widget get _buildHeader => Container(
+    color: AppColors.primaryColor,
+    alignment: Alignment.bottomCenter,
+    padding: const EdgeInsets.only(left: 6, right: 12, bottom: 2),
+    child: InkWell(
+      onTap: () => controller.routeToSearchPage(),
+      child: IOSSearchBar(
+        height: AppConstant.heightAppBarSearch,
+        placeholder: AppStrings.search_hint_text,
+        enable: false,
+        isShowChat: true,
+        onTapChat: () => controller.routeChat(),
+      ),
+    ),
+  );
 
   Widget get _buildCarousel => GetX<HomeController>(
         builder: (controller) {

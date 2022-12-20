@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:chomoi/app/config/constant/app_strings.dart';
+import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/app/util/file_converter.dart';
 import 'package:chomoi/app/util/get_cupertino_dialog.dart';
 import 'package:chomoi/domain/models/request/post/post_request_model.dart';
@@ -125,7 +126,7 @@ class CreatePostController extends GetxController {
 
   bool get isValidForm => _isValidForm.value;
 
-  String _userId = '';
+  List<CategoryModel> _categories = [];
 
   void onValidForm() {
     _isValidForm.value = createPostFormKey.currentState!.validate() &&
@@ -229,14 +230,17 @@ class CreatePostController extends GetxController {
   }
 
   Future<void> _fetchUser() async {
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
     _userState.value = const States.loading();
     // call info myself
-    final result = await fetchUserUseCase.call(null);
+    final result = await fetchUserUseCase.call(userId);
     result.fold((failure) {
       _userState.value = States.failure(failure);
     }, (value) {
       _userState.value = States.success(entity: value);
-      _userId = value.id;
       addressController.text = value.address;
     });
   }
@@ -248,6 +252,7 @@ class CreatePostController extends GetxController {
       _categoryState.value = States.failure(failure);
     }, (value) {
       _categoryState.value = States.success(entity: value);
+      _categories = value;
     });
   }
 
@@ -270,13 +275,24 @@ class CreatePostController extends GetxController {
       final multipart = await imageFiles[i].toMultipart;
       multipartFiles.add(multipart);
     }
+    final categoryId = _categories
+        .where(
+            (element) => element.name.compareTo(categoryController.text) == 0)
+        .first
+        .id;
+
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
+
     final postRequestModel = PostRequestModel(
       title: titleController.text,
       brandId: brandController.text,
       address: addressController.text,
       price: _price,
-      categoryId: categoryController.text,
-      userId: _userId,
+      categoryId: categoryId,
+      userId: userId,
       description: descriptionController.text,
       files: multipartFiles,
     );

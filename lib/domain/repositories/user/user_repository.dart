@@ -8,7 +8,6 @@ abstract class UserRepository {
     String? userId,
   });
 
-  Future<Either<DioError, Unit>> updateUser({
-    required UserRequestModel userRequestModel,
-  });
+  Future<Either<DioError, Unit>> updateUser(
+      {required UserRequestModel userRequestModel, required String userId});
 }

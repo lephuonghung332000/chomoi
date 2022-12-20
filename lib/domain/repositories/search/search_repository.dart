@@ -4,7 +4,8 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 abstract class SearchRepository {
-  Future<Either<DioError, List<SearchHistoryModel>>> fetchSearch();
+  Future<Either<DioError, List<SearchHistoryModel>>> fetchSearch(
+      {required String userId});
 
   Future<Either<DioError, Unit>> addSearch(
     SearchRequestModel searchRequestModel,

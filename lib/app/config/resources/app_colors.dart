@@ -34,6 +34,8 @@ class AppColors {
   // Greens
   static const Color green = Color(0xffa1ce46);
   static const Color greenLeaf = Color(0xff68D84F);
+  static const Color greenFog = Color(0xffdcf8c6);
+  static const Color greenCastleton = Color(0xFF128C7E);
 
   // Yellow
   static const Color goldenYellow = Color(0xffFDCA10);

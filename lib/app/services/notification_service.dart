@@ -6,6 +6,7 @@ import 'package:chomoi/domain/models/state/states.dart';
 import 'package:chomoi/domain/usecases/notification/fetch_notification_use_case.dart';
 import 'package:chomoi/domain/usecases/notification/get_unread_notification_use_case.dart';
 import 'package:chomoi/domain/usecases/notification/update_all_new_notification_usecase.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -131,11 +132,11 @@ class NotificationsServiceImpl extends GetxService
     super.onClose();
   }
 
-  void clearNotifications(){
+  void clearNotifications() {
     _total = 0;
     notificationPage.value = 1;
-    _notificationState.value = States.success(entity: notifications);
     notifications.clear();
+    _notificationState.value = const States.init(entity: []);
   }
 
   @override
@@ -170,7 +171,16 @@ class NotificationsServiceImpl extends GetxService
     if (isLoadScreen && page == 1) {
       _notificationState.value = const States.loading();
     }
-    final result = await fetchNotificationUseCase.call(page);
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
+    final result = await fetchNotificationUseCase.call(
+      Tuple2(
+        page,
+        userId,
+      ),
+    );
     result.fold((failure) {
       if (page == 1) {
         _notificationState.value = States.failure(failure);

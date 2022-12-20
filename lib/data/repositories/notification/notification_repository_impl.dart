@@ -13,9 +13,11 @@ class NotificationRepositoryImpl extends NotificationRepository {
   @override
   Future<Either<DioError, NotificationPagingModel>> fetchNotification({
     int? page,
+    required String userId,
   }) =>
       Task(
-        () => NotificationApi.fetchNotification(page: page).request(),
+        () => NotificationApi.fetchNotification(page: page, userId: userId)
+            .request(),
       )
           .attempt()
           .map(
@@ -87,11 +89,13 @@ class NotificationRepositoryImpl extends NotificationRepository {
 
   @override
   Future<Either<DioError, Unit>> updateFcmToken(
-          FcmTokenRequestModel fcmTokenRequestModel) =>
+          FcmTokenRequestModel fcmTokenRequestModel,
+          {required String userId}) =>
       Task(
         () => NotificationApi.updateFcmToken(
           fcmTokenRequestDto:
               FcmTokenRequestDto.fromModel(fcmTokenRequestModel),
+          userId: userId,
         ).request(),
       )
           .attempt()
@@ -107,7 +111,8 @@ class NotificationRepositoryImpl extends NotificationRepository {
           .run();
 
   @override
-  Future<Either<DioError, Unit>> updateRead({required String notificationId}) => Task(
+  Future<Either<DioError, Unit>> updateRead({required String notificationId}) =>
+      Task(
         () => NotificationApi.updateRead(
           notificationId: notificationId,
         ).request(),

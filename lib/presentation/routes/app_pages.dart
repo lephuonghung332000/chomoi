@@ -1,3 +1,5 @@
+import 'package:chomoi/presentation/controllers/chat/chat_binding.dart';
+import 'package:chomoi/presentation/controllers/content_chat/content_chat_binding.dart';
 import 'package:chomoi/presentation/controllers/create_post/create_post_binding.dart';
 import 'package:chomoi/presentation/controllers/create_post_success/create_post_success_binding.dart';
 import 'package:chomoi/presentation/controllers/home_tab/category_selection/category_selection_binding.dart';
@@ -17,10 +19,12 @@ import 'package:chomoi/presentation/controllers/setting_tab/setting/setting_bind
 import 'package:chomoi/presentation/controllers/setting_tab/showing_post/showing_post_binding.dart';
 import 'package:chomoi/presentation/controllers/sign_up/sign_up_binding.dart';
 import 'package:chomoi/presentation/controllers/splash/splash_binding.dart';
+import 'package:chomoi/presentation/pages/chat/chat_page.dart';
+import 'package:chomoi/presentation/pages/content_chat/content_chat_page.dart';
 import 'package:chomoi/presentation/pages/create_post/create_post_page.dart';
 import 'package:chomoi/presentation/pages/create_post_success/create_post_success_page.dart';
 import 'package:chomoi/presentation/pages/home_tab/category_selection/category_selection_page.dart';
-import 'package:chomoi/presentation/pages/home_tab/comment/comment_page.dart';
+import 'package:chomoi/presentation/pages/comment/comment_page.dart';
 import 'package:chomoi/presentation/pages/home_tab/home/home_page.dart';
 import 'package:chomoi/presentation/pages/home_tab/post/post_page.dart';
 import 'package:chomoi/presentation/pages/home_tab/province_selection/province_selection_page.dart';
@@ -42,17 +46,19 @@ class AppPages {
   static final pages = [
     createPostPage,
     createPostSuccessPage,
-    editUserPage,
+    chatPage,
     commentPage,
+    contentChatPage,
     categorySelectionPage,
+    editUserPage,
     homePage,
     loginPage,
     mainPage,
+    myPostPage,
     notificationPage,
     postDetailPage,
     postPage,
     provinceSelectionPage,
-    myPostPage,
     relatedPostPage,
     signUpPage,
     splashPage,
@@ -101,6 +107,26 @@ class AppPages {
       name: _AppRoutes.comment,
       page: () => CommentPage(),
       binding: CommentBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 700),
+    ),
+  );
+  static final chatPage = AppPages(
+    name: _AppRoutes.chat,
+    page: GetPage(
+      name: _AppRoutes.chat,
+      page: () => ChatPage(),
+      binding: ChatBinding(),
+      transition: Transition.cupertino,
+      transitionDuration: const Duration(milliseconds: 700),
+    ),
+  );
+  static final contentChatPage = AppPages(
+    name: _AppRoutes.contentChat,
+    page: GetPage(
+      name: _AppRoutes.contentChat,
+      page: () => ContentChatPage(),
+      binding: ContentChatBinding(),
       transition: Transition.cupertino,
       transitionDuration: const Duration(milliseconds: 700),
     ),
@@ -256,7 +282,9 @@ class AppPages {
 
 abstract class _AppRoutes {
   static const createPost = '/createPost';
-  static const createPostSuccess = '/createPostSucces';
+  static const createPostSuccess = '/createPostSuccess';
+  static const chat = '/chat';
+  static const contentChat = '/contentChat';
   static const home = '/home_tab';
   static const comment = '/comment';
   static const login = '/login';

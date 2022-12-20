@@ -30,6 +30,13 @@
             {
               "client_id": "257214432280-52tikc2tjbrfq9h28b0g9m7vgq6t5rlq.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "257214432280-6p6b7e80jlbb5oab1s2u0638rjumhrer.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.getxCleanArchitecture"
+              }
             }
           ]
         }

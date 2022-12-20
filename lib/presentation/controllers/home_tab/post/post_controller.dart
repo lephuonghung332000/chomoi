@@ -1,3 +1,4 @@
+import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/domain/models/request/search/search_request_model.dart';
 import 'package:chomoi/domain/models/response/category/category_model.dart';
 import 'package:chomoi/domain/models/response/country/province_model.dart';
@@ -56,8 +57,6 @@ class PostController extends GetxController {
 
   final _timePost = 'DESC'.obs;
 
-  String userId = '';
-
   String get timePost => _timePost.value;
 
   int _page = 1;
@@ -106,18 +105,25 @@ class PostController extends GetxController {
   }
 
   Future<void> _fetchUser() async {
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
     _userState.value = const States.loading();
     // call info myself
-    final result = await fetchUserUseCase.call(null);
+    final result = await fetchUserUseCase.call(userId);
     result.fold((failure) {
       _userState.value = States.failure(failure);
     }, (value) {
       _userState.value = States.success(entity: value);
-      userId = value.id;
     });
   }
 
   Future<void> addSearch() async {
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
     _addSearchState.value = const States.loading();
     final result = await addSearchUseCase.call(
       SearchRequestModel(
@@ -147,7 +153,6 @@ class PostController extends GetxController {
   @override
   void onClose() {
     _timePostListener?.dispose();
-    searchController.dispose();
     super.onClose();
   }
 

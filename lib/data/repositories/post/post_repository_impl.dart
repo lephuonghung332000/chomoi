@@ -16,6 +16,7 @@ class PostRepositoryImpl extends PostRepository {
     String? province,
     String? search,
     int? page,
+    String? userId,
   }) =>
       Task(
         () => PostAPI.fetchPost(
@@ -24,6 +25,7 @@ class PostRepositoryImpl extends PostRepository {
                 timePost: timePost,
                 province: province,
                 search: search,
+                userId: userId,
                 categoryId: categoryId)
             .request(),
       )
@@ -42,11 +44,11 @@ class PostRepositoryImpl extends PostRepository {
           .run();
 
   @override
-  Future<Either<DioError, PostPagingModel>> fetchMyPost({String? status}) =>
+  Future<Either<DioError, Unit>> addPost(PostRequestModel postRequestModel) =>
       Task(
-        () => PostAPI.fetchMyPost(
-          status: status,
-        ).request(),
+        () => PostAPI.addPost(
+                postRequestDto: PostRequestDto.fromModel(postRequestModel))
+            .request(),
       )
           .attempt()
           .map(
@@ -55,29 +57,8 @@ class PostRepositoryImpl extends PostRepository {
                 return l as DioError;
               },
             ).map(
-              (response) => PostPagingModel.fromDto(
-                PostPagingDto.fromJson(response),
-              ),
+              (_) => unit,
             ),
           )
-          .run();
-
-  @override
-  Future<Either<DioError, Unit>> addPost(
-      PostRequestModel postRequestModel) =>
-      Task(
-            () => PostAPI.addPost(postRequestDto:  PostRequestDto.fromModel(postRequestModel))
-            .request(),
-      )
-          .attempt()
-          .map(
-            (either) => either.leftMap<DioError>(
-              (l) {
-            return l as DioError;
-          },
-        ).map(
-              (_) => unit,
-        ),
-      )
           .run();
 }

@@ -11,10 +11,7 @@ abstract class PostRepository {
     String? province,
     String? search,
     int? page,
-  });
-
-  Future<Either<DioError, PostPagingModel>> fetchMyPost({
-    String? status,
+    String userId,
   });
 
   Future<Either<DioError, Unit>> addPost(

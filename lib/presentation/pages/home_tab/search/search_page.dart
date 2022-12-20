@@ -19,13 +19,17 @@ class SearchPage extends GetView<SearchController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.secondaryBackgroundColor,
+      appBar: PreferredSize(
+        preferredSize:
+        const Size.fromHeight(AppConstant.heightAppBarWithoutSearchBar),
+        child: _buildHeader,
+      ),
       body: SafeArea(
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics(),
           ),
           slivers: [
-            _buildHeader,
             _buildSearchList(context),
           ],
         ),
@@ -33,26 +37,23 @@ class SearchPage extends GetView<SearchController> {
     );
   }
 
-  Widget get _buildHeader => SliverPinnedHeader(
-        child: Container(
-          color: AppColors.primaryColor,
-          alignment: Alignment.bottomCenter,
-          height: AppConstant.heightAppBarSearch,
-          padding: const EdgeInsets.only(left: 6, right: 12, bottom: 2),
-          child: IOSSearchBar(
-            placeholder: AppStrings.search_hint_text,
-            controller: controller.searchController,
-            autofocus: true,
-            onSubmit: (text) {
-              controller.debounce.run(() {
-                controller.routeToPostPage(search: text);
-              });
-            },
-            onActiveSearch: controller.onActiveSearch,
-            onCancel: controller.onCancel,
-          ),
-        ),
-      );
+  Widget get _buildHeader => Container(
+    color: AppColors.primaryColor,
+    alignment: Alignment.bottomCenter,
+    padding: const EdgeInsets.only(left: 6, right: 12, bottom: 2),
+    child: IOSSearchBar(
+      placeholder: AppStrings.search_hint_text,
+      controller: controller.searchController,
+      autofocus: true,
+      onSubmit: (text) {
+        controller.debounce.run(() {
+          controller.routeToPostPage(search: text);
+        });
+      },
+      onActiveSearch: controller.onActiveSearch,
+      onCancel: controller.onCancel,
+    ),
+  );
 
   Widget _buildLabel(BuildContext context) => SliverToBoxAdapter(
         child: Container(

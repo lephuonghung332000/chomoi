@@ -6,7 +6,6 @@ import 'package:chomoi/domain/models/response/user/user_model.dart';
 import 'package:chomoi/domain/models/state/states.dart';
 import 'package:chomoi/domain/usecases/post/fetch_my_accept_post_usecase.dart';
 import 'package:chomoi/domain/usecases/user/fetch_user_use_case.dart';
-import 'package:chomoi/presentation/controllers/home_tab/home/home_controller.dart';
 import 'package:chomoi/presentation/controllers/my_post_tab/my_post/my_post_controller.dart';
 import 'package:chomoi/presentation/pages/setting_tab/setting/viewmodels/user_view_model.dart';
 import 'package:chomoi/presentation/routes/app_pages.dart';
@@ -34,9 +33,13 @@ class SettingController extends GetxController {
   });
 
   Future<void> _fetchUser() async {
-    _userState.value = const States.loading();
     // call info myself
-    final result = await fetchUserUseCase.call(null);
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
+    _userState.value = const States.loading();
+    final result = await fetchUserUseCase.call(userId);
     result.fold((failure) {
       _userState.value = States.failure(failure);
     }, (value) {
@@ -45,9 +48,12 @@ class SettingController extends GetxController {
   }
 
   Future<void> _fetchAcceptPost() async {
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
     _postAcceptState.value = const States.loading();
-
-    final result = await fetchMyAcceptPostUseCase.call();
+    final result = await fetchMyAcceptPostUseCase.call(userId);
     result.fold((failure) {
       _postAcceptState.value = States.failure(failure);
     }, (value) async {

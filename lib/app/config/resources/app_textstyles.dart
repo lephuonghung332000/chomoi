@@ -96,7 +96,7 @@ abstract class AppTextStyles {
 
   // Marker Map
   static const TextStyle smallBold11w700 = TextStyle(
-      fontSize: 11, fontWeight: FontWeight.w700, color: AppColors.white);
+      fontSize: 11, fontWeight: FontWeight.w700);
 
   // small
   static const TextStyle smallRegular11w400 = TextStyle(

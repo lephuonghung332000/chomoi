@@ -13,18 +13,31 @@ class AuthAPI implements APIRequestRepresentable {
   final AuthType type;
   final LoginRequestDto? loginRequestDTO;
   final SignUpRequestDto? signUpRequestDto;
+  final String? userId;
 
-  AuthAPI._({required this.type, this.loginRequestDTO, this.signUpRequestDto});
+  AuthAPI._(
+      {required this.type,
+      this.loginRequestDTO,
+      this.signUpRequestDto,
+      this.userId});
 
   AuthAPI.login(LoginRequestDto loginRequestDTO)
       : this._(type: AuthType.login, loginRequestDTO: loginRequestDTO);
 
-  AuthAPI.refreshToken() : this._(type: AuthType.refreshToken);
+  AuthAPI.refreshToken({required String userId})
+      : this._(
+          type: AuthType.refreshToken,
+          userId: userId,
+        );
 
   AuthAPI.signUp(SignUpRequestDto signUpRequestDto)
       : this._(type: AuthType.signUp, signUpRequestDto: signUpRequestDto);
 
-  AuthAPI.logout() : this._(type: AuthType.logout);
+  AuthAPI.logout({required String userId})
+      : this._(
+          type: AuthType.logout,
+          userId: userId,
+        );
 
   @override
   String get endpoint => 'auth';
@@ -37,9 +50,9 @@ class AuthAPI implements APIRequestRepresentable {
       case AuthType.login:
         return '/login';
       case AuthType.logout:
-        return '/logout';
+        return '/logout/$userId';
       case AuthType.refreshToken:
-        return '/refreshToken';
+        return '/refreshToken/$userId';
     }
   }
 

@@ -9,8 +9,10 @@ import 'package:dio/dio.dart';
 
 class SearchRepositoryImpl extends SearchRepository {
   @override
-  Future<Either<DioError, List<SearchHistoryModel>>> fetchSearch() => Task(
-        () => SearchApi.fetchSearch().request(),
+  Future<Either<DioError, List<SearchHistoryModel>>> fetchSearch(
+          {required String userId}) =>
+      Task(
+        () => SearchApi.fetchSearch(userId: userId).request(),
       )
           .attempt()
           .map(

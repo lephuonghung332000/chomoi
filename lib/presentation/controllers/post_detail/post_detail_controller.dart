@@ -1,8 +1,12 @@
+import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/app/util/get_extensions.dart';
+import 'package:chomoi/domain/models/request/chat/chat_request_model.dart';
+import 'package:chomoi/domain/models/response/chat/add_chat_model.dart';
 import 'package:chomoi/domain/models/response/comment/comment_model.dart';
 import 'package:chomoi/domain/models/response/post/post_model.dart';
 import 'package:chomoi/domain/models/response/user/user_model.dart';
 import 'package:chomoi/domain/models/state/states.dart';
+import 'package:chomoi/domain/usecases/chat/add_chat_use_case.dart';
 import 'package:chomoi/domain/usecases/comment/fetch_comment_use_case.dart';
 import 'package:chomoi/domain/usecases/contact/contact_phone_use_case.dart';
 import 'package:chomoi/domain/usecases/contact/contact_sms_use_case.dart';
@@ -18,6 +22,12 @@ class PostDetailController extends GetxController {
   final ContactSmsUseCase contactSmsUseCase;
   final FetchPostUseCase fetchPostUseCase;
   final FetchCommentUseCase fetchCommentUseCase;
+  final AddChatUseCase addChatUseCase;
+
+  String _myId = '';
+  String userName = '';
+  String avatar = '';
+  String userId = '';
 
   PostDetailController({
     required this.fetchUserUseCase,
@@ -25,7 +35,23 @@ class PostDetailController extends GetxController {
     required this.contactSmsUseCase,
     required this.fetchPostUseCase,
     required this.fetchCommentUseCase,
+    required this.addChatUseCase,
   });
+
+  Future<void> _fetchUser() async {
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
+    _myId = userId;
+    _userState.value = const States.loading();
+    final result = await fetchUserUseCase.call(_myId);
+    result.fold((failure) {
+      _userState.value = States.failure(failure);
+    }, (value) {
+      _userState.value = States.success(entity: value);
+    });
+  }
 
   final _postDetail = PostModel.empty().obs;
 
@@ -53,6 +79,12 @@ class PostDetailController extends GetxController {
 
   States<List<CommentModel>> get commentState => _commentState.value;
 
+  final _addChatState = States<AddChatModel>.init(
+    entity: AddChatModel.empty(),
+  ).obs;
+
+  States<AddChatModel> get addChatState => _addChatState.value;
+
   final _total = 0.obs;
 
   int get total => _total.value;
@@ -72,19 +104,11 @@ class PostDetailController extends GetxController {
     if (Get.arguments != null) {
       if (Get.arguments['post'] != null) {
         _postDetail.value = Get.arguments['post'] as PostModel;
+        avatar = _postDetail.value.avatar;
+        userName = _postDetail.value.name;
+        userId = _postDetail.value.userId;
       }
     }
-  }
-
-  Future<void> _fetchUser() async {
-    _userState.value = const States.loading();
-    // call info myself
-    final result = await fetchUserUseCase.call(null);
-    result.fold((failure) {
-      _userState.value = States.failure(failure);
-    }, (value) {
-      _userState.value = States.success(entity: value);
-    });
   }
 
   void callPhone(String phoneNumber) {
@@ -127,11 +151,41 @@ class PostDetailController extends GetxController {
     );
   }
 
+  Future<void> routeContentChat() async {
+    if (avatar.isNotEmpty &&
+        _myId.isNotEmpty &&
+        userName.isNotEmpty &&
+        userId.isNotEmpty) {
+      _addChatState.value = const States.loading();
+
+      final requestChatModel = ChatRequestModel(
+        idReceiver: userId,
+        postId: _postDetail.value.id,
+        idSender: _myId,
+      );
+
+      final result = await addChatUseCase.call(requestChatModel);
+      result.fold((failure) async {}, (value) async {
+        Get.toNamed(
+          AppPages.contentChatPage.name,
+          arguments: {
+            'avatar': avatar,
+            'name': userName,
+            'my_id': _myId,
+            'user_id': userId,
+            'post_id': _postDetail.value.id,
+            'chat_box_id': value.id,
+          },
+        );
+      });
+    }
+  }
+
   Future<void> _fetchPost({int page = 1}) async {
     _postState.value = const States.loading();
 
     final result = await fetchPostUseCase.call(
-      Tuple5( null, _postDetail.value.categoryId, null, null, page),
+      Tuple5(null, _postDetail.value.categoryId, null, null, page),
     );
     result.fold((failure) {
       _postState.value = States.failure(failure);
@@ -157,9 +211,9 @@ class PostDetailController extends GetxController {
 
   @override
   void onReady() {
-    _fetchUser();
     _fetchPost();
     _fetchComment();
+    _fetchUser();
     super.onReady();
   }
 }

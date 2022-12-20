@@ -4,10 +4,12 @@ class AppStrings {
   static const button_cancel = 'Hủy';
   static const button_ok = 'Đồng ý';
   static const token = 'token';
+  static const user_id = 'user_id';
   static const button_confirm = 'Xác nhận';
   static const button_select = 'Chọn';
   static const dialog_auth_error_title = 'Lỗi xác thực người dùng';
   static const dialog_error_title = 'Thông báo';
+  static const dialog_error_chat_text = 'Không thể gửi được tin nhắn';
   static const login_success_message = 'Đăng nhập thành công';
   static const dialog_error_generic = 'Có lỗi xảy ra, vui lòng thử lại';
   static const login_title = 'Đăng nhập';
@@ -17,6 +19,12 @@ class AppStrings {
   static const login_another_login = 'hoặc sử dụng';
   static const show_title = 'Hiện';
   static const hide_title = 'Ẩn';
+  static const document_text = 'Tài liệu';
+  static const camera_text = 'Camera';
+  static const gallery_text = 'Thư viện';
+  static const audio_text = 'Âm thanh';
+  static const location_text = 'Địa điểm';
+  static const contact_text = 'Liên hệ';
   static const settings_notification_push ='Đẩy thông báo';
   static const  content_notification_push ='Vui lòng mở cài đặt để bật thông báo';
   static const input_email_hint_text = 'Email của bạn';
@@ -78,6 +86,7 @@ class AppStrings {
   static const district_selection_create_post_title = 'Chọn quận, huyện, thị xã';
   static const ward_selection_create_post_title = 'Chọn phường, xã, thị trấn';
   static const all_comment_title = 'Tất cả bình luận';
+  static const chat_title = 'Chat';
   static const province_selection_title = 'Vị trí';
   static const filter_province_selection_title = 'Lọc theo khu vực';
   static const apply_text = 'ÁP DỤNG';
@@ -102,6 +111,7 @@ class AppStrings {
   static const see_more_comment_title = 'Xem thêm bình luận';
   static const post_text = 'Đăng';
   static const add_comment_hint_text = 'Thêm bình luận...';
+  static const send_chat_hint_text = 'Gửi tin nhắn';
   static const write_comment_hint_text = 'Viết bình luận';
   static const see_all_text = 'Xem tất cả';
   static const manage_post_title = 'Quản lý tin đăng';

@@ -2,7 +2,8 @@ class AppConstant {
   static const double heightAppBarSearch = 70;
   static const double heightAppBarCarousel = 180;
   static const double heightPhotoGallery = 250;
-  static const double heightAppBarWithoutSearchBar = 50;
+  static const double heightAppBarWithoutSearchBar = 70;
+  static const double heightAppBarChat = 60;
   static const double heightUtility = 150;
   static const double heightCategoryView = 220;
   static const double heightPostViewVertical = 250;
@@ -17,10 +18,13 @@ class AppConstant {
   static const double iconAvatarPostSize = 10;
   static const double iconAvatarSettingSize = 36;
   static const double iconAvatarBoxSize = 20;
+  static const double iconAvatarChatSize = 30;
+  static const double iconBottomSheetSize = 30;
   static const double iconAvatarPostDetailSize = 20;
   static const double boxItemSize = 64;
   static const double itemSpacing = 16;
   static const double itemImageBox = 100;
   static const double iconMoreSetting = 16;
   static const int descriptionMaxLength = 1500;
+  static const double heightBottomSheet = 270;
 }

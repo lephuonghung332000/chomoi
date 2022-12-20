@@ -1,5 +1,6 @@
 import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/app/services/firebase_message_service.dart';
+import 'package:chomoi/app/services/socket_service.dart';
 import 'package:chomoi/domain/usecases/auth/refresh_new_token_use_case.dart';
 import 'package:chomoi/presentation/routes/app_pages.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,17 +32,29 @@ class SplashController extends GetxController {
   }
 
   Future<void> _refreshToken() async {
-    final result = await refreshNewTokenUseCase.call();
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      clearStorageAndRouteLogin();
+      return;
+    }
+
+    final result = await refreshNewTokenUseCase.call(userId);
     result.fold(
       (e) {
-        FirebaseMessageService.get.removeFCMTokenFromServer();
-        _routeToLogin(isRemovedToken: true);
+        AuthService.get.clearUserId();
+        clearStorageAndRouteLogin();
       },
       (value) {
         AuthService.get.storeToken(value.idToken);
         _routeToMain();
       },
     );
+  }
+
+  void clearStorageAndRouteLogin() {
+    FirebaseMessageService.get.removeFCMTokenFromServer();
+
+    _routeToLogin(isRemovedToken: true);
   }
 
   void _routeToMain() {

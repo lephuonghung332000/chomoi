@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:chomoi/app/config/http/app_http_overrides.dart';
 import 'package:chomoi/app/config/resources/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -5,10 +8,14 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'app/util/dependency.dart';
 import 'presentation/app.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
+  HttpOverrides.global = AppHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await DependencyCreator.init();
   _configAppStyle();
   runApp(App());

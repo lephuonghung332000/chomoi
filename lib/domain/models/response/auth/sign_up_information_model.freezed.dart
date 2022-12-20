@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SignUpInformationModel {
   String get idToken => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SignUpInformationModelCopyWith<SignUpInformationModel> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $SignUpInformationModelCopyWith<$Res> {
           $Res Function(SignUpInformationModel) then) =
       _$SignUpInformationModelCopyWithImpl<$Res, SignUpInformationModel>;
   @useResult
-  $Res call({String idToken});
+  $Res call({String idToken, String userId});
 }
 
 /// @nodoc
@@ -47,11 +48,16 @@ class _$SignUpInformationModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? idToken = null,
+    Object? userId = null,
   }) {
     return _then(_value.copyWith(
       idToken: null == idToken
           ? _value.idToken
           : idToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -65,7 +71,7 @@ abstract class _$$_SignUpInformationModelCopyWith<$Res>
       __$$_SignUpInformationModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String idToken});
+  $Res call({String idToken, String userId});
 }
 
 /// @nodoc
@@ -81,11 +87,16 @@ class __$$_SignUpInformationModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? idToken = null,
+    Object? userId = null,
   }) {
     return _then(_$_SignUpInformationModel(
       idToken: null == idToken
           ? _value.idToken
           : idToken // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -94,14 +105,16 @@ class __$$_SignUpInformationModelCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SignUpInformationModel implements _SignUpInformationModel {
-  _$_SignUpInformationModel({required this.idToken});
+  _$_SignUpInformationModel({required this.idToken, required this.userId});
 
   @override
   final String idToken;
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'SignUpInformationModel(idToken: $idToken)';
+    return 'SignUpInformationModel(idToken: $idToken, userId: $userId)';
   }
 
   @override
@@ -109,11 +122,12 @@ class _$_SignUpInformationModel implements _SignUpInformationModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_SignUpInformationModel &&
-            (identical(other.idToken, idToken) || other.idToken == idToken));
+            (identical(other.idToken, idToken) || other.idToken == idToken) &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, idToken);
+  int get hashCode => Object.hash(runtimeType, idToken, userId);
 
   @JsonKey(ignore: true)
   @override
@@ -124,11 +138,14 @@ class _$_SignUpInformationModel implements _SignUpInformationModel {
 }
 
 abstract class _SignUpInformationModel implements SignUpInformationModel {
-  factory _SignUpInformationModel({required final String idToken}) =
-      _$_SignUpInformationModel;
+  factory _SignUpInformationModel(
+      {required final String idToken,
+      required final String userId}) = _$_SignUpInformationModel;
 
   @override
   String get idToken;
+  @override
+  String get userId;
   @override
   @JsonKey(ignore: true)
   _$$_SignUpInformationModelCopyWith<_$_SignUpInformationModel> get copyWith =>

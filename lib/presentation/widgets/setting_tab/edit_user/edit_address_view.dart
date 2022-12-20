@@ -5,7 +5,6 @@ import 'package:chomoi/app/util/get_model_bottom_sheet.dart';
 import 'package:chomoi/domain/models/response/country/district_model.dart';
 import 'package:chomoi/domain/models/response/country/province_model.dart';
 import 'package:chomoi/domain/models/response/country/ward_model.dart';
-import 'package:chomoi/presentation/controllers/create_post/create_post_controller.dart';
 import 'package:chomoi/presentation/controllers/setting_tab/edit_user/edit_user_controller.dart';
 import 'package:chomoi/presentation/widgets/app_back_button.dart';
 import 'package:chomoi/presentation/widgets/create_post/choose_detail_address_view.dart';

@@ -15,6 +15,7 @@ class ImagePost extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: image,
       height: double.infinity,
+      width: double.infinity,
       fit: BoxFit.cover,
       errorWidget: (context, url, error) =>
       const CupertinoActivityIndicator(),

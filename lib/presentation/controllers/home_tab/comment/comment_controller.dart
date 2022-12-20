@@ -1,4 +1,5 @@
 import 'package:chomoi/app/config/constant/app_strings.dart';
+import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/app/util/get_cupertino_dialog.dart';
 import 'package:chomoi/domain/models/request/comment/comment_request_model.dart';
 import 'package:chomoi/domain/models/response/comment/comment_model.dart';
@@ -32,8 +33,6 @@ class CommentController extends GetxController {
   int _total = 0;
 
   String postId = '';
-
-  String userId = '';
 
   final _isLoadingComment = false.obs;
 
@@ -96,14 +95,17 @@ class CommentController extends GetxController {
   }
 
   Future<void> _fetchUser() async {
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
     _userState.value = const States.loading();
     // call info myself
-    final result = await fetchUserUseCase.call(null);
+    final result = await fetchUserUseCase.call(userId);
     result.fold((failure) {
       _userState.value = States.failure(failure);
     }, (value) {
       _userState.value = States.success(entity: value);
-      userId = value.id;
     });
   }
 
@@ -140,6 +142,11 @@ class CommentController extends GetxController {
 
   Future<void> addComment() async {
     if (commentController.text.isEmpty) {
+      return;
+    }
+
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
       return;
     }
 

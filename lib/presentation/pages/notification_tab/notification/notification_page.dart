@@ -19,25 +19,26 @@ class NotificationPage extends GetView<NotificationController> {
         leading: const SizedBox(),
       ),
       body: SafeArea(
-          child: Column(
-        children: [
-          Expanded(
-            child: NotificationListener(
-              onNotification: controller.onNotification,
-              child: CustomScrollView(
-                physics: const BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics(),
+        child: Column(
+          children: [
+            Expanded(
+              child: NotificationListener(
+                onNotification: controller.onNotification,
+                child: CustomScrollView(
+                  physics: const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
+                  slivers: [
+                    _buildNotificationList,
+                    _buildLoadMoreNotification,
+                    _buildSpace
+                  ],
                 ),
-                slivers: [
-                  _buildNotificationList,
-                  _buildLoadMoreNotification,
-                  _buildSpace
-                ],
               ),
-            ),
-          )
-        ],
-      )),
+            )
+          ],
+        ),
+      ),
     );
   }
 

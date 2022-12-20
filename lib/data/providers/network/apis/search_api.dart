@@ -9,16 +9,19 @@ enum SearchType { fetchSearch, addSearch }
 
 class SearchApi implements APIRequestRepresentable {
   final SearchType type;
+  final String? userId;
   final SearchRequestDto? searchRequestDto;
 
   SearchApi._({
     required this.type,
     this.searchRequestDto,
+    this.userId,
   });
 
-  SearchApi.fetchSearch()
+  SearchApi.fetchSearch({required String userId})
       : this._(
           type: SearchType.fetchSearch,
+          userId: userId,
         );
 
   SearchApi.addSearch({
@@ -35,7 +38,7 @@ class SearchApi implements APIRequestRepresentable {
   String get path {
     switch (type) {
       case SearchType.fetchSearch:
-        return '/';
+        return '/$userId';
       case SearchType.addSearch:
         return '/addSearch';
     }

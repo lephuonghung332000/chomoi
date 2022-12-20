@@ -36,8 +36,10 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
           .run();
 
   @override
-  Future<Either<DioError, RefreshNewTokenModel>> refreshNewToken() => Task(
-        () => AuthAPI.refreshToken().request(),
+  Future<Either<DioError, RefreshNewTokenModel>> refreshNewToken(
+          {required String userId}) =>
+      Task(
+        () => AuthAPI.refreshToken(userId: userId).request(),
       )
           .attempt()
           .map(
@@ -54,8 +56,13 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
           .run();
 
   @override
-  Future<Either<DioError, Unit>> logout() => Task(
-        () => AuthAPI.logout().request(),
+  Future<Either<DioError, Unit>> logout({
+    required String userId,
+  }) =>
+      Task(
+        () => AuthAPI.logout(
+          userId: userId,
+        ).request(),
       )
           .attempt()
           .map(

@@ -9,7 +9,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 class UpdateUserUseCase extends ParamUseCase<Either<DioError, Unit>,
-    UserRequestModel> {
+    Tuple2<UserRequestModel, String>> {
   late final UserRepository _repo;
 
   UpdateUserUseCase({UserRepository? userRepository}) {
@@ -19,7 +19,8 @@ class UpdateUserUseCase extends ParamUseCase<Either<DioError, Unit>,
   @override
   Future<Either<DioError, Unit>> call(params) {
     return _repo.updateUser(
-      userRequestModel: params,
+      userRequestModel: params.value1,
+      userId: params.value2,
     );
   }
 }

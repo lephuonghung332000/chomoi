@@ -12,7 +12,7 @@ class SignUpInformationDto {
 
   final bool success;
   final String message;
-  final String data;
+  final SignUpData data;
 
   factory SignUpInformationDto.fromJson(Map<String, dynamic> json) =>
       _$SignUpInformationDtoFromJson(json);
@@ -20,3 +20,17 @@ class SignUpInformationDto {
   Map<String, dynamic> toJson() => _$SignUpInformationDtoToJson(this);
 }
 
+@JsonSerializable()
+class SignUpData {
+  factory SignUpData.fromJson(Map<String, dynamic> json) => _$SignUpDataFromJson(json);
+
+  SignUpData({
+    required this.id,
+    required this.token,
+  });
+
+  final String id;
+  final String token;
+
+  Map<String, dynamic> toJson() => _$SignUpDataToJson(this);
+}

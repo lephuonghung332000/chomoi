@@ -12,11 +12,24 @@ class LoginInformationDto {
 
   final bool success;
   final String message;
-  final String data;
+  final LoginData data;
 
   factory LoginInformationDto.fromJson(Map<String, dynamic> json) =>
       _$LoginInformationDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$LoginInformationDtoToJson(this);
 }
+@JsonSerializable()
+class LoginData {
+  factory LoginData.fromJson(Map<String, dynamic> json) => _$LoginDataFromJson(json);
 
+  LoginData({
+    required this.id,
+    required this.token,
+  });
+
+  final String id;
+  final String token;
+
+  Map<String, dynamic> toJson() => _$LoginDataToJson(this);
+}

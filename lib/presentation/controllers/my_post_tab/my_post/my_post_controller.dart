@@ -1,4 +1,5 @@
 import 'package:chomoi/app/config/constant/broadcast_message.dart';
+import 'package:chomoi/app/services/auth_service.dart';
 import 'package:chomoi/app/util/get_extensions.dart';
 import 'package:chomoi/domain/models/response/post/post_model.dart';
 import 'package:chomoi/domain/models/response/post/post_paging_model.dart';
@@ -76,9 +77,13 @@ class MyPostController extends GetxController
   }
 
   Future<void> fetchUser() async {
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
     _userState.value = const States.loading();
     // call info myself
-    final result = await fetchUserUseCase.call(null);
+    final result = await fetchUserUseCase.call(userId);
     result.fold((failure) {
       _userState.value = States.failure(failure);
     }, (value) {
@@ -88,8 +93,11 @@ class MyPostController extends GetxController
 
   Future<void> _fetchAcceptPost() async {
     _postAcceptState.value = const States.loading();
-
-    final result = await fetchMyAcceptPostUseCase.call();
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
+    final result = await fetchMyAcceptPostUseCase.call(userId);
     result.fold((failure) {
       _postAcceptState.value = States.failure(failure);
     }, (value) async {
@@ -98,9 +106,12 @@ class MyPostController extends GetxController
   }
 
   Future<void> _fetchPendingPost() async {
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
     _postPendingState.value = const States.loading();
-
-    final result = await fetchMyPendingPostUseCase.call();
+    final result = await fetchMyPendingPostUseCase.call(userId);
     result.fold((failure) {
       _postPendingState.value = States.failure(failure);
     }, (value) async {
@@ -109,9 +120,13 @@ class MyPostController extends GetxController
   }
 
   Future<void> _fetchRejectPost() async {
+    final userId = AuthService.get.getCurrentUserId();
+    if (userId == null) {
+      return;
+    }
     _postRejectState.value = const States.loading();
 
-    final result = await fetchMyRejectPostUseCase.call();
+    final result = await fetchMyRejectPostUseCase.call(userId);
     result.fold((failure) {
       _postRejectState.value = States.failure(failure);
     }, (value) async {

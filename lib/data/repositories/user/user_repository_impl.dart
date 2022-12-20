@@ -31,10 +31,12 @@ class UserRepositoryImpl extends UserRepository {
 
   @override
   Future<Either<DioError, Unit>> updateUser(
-          {required UserRequestModel userRequestModel}) =>
+          {required UserRequestModel userRequestModel,
+          required String userId}) =>
       Task(
         () => UserAPI.updateUser(
           userRequestDto: UserRequestDto.fromModel(userRequestModel),
+          userId: userId,
         ).request(),
       )
           .attempt()

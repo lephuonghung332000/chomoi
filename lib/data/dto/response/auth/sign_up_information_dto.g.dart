@@ -11,7 +11,7 @@ SignUpInformationDto _$SignUpInformationDtoFromJson(
     SignUpInformationDto(
       success: json['success'] as bool,
       message: json['message'] as String,
-      data: json['data'] as String,
+      data: SignUpData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SignUpInformationDtoToJson(
@@ -20,4 +20,15 @@ Map<String, dynamic> _$SignUpInformationDtoToJson(
       'success': instance.success,
       'message': instance.message,
       'data': instance.data,
+    };
+
+SignUpData _$SignUpDataFromJson(Map<String, dynamic> json) => SignUpData(
+      id: json['id'] as String,
+      token: json['token'] as String,
+    );
+
+Map<String, dynamic> _$SignUpDataToJson(SignUpData instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'token': instance.token,
     };

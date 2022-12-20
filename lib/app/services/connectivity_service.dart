@@ -24,6 +24,7 @@ class ConnectivityServiceImpl extends GetxService
 
   final Rx<ConnectivityResult> _connectivityResult =
       Rx<ConnectivityResult>(ConnectivityResult.none);
+
   StreamSubscription<ConnectivityResult>? _listener;
 
   @override

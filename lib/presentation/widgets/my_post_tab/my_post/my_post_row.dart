@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chomoi/app/config/constant/app_constants.dart';
 import 'package:chomoi/app/config/constant/app_strings.dart';
 import 'package:chomoi/app/config/resources/app_assets.dart';
@@ -6,10 +5,8 @@ import 'package:chomoi/app/config/resources/app_colors.dart';
 import 'package:chomoi/app/config/resources/app_textstyles.dart';
 import 'package:chomoi/presentation/pages/home_tab/home/viewmodels/post_view_model.dart';
 import 'package:chomoi/presentation/widgets/hbox.dart';
-import 'package:chomoi/presentation/widgets/ink_well_container.dart';
 import 'package:chomoi/presentation/widgets/svg_icon.dart';
 import 'package:chomoi/presentation/widgets/vbox.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'image_post.dart';

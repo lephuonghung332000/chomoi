@@ -6,7 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 class FetchUserUseCase
-    extends ParamUseCase<Either<DioError, UserModel>, String?> {
+    extends ParamUseCase<Either<DioError, UserModel>, String> {
   late final UserRepository _repo;
 
   FetchUserUseCase({UserRepository? userRepository}) {

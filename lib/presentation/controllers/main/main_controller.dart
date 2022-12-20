@@ -100,7 +100,7 @@ class MainController extends GetxController
         setInNotificationTab(inNotificationTab: false);
         break;
       case TabType.notification:
-        await NotificationsService.get.updateAllReadNotification();
+        NotificationsService.get.updateAllReadNotification();
         setInNotificationTab(inNotificationTab: true);
         NotificationsService.get.getNotifications(isLoadScreen: true);
         break;

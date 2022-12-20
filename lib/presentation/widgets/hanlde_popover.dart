@@ -1,7 +1,5 @@
 // Flutter imports:
-import 'package:chomoi/app/config/constant/app_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class HandlePopover extends StatelessWidget {
   final EdgeInsets margin;

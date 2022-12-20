@@ -18,6 +18,7 @@ enum DateFormatEnum {
   dayMonthYearShort,
   monthYearShort,
   onlyMonth,
+  hourDayMonthYear
 }
 
 extension DateFormatEnumExt on DateFormatEnum {
@@ -25,6 +26,8 @@ extension DateFormatEnumExt on DateFormatEnum {
     switch (this) {
       case DateFormatEnum.dayMonthYear:
         return 'dd/MM/yyyy';
+      case DateFormatEnum.hourDayMonthYear:
+        return 'HH:mm dd/MM/yyyy';
       case DateFormatEnum.weekdayDayMonthYear:
         return 'EEE dd/MM/yyyy';
       case DateFormatEnum.weekdayShort:
